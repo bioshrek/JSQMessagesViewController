@@ -204,7 +204,7 @@
  *  @param date              The message date.
  */
 - (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
+ withMessageAttributedText:(NSAttributedString *)attributedText
                   senderId:(NSString *)senderId
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date;

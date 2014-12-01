@@ -18,6 +18,7 @@
 
 #import "DemoMessagesViewController.h"
 
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @implementation DemoMessagesViewController
 
@@ -124,8 +125,8 @@
     
     if (!copyMessage) {
         copyMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdJobs
-                                          displayName:kJSQDemoAvatarDisplayNameJobs
-                                                 text:@"First received!"];
+                                              displayName:kJSQDemoAvatarDisplayNameJobs
+                                           attributedText:[[NSAttributedString alloc] initWithString:@"First received!"]];
     }
     
     /**
@@ -198,8 +199,8 @@
              *  Last message was a text message
              */
             newMessage = [JSQMessage messageWithSenderId:randomUserId
-                                             displayName:self.demoData.users[randomUserId]
-                                                    text:copyMessage.text];
+                                                 displayName:self.demoData.users[randomUserId]
+                                              attributedText:copyMessage.attributedText];
         }
         
         /**
@@ -262,7 +263,7 @@
 #pragma mark - JSQMessagesViewController method overrides
 
 - (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
+ withMessageAttributedText:(NSAttributedString *)attributedText
                   senderId:(NSString *)senderId
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date
@@ -279,7 +280,7 @@
     JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
                                              senderDisplayName:senderDisplayName
                                                           date:date
-                                                          text:text];
+                                                          attributedText:attributedText];
     
     [self.demoData.messages addObject:message];
     [self finishSendingMessage];
@@ -291,7 +292,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", nil];
+                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send text emoji mixture", @"Input text emoji mixture", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -305,25 +306,62 @@
     switch (buttonIndex) {
         case 0:
             [self.demoData addPhotoMediaMessage];
+            [JSQSystemSoundPlayer jsq_playMessageSentSound];
+            [self finishSendingMessage];
             break;
             
-        case 1:
-        {
+        case 1: {
             __weak UICollectionView *weakView = self.collectionView;
             
             [self.demoData addLocationMediaMessageCompletion:^{
                 [weakView reloadData];
             }];
-        }
-            break;
+            [JSQSystemSoundPlayer jsq_playMessageSentSound];
+            [self finishSendingMessage];
+        } break;
             
         case 2:
             [self.demoData addVideoMediaMessage];
+            [JSQSystemSoundPlayer jsq_playMessageSentSound];
+            [self finishSendingMessage];
             break;
+        
+        case 3: {
+            UIImage *emojiImage = [UIImage imageNamed:@"smiley"];
+            NSTextAttachment *attach = [[NSTextAttachment alloc] initWithData:UIImagePNGRepresentation(emojiImage)
+                                                                       ofType:(__bridge NSString *)kUTTypePNG];
+            
+            NSMutableAttributedString *mutableAttrText = [[NSMutableAttributedString alloc] init];
+            [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            [mutableAttrText appendAttributedString:[[NSAttributedString alloc] initWithString:@" This is a sentence with custome emoji "]];
+            [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            [mutableAttrText appendAttributedString:[[NSAttributedString alloc] initWithString:@", enjoy! xxxx eeea eea ega a ee ae33sss"]];
+            [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            
+            JSQMessage *message = [[JSQMessage alloc] initWithSenderId:self.senderId
+                                                             senderDisplayName:self.senderDisplayName
+                                                                          date:[NSDate distantFuture]
+                                                                attributedText:mutableAttrText];
+            [self.demoData.messages addObject:message];
+            [self finishSendingMessage];
+        } break;
+            
+        case 4: {
+            UIImage *emojiImage = [UIImage imageNamed:@"smiley"];
+            NSTextAttachment *attach = [[NSTextAttachment alloc] initWithData:UIImagePNGRepresentation(emojiImage)
+                                                                       ofType:(__bridge NSString *)kUTTypePNG];
+            
+            NSMutableAttributedString *mutableAttrText = [[NSMutableAttributedString alloc] init];
+            [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            [mutableAttrText appendAttributedString:[[NSAttributedString alloc] initWithString:@" This is a sentence with custome emoji "]];
+            [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            [mutableAttrText appendAttributedString:[[NSAttributedString alloc] initWithString:@", enjoy! xxxx eeea eea ega a ee ae33sss"]];
+            [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            
+            [self.inputToolbar.contentView.textView.textStorage appendAttributedString:mutableAttrText];
+            [self.inputToolbar toggleSendButtonEnabled];  // change text view programmatically
+        } break;
     }
-    
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
-    [self finishSendingMessage];
 }
 
 

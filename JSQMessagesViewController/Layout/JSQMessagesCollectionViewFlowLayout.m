@@ -454,11 +454,16 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
         CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin - horizontalInsetsTotal;
         
-        CGRect stringRect = [[messageItem text] boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
-                                                             options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                          attributes:@{ NSFontAttributeName : self.messageBubbleFont }
-                                                             context:nil];
-        
+        NSMutableAttributedString *mutableAttrText = [[NSMutableAttributedString alloc] initWithAttributedString:[messageItem attributedText]];
+        NSRange range = NSMakeRange(0, [mutableAttrText length]);
+        [mutableAttrText removeAttribute:@"NSOriginalFont"
+                                   range:range];  // clear original font attribute
+        [mutableAttrText addAttribute:NSFontAttributeName
+                                value:self.messageBubbleFont
+                                range:range];  // add new font attribute
+        CGRect stringRect = [mutableAttrText boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
+                                                          options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                          context:nil];
         CGSize stringSize = CGRectIntegral(stringRect).size;
         
         CGFloat verticalContainerInsets = self.messageBubbleTextViewTextContainerInsets.top + self.messageBubbleTextViewTextContainerInsets.bottom;

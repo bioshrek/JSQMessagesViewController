@@ -66,7 +66,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_configureMessagesViewController;
 
-- (NSString *)jsq_currentlyComposedMessageText;
+- (NSAttributedString *)jsq_currentlyComposedMessageAttributedText;
 
 - (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
@@ -301,7 +301,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 #pragma mark - Messages view controller
 
 - (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
+ withMessageAttributedText:(NSAttributedString *)attributedText
                   senderId:(NSString *)senderId
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date
@@ -314,7 +314,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)finishSendingMessage
 {
     UITextView *textView = self.inputToolbar.contentView.textView;
-    textView.text = nil;
+    textView.attributedText = nil;
     [textView.undoManager removeAllActions];
     
     [self.inputToolbar toggleSendButtonEnabled];
@@ -440,8 +440,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.delegate = collectionView;
     
     if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
-        NSParameterAssert(cell.textView.text != nil);
+        NSMutableAttributedString *mutableAttrText = cell.textView.textStorage;
+        [mutableAttrText setAttributedString:[messageItem attributedText]];
+        NSRange range = NSMakeRange(0, [mutableAttrText length]);
+        [mutableAttrText removeAttribute:@"NSOriginalFont"
+                                   range:range];  // clear original font attribute
+        [mutableAttrText addAttribute:NSFontAttributeName
+                                value:collectionView.collectionViewLayout.messageBubbleFont
+                                range:range];  // add new font attribute
+        
+        NSParameterAssert(cell.textView.attributedText != nil);
         
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
         if (bubbleImageDataSource != nil) {
@@ -570,7 +578,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     if (action == @selector(copy:)) {
         id<JSQMessageData> messageData = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-        [[UIPasteboard generalPasteboard] setString:[messageData text]];
+        [[UIPasteboard generalPasteboard] setString:[[messageData attributedText] string]];
     }
 }
 
@@ -619,7 +627,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     else {
         [self didPressSendButton:sender
-                 withMessageText:[self jsq_currentlyComposedMessageText]
+       withMessageAttributedText:[self jsq_currentlyComposedMessageAttributedText]
                         senderId:self.senderId
                senderDisplayName:self.senderDisplayName
                             date:[NSDate date]];
@@ -630,7 +638,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     if (toolbar.sendButtonOnRight) {
         [self didPressSendButton:sender
-                 withMessageText:[self jsq_currentlyComposedMessageText]
+       withMessageAttributedText:[self jsq_currentlyComposedMessageAttributedText]
                         senderId:self.senderId
                senderDisplayName:self.senderDisplayName
                             date:[NSDate date]];
@@ -640,12 +648,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 }
 
-- (NSString *)jsq_currentlyComposedMessageText
+- (NSAttributedString *)jsq_currentlyComposedMessageAttributedText
 {
     //  add a space to accept any auto-correct suggestions
-    NSString *text = self.inputToolbar.contentView.textView.text;
-    self.inputToolbar.contentView.textView.text = [text stringByAppendingString:@" "];
-    return [self.inputToolbar.contentView.textView.text jsq_stringByTrimingWhitespace];
+    NSMutableAttributedString *editor = self.inputToolbar.contentView.textView.textStorage;
+    [editor appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    [editor deleteCharactersInRange:NSMakeRange([editor length] - 1, 1)];
+    return editor;
 }
 
 #pragma mark - Text view delegate
@@ -670,6 +679,17 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     [self.inputToolbar toggleSendButtonEnabled];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (textView != self.inputToolbar.contentView.textView) {
+        return NO;
+    }
+    
+    [self.inputToolbar toggleSendButtonEnabled];
+    
+    return YES;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView

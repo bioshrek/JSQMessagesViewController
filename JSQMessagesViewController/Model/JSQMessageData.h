@@ -87,7 +87,7 @@
  *
  *  @warning You must not return `nil` from this method.
  */
-- (NSString *)text;
+- (NSAttributedString *)attributedText;
 
 /**
  *  @return The media item of the message.

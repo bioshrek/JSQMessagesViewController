@@ -36,24 +36,24 @@
 
 + (instancetype)messageWithSenderId:(NSString *)senderId
                         displayName:(NSString *)displayName
-                               text:(NSString *)text
+                     attributedText:(NSAttributedString *)attributedText
 {
     return [[JSQMessage alloc] initWithSenderId:senderId
                               senderDisplayName:displayName
                                            date:[NSDate date]
-                                           text:text];
+                                 attributedText:attributedText];
 }
 
 - (instancetype)initWithSenderId:(NSString *)senderId
                senderDisplayName:(NSString *)senderDisplayName
                             date:(NSDate *)date
-                            text:(NSString *)text
+                  attributedText:(NSAttributedString *)attributedText
 {
-    NSParameterAssert(text != nil);
+    NSParameterAssert(attributedText != nil);
     
     self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:NO];
     if (self) {
-        _text = [text copy];
+        _attributedText = [attributedText copy];
     }
     return self;
 }
@@ -112,7 +112,7 @@
     _senderId = nil;
     _senderDisplayName = nil;
     _date = nil;
-    _text = nil;
+    _attributedText = nil;
     _media = nil;
 }
 
@@ -134,7 +134,7 @@
         return NO;
     }
     
-    BOOL hasEqualContent = self.isMediaMessage ? [self.media isEqual:aMessage.media] : [self.text isEqualToString:aMessage.text];
+    BOOL hasEqualContent = self.isMediaMessage ? [self.media isEqual:aMessage.media] : [self.attributedText isEqualToAttributedString:aMessage.attributedText];
     
     return [self.senderId isEqualToString:aMessage.senderId]
             && [self.senderDisplayName isEqualToString:aMessage.senderDisplayName]
@@ -144,15 +144,15 @@
 
 - (NSUInteger)hash
 {
-    NSUInteger contentHash = self.isMediaMessage ? self.media.hash : self.text.hash;
+    NSUInteger contentHash = self.isMediaMessage ? self.media.hash : self.attributedText.hash;
     
     return self.senderId.hash ^ self.date.hash ^ contentHash;
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, isMediaMessage=%@, text=%@, media=%@>",
-            [self class], self.senderId, self.senderDisplayName, self.date, @(self.isMediaMessage), self.text, self.media];
+    return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, isMediaMessage=%@, attributedText=%@, media=%@>",
+            [self class], self.senderId, self.senderDisplayName, self.date, @(self.isMediaMessage), self.attributedText, self.media];
 }
 
 - (id)debugQuickLookObject
@@ -170,7 +170,7 @@
         _senderDisplayName = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(senderDisplayName))];
         _date = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(date))];
         _isMediaMessage = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(isMediaMessage))];
-        _text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
+        _attributedText = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(attributedText))];
         _media = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(media))];
     }
     return self;
@@ -182,7 +182,7 @@
     [aCoder encodeObject:self.senderDisplayName forKey:NSStringFromSelector(@selector(senderDisplayName))];
     [aCoder encodeObject:self.date forKey:NSStringFromSelector(@selector(date))];
     [aCoder encodeBool:self.isMediaMessage forKey:NSStringFromSelector(@selector(isMediaMessage))];
-    [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
+    [aCoder encodeObject:self.attributedText forKey:NSStringFromSelector(@selector(attributedText))];
     
     if ([self.media conformsToProtocol:@protocol(NSCoding)]) {
         [aCoder encodeObject:self.media forKey:NSStringFromSelector(@selector(media))];
@@ -203,7 +203,7 @@
     return [[[self class] allocWithZone:zone] initWithSenderId:self.senderId
                                              senderDisplayName:self.senderDisplayName
                                                           date:self.date
-                                                          text:self.text];
+                                                attributedText:self.attributedText];
 }
 
 @end
