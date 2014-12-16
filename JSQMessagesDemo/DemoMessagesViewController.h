@@ -23,6 +23,8 @@
 #import "DemoModelData.h"
 #import "NSUserDefaults+DemoSettings.h"
 
+#import "SKMessagesViewController.h"
+
 
 @class DemoMessagesViewController;
 
@@ -35,7 +37,7 @@
 
 
 
-@interface DemoMessagesViewController : JSQMessagesViewController <UIActionSheetDelegate>
+@interface DemoMessagesViewController : SKMessagesViewController <UIActionSheetDelegate>
 
 @property (weak, nonatomic) id<JSQDemoViewControllerDelegate> delegateModal;
 

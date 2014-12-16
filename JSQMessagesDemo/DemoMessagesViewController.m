@@ -20,6 +20,10 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#import "SKMessage.h"
+
+#import "SKMessagesCollectionViewCellOutgoing.h"
+
 @implementation DemoMessagesViewController
 
 #pragma mark - View lifecycle
@@ -277,13 +281,40 @@
      */
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
+    NSString *uuid = [[NSUUID UUID] UUIDString];
+    SKMessage *message = [[SKMessage alloc] initWithSenderId:senderId
                                              senderDisplayName:senderDisplayName
                                                           date:date
-                                                          attributedText:attributedText];
+                                                          attributedText:attributedText
+                                                        uuid:uuid
+                                                       state:SKMessageStateSending];
     
     [self.demoData.messages addObject:message];
     [self finishSendingMessage];
+    
+    // message
+    
+    
+    __weak DemoMessagesViewController *weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // update sending progress
+        [weakSelf updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
+            
+            [messageItem setState:SKMessageStateSent];
+            
+            // stop animation if visible
+            if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
+                SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
+                outgoingCell.activityIndicatorView.hidden = YES;
+                [outgoingCell.activityIndicatorView stopAnimating];
+            }
+        } complete:^{
+            // TODO:
+        }];
+        
+        
+        // if cell visible, stop activitiy indicator animation
+    });
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender
