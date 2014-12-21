@@ -10,6 +10,8 @@
 
 #import "SKMessageData.h"
 
+#import "MRProgress.h"
+
 @interface SKMessagesViewController : JSQMessagesViewController
 
 - (void)updateItemWithUUID:(NSString *)uuid

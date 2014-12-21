@@ -59,24 +59,23 @@
     NSParameterAssert(messageSenderId != nil);
     
     BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
-    BOOL isMediaMessage = [messageItem isMediaMessage];
     
-    if (!isMediaMessage && isOutgoingMessage && [cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
-        // outgoing text message
+    if (isOutgoingMessage && [cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
+        // outgoing message
         
-        MRActivityIndicatorView *activityIndicatorView = ((SKMessagesCollectionViewCellOutgoing *)cell).activityIndicatorView;
-        if (SKMessageStateSending == [messageItem state]) {
-            activityIndicatorView.hidden = NO;
-            [activityIndicatorView startAnimating];
-        } else {
-            activityIndicatorView.hidden = YES;
-            [activityIndicatorView stopAnimating];
-        }
+        SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
+        [outgoingCell configSendingStatusWithMessage:messageItem];
+    }
+    
+    if (!isOutgoingMessage && [cell isKindOfClass:[SKMessagesCollectionViewCellIncoming class]]) {
+        // incoming message
+        
+        SKMessagesCollectionViewCellIncoming *incomingCell = (SKMessagesCollectionViewCellIncoming *)cell;
+        [incomingCell configReceivingStatusWithMessage:messageItem];
     }
     
     return cell;
 }
-
 
 #pragma mark - update messages
 

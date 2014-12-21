@@ -23,6 +23,7 @@
 #import "SKMessage.h"
 
 #import "SKMessagesCollectionViewCellOutgoing.h"
+#import "SKMessagesCollectionViewCellIncoming.h"
 
 @implementation DemoMessagesViewController
 
@@ -125,12 +126,16 @@
     /**
      *  Copy last sent message, this will be the new "received" message
      */
-    JSQMessage *copyMessage = [[self.demoData.messages lastObject] copy];
+    SKMessage *copyMessage = [[self.demoData.messages lastObject] copy];
     
     if (!copyMessage) {
-        copyMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdJobs
-                                              displayName:kJSQDemoAvatarDisplayNameJobs
-                                           attributedText:[[NSAttributedString alloc] initWithString:@"First received!"]];
+        NSString *uuid = [[NSUUID UUID] UUIDString];
+        copyMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdJobs
+                                        senderDisplayName:kJSQDemoAvatarDisplayNameJobs
+                                                     date:[NSDate date]
+                                           attributedText:[[NSAttributedString alloc] initWithString:@"First received!"]
+                                                     uuid:uuid
+                                                    state:SKMessageStateReceiving];
     }
     
     /**
@@ -142,7 +147,7 @@
         [userIds removeObject:self.senderId];
         NSString *randomUserId = userIds[arc4random_uniform((int)[userIds count])];
         
-        JSQMessage *newMessage = nil;
+        SKMessage *newMessage = nil;
         id<JSQMessageMediaData> newMediaData = nil;
         id newMediaAttachmentCopy = nil;
         
@@ -194,17 +199,25 @@
                 NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
             }
             
-            newMessage = [JSQMessage messageWithSenderId:randomUserId
-                                             displayName:self.demoData.users[randomUserId]
-                                                   media:newMediaData];
+            NSString *uuid = [[NSUUID UUID] UUIDString];
+            newMessage = [[SKMessage alloc] initWithSenderId:randomUserId
+                                           senderDisplayName:self.demoData.users[randomUserId]
+                                                        date:[NSDate date]
+                                                       media:newMediaData
+                                                        uuid:uuid
+                                                       state:SKMessageStateReceiving];
         }
         else {
             /**
              *  Last message was a text message
              */
-            newMessage = [JSQMessage messageWithSenderId:randomUserId
-                                                 displayName:self.demoData.users[randomUserId]
-                                              attributedText:copyMessage.attributedText];
+            NSString *uuid = [[NSUUID UUID] UUIDString];
+            newMessage = [[SKMessage alloc] initWithSenderId:randomUserId
+                                           senderDisplayName:self.demoData.users[randomUserId]
+                                                        date:[NSDate date]
+                                              attributedText:copyMessage.attributedText
+                                                        uuid:uuid
+                                                       state:SKMessageStateReceiving];
         }
         
         /**
@@ -223,37 +236,70 @@
             /**
              *  Simulate "downloading" media
              */
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                /**
-                 *  Media is "finished downloading", re-display visible cells
-                 *
-                 *  If media cell is not visible, the next time it is dequeued the view controller will display its new attachment data
-                 *
-                 *  Reload the specific item, or simply call `reloadData`
-                 */
+            [self receiveMediaMessageWithProgressTotalUnitCount:10 completedUnitCount:1 uuid:newMessage.uuid copiedMediaAttachmentCopy:newMediaAttachmentCopy];
+        }
+        
+    });
+}
+
+- (void)receiveMediaMessageWithProgressTotalUnitCount:(NSUInteger)totalUnitCount completedUnitCount:(NSUInteger)completedUnitCount uuid:(NSString *)uuid copiedMediaAttachmentCopy:(id)copiedMediaAttachmentCopy
+{
+    __weak DemoMessagesViewController *weakSelf = self;
+    
+    if (completedUnitCount <= totalUnitCount) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // update sending progress
+            [self updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
                 
+                // update progress
+                [messageItem setState:SKMessageStateReceiving];
+                NSProgress *progress = [NSProgress progressWithTotalUnitCount:totalUnitCount];
+                progress.completedUnitCount = completedUnitCount;
+                [messageItem setProgress:progress];
+                
+                // update ui if visible
+                if ([cell isKindOfClass:[SKMessagesCollectionViewCellIncoming class]]) {
+                    SKMessagesCollectionViewCellIncoming *outgoingCell = (SKMessagesCollectionViewCellIncoming *)cell;
+                    [outgoingCell configReceivingStatusWithMessage:messageItem];
+                }
+            } complete:^{
+                
+                [weakSelf receiveMediaMessageWithProgressTotalUnitCount:totalUnitCount completedUnitCount:(completedUnitCount + 1) uuid:uuid copiedMediaAttachmentCopy:copiedMediaAttachmentCopy];
+            }];
+        });
+    } else {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // update sending progress
+            [self updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
+                
+                [messageItem setState:SKMessageStateReceived];
+                
+                id<JSQMessageMediaData> newMediaData = [messageItem media];
                 if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                    ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachmentCopy;
-                    [self.collectionView reloadData];
+                    JSQPhotoMediaItem *photoItemCopy = (JSQPhotoMediaItem *)newMediaData;
+                    photoItemCopy.image = copiedMediaAttachmentCopy;
                 }
                 else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                    [((JSQLocationMediaItem *)newMediaData)setLocation:newMediaAttachmentCopy withCompletionHandler:^{
-                        [self.collectionView reloadData];
+                    JSQLocationMediaItem *locationItemCopy = (JSQLocationMediaItem *)newMediaData;
+                    [locationItemCopy setLocation:copiedMediaAttachmentCopy withCompletionHandler:^{
+                        // TODO:
                     }];
                 }
                 else if ([newMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
-                    ((JSQVideoMediaItem *)newMediaData).fileURL = newMediaAttachmentCopy;
-                    ((JSQVideoMediaItem *)newMediaData).isReadyToPlay = YES;
-                    [self.collectionView reloadData];
+                    JSQVideoMediaItem *videoItemCopy = (JSQVideoMediaItem *)newMediaData;
+                    videoItemCopy.isReadyToPlay = YES;
+                    videoItemCopy.fileURL = copiedMediaAttachmentCopy;
                 }
                 else {
                     NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
                 }
                 
-            });
-        }
-        
-    });
+                [weakSelf.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+            } complete:^{
+                // TODO:
+            }];
+        });
+    }
 }
 
 - (void)closePressed:(UIBarButtonItem *)sender
@@ -279,8 +325,7 @@
      *  2. Add new id<JSQMessageData> object to your data source
      *  3. Call `finishSendingMessage`
      */
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
-    
+
     NSString *uuid = [[NSUUID UUID] UUIDString];
     SKMessage *message = [[SKMessage alloc] initWithSenderId:senderId
                                              senderDisplayName:senderDisplayName
@@ -288,32 +333,31 @@
                                                           attributedText:attributedText
                                                         uuid:uuid
                                                        state:SKMessageStateSending];
-    
-    [self.demoData.messages addObject:message];
+    [self sendTextMessage:message];
+}
+
+- (void)sendTextMessage:(id<SKMessageData>)textMessage
+{
+    [self.demoData.messages addObject:textMessage];
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self finishSendingMessage];
     
-    // message
-    
-    
+    // sending status change
     __weak DemoMessagesViewController *weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // update sending progress
-        [weakSelf updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
+        [weakSelf updateItemWithUUID:[textMessage uuid] handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
             
             [messageItem setState:SKMessageStateSent];
             
             // stop animation if visible
             if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
                 SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
-                outgoingCell.activityIndicatorView.hidden = YES;
-                [outgoingCell.activityIndicatorView stopAnimating];
+                [outgoingCell configSendingStatusWithMessage:messageItem];
             }
         } complete:^{
             // TODO:
         }];
-        
-        
-        // if cell visible, stop activitiy indicator animation
     });
 }
 
@@ -330,33 +374,32 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    __weak DemoMessagesViewController *weakSelf = self;
+    
     if (buttonIndex == actionSheet.cancelButtonIndex) {
         return;
     }
     
     switch (buttonIndex) {
-        case 0:
-            [self.demoData addPhotoMediaMessage];
-            [JSQSystemSoundPlayer jsq_playMessageSentSound];
-            [self finishSendingMessage];
-            break;
-            
-        case 1: {
-            __weak UICollectionView *weakView = self.collectionView;
-            
-            [self.demoData addLocationMediaMessageCompletion:^{
-                [weakView reloadData];
-            }];
-            [JSQSystemSoundPlayer jsq_playMessageSentSound];
-            [self finishSendingMessage];
+        case 0: {
+            NSString *uuid = [[NSUUID UUID] UUIDString];
+            id<SKMessageData> photoMessage = [self.demoData createPhotoMessageWithUUID:uuid];
+            [self sendMediaMessage:photoMessage];
         } break;
             
-        case 2:
-            [self.demoData addVideoMediaMessage];
-            [JSQSystemSoundPlayer jsq_playMessageSentSound];
-            [self finishSendingMessage];
-            break;
-        
+        case 1: {
+            NSString *uuid = [[NSUUID UUID] UUIDString];
+            id<SKMessageData> locationMessage = [self.demoData createLocationMediaMessageWithUUID:uuid completion:^{
+                // TODO:
+            }];
+            [weakSelf sendMediaMessage:locationMessage];
+        } break;
+            
+        case 2: {
+            NSString *uuid = [[NSUUID UUID] UUIDString];
+            id<SKMessageData> videoMessage = [self.demoData createVideoMediaMessageWithUUID:uuid];
+            [self sendMediaMessage:videoMessage];
+        } break;        
         case 3: {
             UIImage *emojiImage = [UIImage imageNamed:@"smiley"];
             NSTextAttachment *attach = [[NSTextAttachment alloc] initWithData:UIImagePNGRepresentation(emojiImage)
@@ -368,13 +411,20 @@
             [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
             [mutableAttrText appendAttributedString:[[NSAttributedString alloc] initWithString:@", enjoy! xxxx eeea eea ega a ee ae33sss"]];
             [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            [mutableAttrText appendAttributedString:[[NSAttributedString alloc] initWithString:@", enjoy! xxxx eeea eea ega a ee ae33sss"]];
+            [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            [mutableAttrText appendAttributedString:[[NSAttributedString alloc] initWithString:@", enjoy! xxxx eeea eea ega a ee ae33sss"]];
+            [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
             
-            JSQMessage *message = [[JSQMessage alloc] initWithSenderId:self.senderId
-                                                             senderDisplayName:self.senderDisplayName
-                                                                          date:[NSDate distantFuture]
-                                                                attributedText:mutableAttrText];
-            [self.demoData.messages addObject:message];
-            [self finishSendingMessage];
+            NSString *uuid = [[NSUUID UUID] UUIDString];
+            SKMessage *message = [[SKMessage alloc] initWithSenderId:self.senderId
+                                                   senderDisplayName:self.senderDisplayName
+                                                                date:[NSDate distantFuture]
+                                                      attributedText:mutableAttrText
+                                                                uuid:uuid
+                                                               state:SKMessageStateSending];
+            [self sendTextMessage:message];
         } break;
             
         case 4: {
@@ -395,7 +445,61 @@
     }
 }
 
+- (void)sendMediaMessage:(id<SKMessageData>)mediaMessage
+{
+    NSString *uuid = [mediaMessage uuid];
+    
+    [self.demoData.messages addObject:mediaMessage];
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    [self finishSendingMessage];
+    
+    // sending progress change
+    [self sendMediaMessageWithProgressTotalUnitCount:10 completedUnitCount:1 uuid:uuid];
+}
 
+- (void)sendMediaMessageWithProgressTotalUnitCount:(NSUInteger)totalUnitCount completedUnitCount:(NSUInteger)completedUnitCount uuid:(NSString *)uuid
+{
+    __weak DemoMessagesViewController *weakSelf = self;
+    
+    if (completedUnitCount <= totalUnitCount) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // update sending progress
+            [self updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
+                
+                // update progress
+                [messageItem setState:SKMessageStateSending];
+                NSProgress *progress = [NSProgress progressWithTotalUnitCount:totalUnitCount];
+                progress.completedUnitCount = completedUnitCount;
+                [messageItem setProgress:progress];
+                
+                // update ui if visible
+                if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
+                    SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
+                    [outgoingCell configSendingStatusWithMessage:messageItem];
+                }
+            } complete:^{
+                
+                [weakSelf sendMediaMessageWithProgressTotalUnitCount:totalUnitCount completedUnitCount:(completedUnitCount + 1) uuid:uuid];
+            }];
+        });
+    } else {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // update sending progress
+            [self updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
+                
+                [messageItem setState:SKMessageStateSent];
+                
+                // stop animation if visible
+                if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
+                    SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
+                    [outgoingCell configSendingStatusWithMessage:messageItem];
+                }
+            } complete:^{
+                // TODO:
+            }];
+        });
+    }
+}
 
 #pragma mark - JSQMessages CollectionView DataSource
 

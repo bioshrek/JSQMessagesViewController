@@ -86,6 +86,15 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stP-K6-qiT" customClass="MRCircularProgressView">
+                        <rect key="frame" x="284" y="72" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="3fp-Qc-2DO"/>
+                            <constraint firstAttribute="width" constant="30" id="FbJ-80-iWe"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -100,9 +109,11 @@
                 <constraint firstAttribute="trailing" secondItem="p0N-UF-X4v" secondAttribute="trailing" id="Iwf-dp-iSP"/>
                 <constraint firstItem="lRU-KR-kRd" firstAttribute="top" secondItem="pd9-eq-77k" secondAttribute="bottom" id="QzT-Oj-yeo"/>
                 <constraint firstItem="jdx-gZ-DnR" firstAttribute="leading" secondItem="VGU-e5-X7E" secondAttribute="trailing" constant="2" id="RJB-7R-BhC"/>
+                <constraint firstItem="stP-K6-qiT" firstAttribute="leading" secondItem="jdx-gZ-DnR" secondAttribute="trailing" constant="4" id="TpG-44-8Js"/>
                 <constraint firstAttribute="bottom" secondItem="p0N-UF-X4v" secondAttribute="bottom" id="aCS-pY-M72"/>
                 <constraint firstItem="lRU-KR-kRd" firstAttribute="leading" secondItem="beB-OM-5xj" secondAttribute="leading" id="fU0-ff-gbf"/>
                 <constraint firstItem="pd9-eq-77k" firstAttribute="top" secondItem="beB-OM-5xj" secondAttribute="top" id="sBe-2y-jfI"/>
+                <constraint firstItem="stP-K6-qiT" firstAttribute="centerY" secondItem="jdx-gZ-DnR" secondAttribute="centerY" id="si0-bG-bmn"/>
                 <constraint firstItem="p0N-UF-X4v" firstAttribute="top" secondItem="VGU-e5-X7E" secondAttribute="bottom" id="xbw-fB-Aox"/>
             </constraints>
             <size key="customSize" width="317" height="245"/>
@@ -115,6 +126,7 @@
                 <outlet property="cellBottomLabelHeightConstraint" destination="1gy-UX-Ksw" id="JdV-NU-Lef"/>
                 <outlet property="cellTopLabel" destination="pd9-eq-77k" id="ikO-Bx-WwV"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="dCZ-Ea-juc" id="yuz-Ta-dyD"/>
+                <outlet property="circularProgressView" destination="stP-K6-qiT" id="djR-f9-suZ"/>
                 <outlet property="messageBubbleContainerView" destination="jdx-gZ-DnR" id="z9x-si-A8X"/>
                 <outlet property="messageBubbleContainerWidthConstraint" destination="EH3-Qa-7OR" id="5W7-Bk-Dp0"/>
                 <outlet property="messageBubbleImageView" destination="djF-vE-krd" id="g0G-PM-D0c"/>

@@ -22,6 +22,8 @@
 
 #import "JSQMessages.h"
 
+#import "SKMessageData.h"
+
 /**
  *  This is for demo/testing purposes only. 
  *  This object sets up some fake model data.
@@ -57,5 +59,12 @@ static NSString * const kJSQDemoAvatarIdWoz = @"309-41802-93823";
 - (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion;
 
 - (void)addVideoMediaMessage;
+
+- (id<SKMessageData>)createPhotoMessageWithUUID:(NSString *)uuid;
+
+- (id<SKMessageData>)createLocationMediaMessageWithUUID:(NSString *)uuid
+                                             completion:(JSQLocationMediaItemCompletionBlock)completion;
+
+- (id<SKMessageData>)createVideoMediaMessageWithUUID:(NSString *)uuid;
 
 @end

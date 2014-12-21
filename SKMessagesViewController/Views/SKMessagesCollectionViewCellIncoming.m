@@ -17,13 +17,29 @@
 
 @implementation SKMessagesCollectionViewCellIncoming
 
-- (id)initWithFrame:(CGRect)frame
+#pragma mark - rendering
+
+- (void)configReceivingStatusWithMessage:(id<SKMessageData>)message
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    NSParameterAssert(nil != message);
+    
+    if ([message isMediaMessage]) {  // media message
+        
+        self.circularProgressView.lineWidth = 15.0f;
+        self.circularProgressView.borderWidth = 1.0f;
+        [self.circularProgressView.valueLabel removeFromSuperview];
+        
+        float fractionCompleted = [message progress].fractionCompleted;
+        if (SKMessageStateReceiving == [message state]) {
+            self.circularProgressView.hidden = NO;
+            [self.circularProgressView setProgress:fractionCompleted
+                                          animated:YES];
+        } else {
+            self.circularProgressView.hidden = YES;
+        }
+    } else {  // text message
+        [self.circularProgressView removeFromSuperview];
     }
-    return self;
 }
 
 

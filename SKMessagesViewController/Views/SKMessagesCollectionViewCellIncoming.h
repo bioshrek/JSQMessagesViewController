@@ -10,8 +10,14 @@
 
 #import "MRProgress.h"
 
+#import "SKMessageData.h"
+
 @interface SKMessagesCollectionViewCellIncoming : JSQMessagesCollectionViewCellIncoming
 
 @property (weak, nonatomic, readonly) MRCircularProgressView *circularProgressView;
+
+#pragma mark - rendering
+
+- (void)configReceivingStatusWithMessage:(id<SKMessageData>)message;
 
 @end

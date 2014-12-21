@@ -20,6 +20,8 @@
 
 #import "NSUserDefaults+DemoSettings.h"
 
+#import "SKMessage.h"
+
 
 /**
  *  This is for demo/testing purposes only.
@@ -165,6 +167,19 @@
     [self.messages addObject:photoMessage];
 }
 
+- (id<SKMessageData>)createPhotoMessageWithUUID:(NSString *)uuid
+{
+    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
+    SKMessage *photoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                                                senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+                                                             date:[NSDate date]
+                                                            media:photoItem
+                                                             uuid:uuid
+                                                            state:SKMessageStateSending];
+    
+    return photoMessage;
+}
+
 - (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion
 {
     CLLocation *ferryBuildingInSF = [[CLLocation alloc] initWithLatitude:37.795313 longitude:-122.393757];
@@ -178,6 +193,23 @@
     [self.messages addObject:locationMessage];
 }
 
+- (id<SKMessageData>)createLocationMediaMessageWithUUID:(NSString *)uuid
+                                             completion:(JSQLocationMediaItemCompletionBlock)completion
+{
+    CLLocation *ferryBuildingInSF = [[CLLocation alloc] initWithLatitude:37.795313 longitude:-122.393757];
+    
+    JSQLocationMediaItem *locationItem = [[JSQLocationMediaItem alloc] init];
+    [locationItem setLocation:ferryBuildingInSF withCompletionHandler:completion];
+    
+    SKMessage *locationMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                                                senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+                                                             date:[NSDate date]
+                                                            media:locationItem
+                                                             uuid:uuid
+                                                            state:SKMessageStateSending];
+    return locationMessage;
+}
+
 - (void)addVideoMediaMessage
 {
     // don't have a real video, just pretending
@@ -188,6 +220,22 @@
                                                    displayName:kJSQDemoAvatarDisplayNameSquires
                                                          media:videoItem];
     [self.messages addObject:videoMessage];
+}
+
+- (id<SKMessageData>)createVideoMediaMessageWithUUID:(NSString *)uuid
+{
+    // don't have a real video, just pretending
+    NSURL *videoURL = [NSURL URLWithString:@"file://"];
+    
+    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
+    
+    SKMessage *videoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                                                   senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+                                                                date:[NSDate date]
+                                                               media:videoItem
+                                                                uuid:uuid
+                                                               state:SKMessageStateSending];
+    return videoMessage;
 }
 
 @end
