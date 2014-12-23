@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="FFt-Fk-CHM" customClass="SKMediaPlaceholderView">
+            <rect key="frame" x="0.0" y="0.0" width="210" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kfc-Kv-fcH">
+                    <rect key="frame" x="0.0" y="0.0" width="210" height="150"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgI-97-k4w" customClass="MRCircularProgressView">
+                    <rect key="frame" x="70" y="15" width="71" height="71"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" white="0.66666666666666663" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="71" id="kk6-Eq-lJ3"/>
+                        <constraint firstAttribute="width" constant="71" id="xy8-01-y57"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="orF-iP-Acl">
+                    <rect key="frame" x="0.0" y="101" width="210" height="49"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfe-Ue-HSn">
+                            <rect key="frame" x="15" y="4" width="180" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="Q0F-LQ-hS8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iil-1G-sRD">
+                            <rect key="frame" x="15" y="26" width="180" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="elS-Ip-Bvn"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="cfe-Ue-HSn" firstAttribute="top" secondItem="orF-iP-Acl" secondAttribute="top" constant="4" id="A3K-yO-LsH"/>
+                        <constraint firstItem="cfe-Ue-HSn" firstAttribute="leading" secondItem="orF-iP-Acl" secondAttribute="leading" constant="15" id="Efm-QJ-W2L"/>
+                        <constraint firstAttribute="trailing" secondItem="cfe-Ue-HSn" secondAttribute="trailing" constant="15" id="HLq-uy-0PE"/>
+                        <constraint firstItem="iil-1G-sRD" firstAttribute="top" secondItem="cfe-Ue-HSn" secondAttribute="bottom" id="JU5-7h-bS4"/>
+                        <constraint firstAttribute="height" constant="49" id="Rx3-M9-bfM"/>
+                        <constraint firstAttribute="trailing" secondItem="iil-1G-sRD" secondAttribute="trailing" constant="15" id="X93-xm-YdM"/>
+                        <constraint firstItem="iil-1G-sRD" firstAttribute="leading" secondItem="orF-iP-Acl" secondAttribute="leading" constant="15" id="u7b-pa-dlO"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="orF-iP-Acl" firstAttribute="leading" secondItem="FFt-Fk-CHM" secondAttribute="leading" id="3fy-na-GLS"/>
+                <constraint firstItem="orF-iP-Acl" firstAttribute="top" secondItem="pgI-97-k4w" secondAttribute="bottom" constant="15" id="MDD-41-Joi"/>
+                <constraint firstAttribute="bottom" secondItem="Kfc-Kv-fcH" secondAttribute="bottom" id="RPK-hK-5tV"/>
+                <constraint firstItem="pgI-97-k4w" firstAttribute="top" secondItem="FFt-Fk-CHM" secondAttribute="top" constant="15" id="RYr-Wl-iFH"/>
+                <constraint firstItem="Kfc-Kv-fcH" firstAttribute="leading" secondItem="FFt-Fk-CHM" secondAttribute="leading" id="WnN-NU-PZ0"/>
+                <constraint firstItem="Kfc-Kv-fcH" firstAttribute="top" secondItem="FFt-Fk-CHM" secondAttribute="top" id="b2b-pr-bl3"/>
+                <constraint firstAttribute="centerX" secondItem="pgI-97-k4w" secondAttribute="centerX" constant="-0.5" id="dtX-5l-nx0"/>
+                <constraint firstAttribute="trailing" secondItem="Kfc-Kv-fcH" secondAttribute="trailing" id="iA8-Yo-8cL"/>
+                <constraint firstAttribute="trailing" secondItem="orF-iP-Acl" secondAttribute="trailing" id="sVG-TR-P55"/>
+                <constraint firstAttribute="bottom" secondItem="orF-iP-Acl" secondAttribute="bottom" id="tit-qt-MSb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="Kfc-Kv-fcH" id="t5L-jk-gIt"/>
+                <outlet property="circularProgressView" destination="pgI-97-k4w" id="fE2-Z7-aut"/>
+                <outlet property="mediaNameLabel" destination="cfe-Ue-HSn" id="1uE-Zw-sJ1"/>
+                <outlet property="mediaSizeLabel" destination="iil-1G-sRD" id="qNT-Qr-Fvi"/>
+                <outlet property="mediaTextInfoHolderView" destination="orF-iP-Acl" id="JZC-tC-V0w"/>
+            </connections>
+        </view>
+    </objects>
+</document>

@@ -95,15 +95,20 @@
                             <constraint firstAttribute="height" constant="20" id="9hE-XX-XtH"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bS-fd-BCF" customClass="MRCircularProgressView">
-                        <rect key="frame" x="6" y="72" width="30" height="30"/>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6j-Gj-9EH" customClass="SKButton">
+                        <rect key="frame" x="16" y="77" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.1786626955" blue="0.21237198400000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="1BG-XM-Veg"/>
-                            <constraint firstAttribute="height" constant="30" id="vKD-sp-xsc"/>
+                            <constraint firstAttribute="height" constant="20" id="7sY-dy-dwr"/>
+                            <constraint firstAttribute="width" constant="20" id="kyP-Cb-Y51"/>
                         </constraints>
-                    </view>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <state key="normal" title="!">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -112,10 +117,10 @@
                 <constraint firstItem="PWU-8N-42d" firstAttribute="top" secondItem="O6h-8c-j0J" secondAttribute="bottom" id="Cdz-5c-OyJ"/>
                 <constraint firstItem="Dsd-Yf-0Sl" firstAttribute="top" secondItem="whF-Fx-Wgw" secondAttribute="bottom" id="Ebv-6d-2aD"/>
                 <constraint firstAttribute="trailing" secondItem="whF-Fx-Wgw" secondAttribute="trailing" id="Fc2-Uy-IfG"/>
+                <constraint firstItem="b6j-Gj-9EH" firstAttribute="centerY" secondItem="Dsd-Yf-0Sl" secondAttribute="centerY" id="MB6-BA-hAe"/>
                 <constraint firstAttribute="trailing" secondItem="PWU-8N-42d" secondAttribute="trailing" id="N28-Jb-p2V"/>
                 <constraint firstItem="whF-Fx-Wgw" firstAttribute="top" secondItem="NyH-CY-1T2" secondAttribute="bottom" id="VX2-gh-bfO"/>
                 <constraint firstItem="Dsd-Yf-0Sl" firstAttribute="leading" secondItem="F6C-c2-pmb" secondAttribute="trailing" constant="4" id="YED-Vp-3Ef"/>
-                <constraint firstItem="Dsd-Yf-0Sl" firstAttribute="leading" secondItem="6bS-fd-BCF" secondAttribute="trailing" constant="4" id="ZTw-Lg-Qp7"/>
                 <constraint firstItem="O6h-8c-j0J" firstAttribute="leading" secondItem="Dsd-Yf-0Sl" secondAttribute="trailing" constant="2" id="Zcg-MI-Tux"/>
                 <constraint firstItem="PWU-8N-42d" firstAttribute="leading" secondItem="m1f-NM-6hN" secondAttribute="leading" id="Zr6-Bv-sxX"/>
                 <constraint firstItem="NyH-CY-1T2" firstAttribute="leading" secondItem="m1f-NM-6hN" secondAttribute="leading" id="aUx-O6-A8T"/>
@@ -123,8 +128,8 @@
                 <constraint firstItem="Dsd-Yf-0Sl" firstAttribute="centerY" secondItem="F6C-c2-pmb" secondAttribute="centerY" id="cRA-jt-Yzk"/>
                 <constraint firstItem="whF-Fx-Wgw" firstAttribute="leading" secondItem="m1f-NM-6hN" secondAttribute="leading" id="mjh-2Q-o2O"/>
                 <constraint firstItem="PWU-8N-42d" firstAttribute="top" secondItem="Dsd-Yf-0Sl" secondAttribute="bottom" id="qzz-IW-Xcb"/>
-                <constraint firstItem="6bS-fd-BCF" firstAttribute="centerY" secondItem="Dsd-Yf-0Sl" secondAttribute="centerY" id="sy0-qG-AEa"/>
                 <constraint firstAttribute="trailing" secondItem="NyH-CY-1T2" secondAttribute="trailing" id="tcC-ON-vdG"/>
+                <constraint firstItem="Dsd-Yf-0Sl" firstAttribute="leading" secondItem="b6j-Gj-9EH" secondAttribute="trailing" constant="4" id="whg-M3-zcJ"/>
                 <constraint firstAttribute="bottom" secondItem="PWU-8N-42d" secondAttribute="bottom" id="xYs-qV-5f5"/>
             </constraints>
             <size key="customSize" width="317" height="245"/>
@@ -138,7 +143,7 @@
                 <outlet property="cellBottomLabelHeightConstraint" destination="4gV-Xd-GbI" id="OKy-vh-kOf"/>
                 <outlet property="cellTopLabel" destination="NyH-CY-1T2" id="k3I-1y-ZXs"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="Mxl-Kv-FBN" id="jhz-kO-d0T"/>
-                <outlet property="circularProgressView" destination="6bS-fd-BCF" id="Vdy-JN-xB2"/>
+                <outlet property="errorIndicatorButton" destination="b6j-Gj-9EH" id="cI6-Ir-77O"/>
                 <outlet property="messageBubbleContainerView" destination="Dsd-Yf-0Sl" id="elc-yu-7ie"/>
                 <outlet property="messageBubbleContainerWidthConstraint" destination="5rv-si-Sd2" id="6HM-ml-jm1"/>
                 <outlet property="messageBubbleImageView" destination="9AF-UH-doA" id="qvy-hh-zvE"/>

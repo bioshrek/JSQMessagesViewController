@@ -17,7 +17,8 @@ typedef NS_ENUM(NSInteger, SKMessageState) {
     SKMessageStateSent = 3,
     SKMessageStateReceiving = 4,
     SKMessageStateReceived = 5,
-    SKMessageStateRead = 6
+    SKMessageStateRead = 6,
+    SKMessageStateSendingFailure = 7
 };
 
 @protocol SKMessageData <JSQMessageData>

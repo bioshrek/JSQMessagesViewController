@@ -22,6 +22,10 @@
 
 #import "SKMessage.h"
 
+#import "SKVideoMediaItem.h"
+
+#import "SKMediaPlaceholderView.h"
+
 
 /**
  *  This is for demo/testing purposes only.
@@ -225,9 +229,19 @@
 - (id<SKMessageData>)createVideoMediaMessageWithUUID:(NSString *)uuid
 {
     // don't have a real video, just pretending
-    NSURL *videoURL = [NSURL URLWithString:@"file://"];
+//    NSURL *videoURL = [NSURL URLWithString:@"file://"];
+    NSURL *videoURL = nil;
+    NSString *fileName = @"Star War 2.mp4";
+    NSString *fileSize = @"1.35 GB";
     
-    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
+//    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
+    SKVideoMediaItem *videoItem = [[SKVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:NO];
+    if ([videoItem.mediaPlaceholderView isKindOfClass:[SKMediaPlaceholderView class]]) {
+        SKMediaPlaceholderView *placeholderView = (SKMediaPlaceholderView *)videoItem.mediaPlaceholderView;
+        placeholderView.mediaNameLabel.text = fileName;
+        placeholderView.mediaSizeLabel.text = fileSize;
+        placeholderView.backgroundImageView.image = [UIImage imageNamed:@"star_wars"];
+    }
     
     SKMessage *videoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                                    senderDisplayName:kJSQDemoAvatarDisplayNameSquires

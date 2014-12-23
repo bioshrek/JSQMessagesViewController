@@ -361,13 +361,38 @@
     });
 }
 
+- (void)sendTextMessageWillFailed:(id<SKMessageData>)textMessage
+{
+    [self.demoData.messages addObject:textMessage];
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    [self finishSendingMessage];
+    
+    // sending status change
+    __weak DemoMessagesViewController *weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // update sending progress
+        [weakSelf updateItemWithUUID:[textMessage uuid] handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
+            
+            [messageItem setState:SKMessageStateSendingFailure];
+            
+            // stop animation if visible
+            if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
+                SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
+                [outgoingCell configSendingStatusWithMessage:messageItem];
+            }
+        } complete:^{
+            // TODO:
+        }];
+    });
+}
+
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Media messages"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send text emoji mixture", @"Input text emoji mixture", nil];
+                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send text emoji mixture", @"Input text emoji mixture", @"Send text failed", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -441,6 +466,18 @@
             
             [self.inputToolbar.contentView.textView.textStorage appendAttributedString:mutableAttrText];
             [self.inputToolbar toggleSendButtonEnabled];  // change text view programmatically
+        } break;
+        
+        case 5: {  // send text failed
+            NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"Bilibili bon si wa."];
+            NSString *uuid = [[NSUUID UUID] UUIDString];
+            SKMessage *message = [[SKMessage alloc] initWithSenderId:self.senderId
+                                                   senderDisplayName:self.senderDisplayName
+                                                                date:[NSDate distantFuture]
+                                                      attributedText:text
+                                                                uuid:uuid
+                                                               state:SKMessageStateSending];
+            [self sendTextMessageWillFailed:message];
         } break;
     }
 }

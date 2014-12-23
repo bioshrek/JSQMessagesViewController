@@ -8,11 +8,13 @@
 
 #import "SKMessagesCollectionViewCellOutgoing.h"
 
+#import "SKMediaPlaceholderView.h"
+
 @interface SKMessagesCollectionViewCellOutgoing ()
 
 @property (weak, nonatomic) IBOutlet MRActivityIndicatorView *activityIndicatorView;
 
-@property (weak, nonatomic) IBOutlet MRCircularProgressView *circularProgressView;
+@property (weak, nonatomic) IBOutlet SKButton *errorIndicatorButton;
 
 @end
 
@@ -37,27 +39,43 @@
     if ([message isMediaMessage]) {  // media message
         [self.activityIndicatorView removeFromSuperview];
         
-        self.circularProgressView.lineWidth = 15.0f;
-        self.circularProgressView.borderWidth = 1.0f;
-        [self.circularProgressView.valueLabel removeFromSuperview];
+        UIView *mediaPlaceHolderView = [[message media] mediaPlaceholderView];
+        if (![mediaPlaceHolderView isKindOfClass:[SKMediaPlaceholderView class]]) {
+            return;
+        }
+        SKMediaPlaceholderView *skMediaPlaceholderView = (SKMediaPlaceholderView *)mediaPlaceHolderView;
+        MRCircularProgressView *circularProgressView = skMediaPlaceholderView.circularProgressView;
+        
+        circularProgressView.lineWidth = CGRectGetWidth(circularProgressView.bounds) / 2.0f;
+        circularProgressView.borderWidth = 1.0f;
+        [circularProgressView.valueLabel removeFromSuperview];
         
         float fractionCompleted = [message progress].fractionCompleted;
         if (SKMessageStateSending == [message state]) {
-            self.circularProgressView.hidden = NO;
-            [self.circularProgressView setProgress:fractionCompleted
+            circularProgressView.hidden = NO;
+            [circularProgressView setProgress:fractionCompleted
                                           animated:YES];
         } else {
-            self.circularProgressView.hidden = YES;
+            circularProgressView.hidden = YES;
         }
     } else {  // text message
-        [self.circularProgressView removeFromSuperview];
         
         if (SKMessageStateSending == [message state]) {
             self.activityIndicatorView.hidden = NO;
             [self.activityIndicatorView startAnimating];
+            
+            self.errorIndicatorButton.hidden = YES;
+        } else if (SKMessageStateSendingFailure == [message state]) {
+            [self.errorIndicatorButton becomeRoundIfPossible];
+            self.errorIndicatorButton.hidden = NO;
+            
+            self.activityIndicatorView.hidden = YES;
+            [self.activityIndicatorView stopAnimating];
         } else {
             self.activityIndicatorView.hidden = YES;
             [self.activityIndicatorView stopAnimating];
+            
+            self.errorIndicatorButton.hidden = YES;
         }
     }
 }

@@ -1,0 +1,478 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		146E30071A48611C00DA7BDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146E30061A48611C00DA7BDE /* Foundation.framework */; };
+		146E30091A48611C00DA7BDE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146E30081A48611C00DA7BDE /* CoreGraphics.framework */; };
+		146E300B1A48611C00DA7BDE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146E300A1A48611C00DA7BDE /* UIKit.framework */; };
+		146E30111A48611C00DA7BDE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 146E300F1A48611C00DA7BDE /* InfoPlist.strings */; };
+		146E30131A48611C00DA7BDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E30121A48611C00DA7BDE /* main.m */; };
+		146E30171A48611C00DA7BDE /* SKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E30161A48611C00DA7BDE /* SKAppDelegate.m */; };
+		146E301A1A48611C00DA7BDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 146E30181A48611C00DA7BDE /* Main.storyboard */; };
+		146E301D1A48611C00DA7BDE /* SKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E301C1A48611C00DA7BDE /* SKViewController.m */; };
+		146E301F1A48611C00DA7BDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E301E1A48611C00DA7BDE /* Images.xcassets */; };
+		146E30261A48611C00DA7BDE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146E30251A48611C00DA7BDE /* XCTest.framework */; };
+		146E30271A48611C00DA7BDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146E30061A48611C00DA7BDE /* Foundation.framework */; };
+		146E30281A48611C00DA7BDE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146E300A1A48611C00DA7BDE /* UIKit.framework */; };
+		146E30301A48611C00DA7BDE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 146E302E1A48611C00DA7BDE /* InfoPlist.strings */; };
+		146E30321A48611C00DA7BDE /* SKButtonsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E30311A48611C00DA7BDE /* SKButtonsTests.m */; };
+		146E30401A48617500DA7BDE /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E303F1A48617500DA7BDE /* SKButton.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		146E30291A48611C00DA7BDE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146E2FFB1A48611C00DA7BDE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 146E30021A48611C00DA7BDE;
+			remoteInfo = SKButtons;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		146E30031A48611C00DA7BDE /* SKButtons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKButtons.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		146E30061A48611C00DA7BDE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		146E30081A48611C00DA7BDE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		146E300A1A48611C00DA7BDE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		146E300E1A48611C00DA7BDE /* SKButtons-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SKButtons-Info.plist"; sourceTree = "<group>"; };
+		146E30101A48611C00DA7BDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		146E30121A48611C00DA7BDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		146E30141A48611C00DA7BDE /* SKButtons-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKButtons-Prefix.pch"; sourceTree = "<group>"; };
+		146E30151A48611C00DA7BDE /* SKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKAppDelegate.h; sourceTree = "<group>"; };
+		146E30161A48611C00DA7BDE /* SKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKAppDelegate.m; sourceTree = "<group>"; };
+		146E30191A48611C00DA7BDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		146E301B1A48611C00DA7BDE /* SKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKViewController.h; sourceTree = "<group>"; };
+		146E301C1A48611C00DA7BDE /* SKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKViewController.m; sourceTree = "<group>"; };
+		146E301E1A48611C00DA7BDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		146E30241A48611C00DA7BDE /* SKButtonsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKButtonsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		146E30251A48611C00DA7BDE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		146E302D1A48611C00DA7BDE /* SKButtonsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SKButtonsTests-Info.plist"; sourceTree = "<group>"; };
+		146E302F1A48611C00DA7BDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		146E30311A48611C00DA7BDE /* SKButtonsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKButtonsTests.m; sourceTree = "<group>"; };
+		146E303E1A48617500DA7BDE /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
+		146E303F1A48617500DA7BDE /* SKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKButton.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		146E30001A48611C00DA7BDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146E30091A48611C00DA7BDE /* CoreGraphics.framework in Frameworks */,
+				146E300B1A48611C00DA7BDE /* UIKit.framework in Frameworks */,
+				146E30071A48611C00DA7BDE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		146E30211A48611C00DA7BDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146E30261A48611C00DA7BDE /* XCTest.framework in Frameworks */,
+				146E30281A48611C00DA7BDE /* UIKit.framework in Frameworks */,
+				146E30271A48611C00DA7BDE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		146E2FFA1A48611C00DA7BDE = {
+			isa = PBXGroup;
+			children = (
+				146E300C1A48611C00DA7BDE /* SKButtons */,
+				146E302B1A48611C00DA7BDE /* SKButtonsTests */,
+				146E30051A48611C00DA7BDE /* Frameworks */,
+				146E30041A48611C00DA7BDE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		146E30041A48611C00DA7BDE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				146E30031A48611C00DA7BDE /* SKButtons.app */,
+				146E30241A48611C00DA7BDE /* SKButtonsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		146E30051A48611C00DA7BDE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				146E30061A48611C00DA7BDE /* Foundation.framework */,
+				146E30081A48611C00DA7BDE /* CoreGraphics.framework */,
+				146E300A1A48611C00DA7BDE /* UIKit.framework */,
+				146E30251A48611C00DA7BDE /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		146E300C1A48611C00DA7BDE /* SKButtons */ = {
+			isa = PBXGroup;
+			children = (
+				146E30151A48611C00DA7BDE /* SKAppDelegate.h */,
+				146E30161A48611C00DA7BDE /* SKAppDelegate.m */,
+				146E30181A48611C00DA7BDE /* Main.storyboard */,
+				146E301B1A48611C00DA7BDE /* SKViewController.h */,
+				146E301C1A48611C00DA7BDE /* SKViewController.m */,
+				146E301E1A48611C00DA7BDE /* Images.xcassets */,
+				146E300D1A48611C00DA7BDE /* Supporting Files */,
+				146E303E1A48617500DA7BDE /* SKButton.h */,
+				146E303F1A48617500DA7BDE /* SKButton.m */,
+			);
+			path = SKButtons;
+			sourceTree = "<group>";
+		};
+		146E300D1A48611C00DA7BDE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				146E300E1A48611C00DA7BDE /* SKButtons-Info.plist */,
+				146E300F1A48611C00DA7BDE /* InfoPlist.strings */,
+				146E30121A48611C00DA7BDE /* main.m */,
+				146E30141A48611C00DA7BDE /* SKButtons-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		146E302B1A48611C00DA7BDE /* SKButtonsTests */ = {
+			isa = PBXGroup;
+			children = (
+				146E30311A48611C00DA7BDE /* SKButtonsTests.m */,
+				146E302C1A48611C00DA7BDE /* Supporting Files */,
+			);
+			path = SKButtonsTests;
+			sourceTree = "<group>";
+		};
+		146E302C1A48611C00DA7BDE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				146E302D1A48611C00DA7BDE /* SKButtonsTests-Info.plist */,
+				146E302E1A48611C00DA7BDE /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		146E30021A48611C00DA7BDE /* SKButtons */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 146E30351A48611C00DA7BDE /* Build configuration list for PBXNativeTarget "SKButtons" */;
+			buildPhases = (
+				146E2FFF1A48611C00DA7BDE /* Sources */,
+				146E30001A48611C00DA7BDE /* Frameworks */,
+				146E30011A48611C00DA7BDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SKButtons;
+			productName = SKButtons;
+			productReference = 146E30031A48611C00DA7BDE /* SKButtons.app */;
+			productType = "com.apple.product-type.application";
+		};
+		146E30231A48611C00DA7BDE /* SKButtonsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 146E30381A48611C00DA7BDE /* Build configuration list for PBXNativeTarget "SKButtonsTests" */;
+			buildPhases = (
+				146E30201A48611C00DA7BDE /* Sources */,
+				146E30211A48611C00DA7BDE /* Frameworks */,
+				146E30221A48611C00DA7BDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				146E302A1A48611C00DA7BDE /* PBXTargetDependency */,
+			);
+			name = SKButtonsTests;
+			productName = SKButtonsTests;
+			productReference = 146E30241A48611C00DA7BDE /* SKButtonsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		146E2FFB1A48611C00DA7BDE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SK;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "___FULLUSERNAME___";
+				TargetAttributes = {
+					146E30231A48611C00DA7BDE = {
+						TestTargetID = 146E30021A48611C00DA7BDE;
+					};
+				};
+			};
+			buildConfigurationList = 146E2FFE1A48611C00DA7BDE /* Build configuration list for PBXProject "SKButtons" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 146E2FFA1A48611C00DA7BDE;
+			productRefGroup = 146E30041A48611C00DA7BDE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				146E30021A48611C00DA7BDE /* SKButtons */,
+				146E30231A48611C00DA7BDE /* SKButtonsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		146E30011A48611C00DA7BDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146E301F1A48611C00DA7BDE /* Images.xcassets in Resources */,
+				146E30111A48611C00DA7BDE /* InfoPlist.strings in Resources */,
+				146E301A1A48611C00DA7BDE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		146E30221A48611C00DA7BDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146E30301A48611C00DA7BDE /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		146E2FFF1A48611C00DA7BDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146E30171A48611C00DA7BDE /* SKAppDelegate.m in Sources */,
+				146E301D1A48611C00DA7BDE /* SKViewController.m in Sources */,
+				146E30131A48611C00DA7BDE /* main.m in Sources */,
+				146E30401A48617500DA7BDE /* SKButton.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		146E30201A48611C00DA7BDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146E30321A48611C00DA7BDE /* SKButtonsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		146E302A1A48611C00DA7BDE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 146E30021A48611C00DA7BDE /* SKButtons */;
+			targetProxy = 146E30291A48611C00DA7BDE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		146E300F1A48611C00DA7BDE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				146E30101A48611C00DA7BDE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		146E30181A48611C00DA7BDE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				146E30191A48611C00DA7BDE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		146E302E1A48611C00DA7BDE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				146E302F1A48611C00DA7BDE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		146E30331A48611C00DA7BDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		146E30341A48611C00DA7BDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		146E30361A48611C00DA7BDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKButtons/SKButtons-Prefix.pch";
+				INFOPLIST_FILE = "SKButtons/SKButtons-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		146E30371A48611C00DA7BDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKButtons/SKButtons-Prefix.pch";
+				INFOPLIST_FILE = "SKButtons/SKButtons-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		146E30391A48611C00DA7BDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SKButtons.app/SKButtons";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKButtons/SKButtons-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SKButtonsTests/SKButtonsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		146E303A1A48611C00DA7BDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SKButtons.app/SKButtons";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKButtons/SKButtons-Prefix.pch";
+				INFOPLIST_FILE = "SKButtonsTests/SKButtonsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		146E2FFE1A48611C00DA7BDE /* Build configuration list for PBXProject "SKButtons" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146E30331A48611C00DA7BDE /* Debug */,
+				146E30341A48611C00DA7BDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		146E30351A48611C00DA7BDE /* Build configuration list for PBXNativeTarget "SKButtons" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146E30361A48611C00DA7BDE /* Debug */,
+				146E30371A48611C00DA7BDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		146E30381A48611C00DA7BDE /* Build configuration list for PBXNativeTarget "SKButtonsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146E30391A48611C00DA7BDE /* Debug */,
+				146E303A1A48611C00DA7BDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 146E2FFB1A48611C00DA7BDE /* Project object */;
+}

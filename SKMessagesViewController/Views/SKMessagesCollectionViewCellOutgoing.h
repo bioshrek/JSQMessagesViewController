@@ -12,11 +12,13 @@
 
 #import "SKMessageData.h"
 
+#import "SKButton.h"
+
 @interface SKMessagesCollectionViewCellOutgoing : JSQMessagesCollectionViewCellOutgoing
 
-@property (weak, nonatomic, readonly) MRCircularProgressView *circularProgressView;
-
 @property (weak, nonatomic, readonly) MRActivityIndicatorView *activityIndicatorView;
+
+@property (weak, nonatomic, readonly) SKButton *errorIndicatorButton;
 
 #pragma mark - rendering
 
