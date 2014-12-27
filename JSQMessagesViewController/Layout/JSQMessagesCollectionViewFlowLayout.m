@@ -431,17 +431,18 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (CGSize)messageBubbleSizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSQMessageData> messageItem = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
+    id<JSQMessagesCollectionViewDataSource> messageDataSource = self.collectionView.dataSource;
     
-    NSValue *cachedSize = [self.messageBubbleCache objectForKey:@(messageItem.hash)];
+    NSUInteger hash = [messageDataSource collectionView:self.collectionView hashForItemAtIndexPath:indexPath];
+    NSValue *cachedSize = [self.messageBubbleCache objectForKey:@(hash)];
     if (cachedSize != nil) {
         return [cachedSize CGSizeValue];
     }
     
     CGSize finalSize = CGSizeZero;
     
-    if ([messageItem isMediaMessage]) {
-        finalSize = [[messageItem media] mediaViewDisplaySize];
+    if ([messageDataSource collectionView:self.collectionView isMediaMessageForItemAtIndexPath:indexPath]) {
+        finalSize = [messageDataSource collectionView:self.collectionView mediaViewDisplaySizeForItemAtIndexPath:indexPath];
     }
     else {
         CGSize avatarSize = [self jsq_avatarSizeForIndexPath:indexPath];
@@ -454,7 +455,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
         CGFloat maximumTextWidth = self.itemWidth - avatarSize.width - self.messageBubbleLeftRightMargin - horizontalInsetsTotal;
         
-        NSMutableAttributedString *mutableAttrText = [[NSMutableAttributedString alloc] initWithAttributedString:[messageItem attributedText]];
+        NSMutableAttributedString *mutableAttrText = [[NSMutableAttributedString alloc] initWithAttributedString:[messageDataSource collectionView:self.collectionView attributedTextForItemAtIndexPath:indexPath]];
         NSRange range = NSMakeRange(0, [mutableAttrText length]);
         [mutableAttrText removeAttribute:@"NSOriginalFont"
                                    range:range];  // clear original font attribute
@@ -479,7 +480,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
         finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
     }
     
-    [self.messageBubbleCache setObject:[NSValue valueWithCGSize:finalSize] forKey:@(messageItem.hash)];
+    [self.messageBubbleCache setObject:[NSValue valueWithCGSize:finalSize] forKey:@(hash)];
     
     return finalSize;
 }
@@ -530,9 +531,9 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (CGSize)jsq_avatarSizeForIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSQMessageData> messageData = [self.collectionView.dataSource collectionView:self.collectionView messageDataForItemAtIndexPath:indexPath];
-    NSString *messageSender = [messageData senderId];
-   
+    id<JSQMessagesCollectionViewDataSource> messageDataSource = self.collectionView.dataSource;
+    NSString *messageSender = [messageDataSource collectionView:self.collectionView senderIdForItemAtIndexPath:indexPath];
+    
     if ([messageSender isEqualToString:[self.collectionView.dataSource senderId]]) {
         return self.outgoingAvatarViewSize;
     }

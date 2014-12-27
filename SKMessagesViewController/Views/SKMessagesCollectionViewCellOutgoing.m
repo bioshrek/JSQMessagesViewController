@@ -66,7 +66,6 @@
             
             self.errorIndicatorButton.hidden = YES;
         } else if (SKMessageStateSendingFailure == [message state]) {
-            [self.errorIndicatorButton becomeRoundIfPossible];
             self.errorIndicatorButton.hidden = NO;
             
             self.activityIndicatorView.hidden = YES;

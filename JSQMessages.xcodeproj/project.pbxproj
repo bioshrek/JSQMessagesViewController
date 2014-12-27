@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1439C3ED1A4F02930074A853 /* SKMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439C3EC1A4F02930074A853 /* SKMediaView.m */; };
+		1439C3F01A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439C3EF1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m */; };
+		1439C3F31A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439C3F21A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m */; };
+		1439C3F51A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1439C3F41A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib */; };
+		1439C3F71A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1439C3F61A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib */; };
 		146E30431A48685900DA7BDE /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E30421A48685900DA7BDE /* SKButton.m */; };
 		146E30471A487D7300DA7BDE /* SKMediaPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E30461A487D7300DA7BDE /* SKMediaPlaceholderView.m */; };
-		147F7C281A49B93E007F0FBF /* SKVideoMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F7C271A49B93E007F0FBF /* SKVideoMediaItem.m */; };
-		147F7C2B1A49BA9D007F0FBF /* SKMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F7C2A1A49BA9D007F0FBF /* SKMediaItem.m */; };
 		147F7C2D1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 147F7C2C1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib */; };
 		147F7C301A49C657007F0FBF /* SKBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F7C2F1A49C657007F0FBF /* SKBorderView.m */; };
 		14E0444A1A3DCC0700A7BDB0 /* SKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E044491A3DCC0700A7BDB0 /* SKMessage.m */; };
@@ -128,14 +131,19 @@
 
 /* Begin PBXFileReference section */
 		0844AD596023C7658D39E241 /* Pods-JSQMessagesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessagesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.release.xcconfig"; sourceTree = "<group>"; };
+		141B9FD01A4E830800DF87A5 /* SKMessagesCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessagesCollectionViewDataSource.h; sourceTree = "<group>"; };
+		1439C3EB1A4F02930074A853 /* SKMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaView.h; sourceTree = "<group>"; };
+		1439C3EC1A4F02930074A853 /* SKMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaView.m; sourceTree = "<group>"; };
+		1439C3EE1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaPlaceholderViewIncoming.h; sourceTree = "<group>"; };
+		1439C3EF1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaPlaceholderViewIncoming.m; sourceTree = "<group>"; };
+		1439C3F11A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaPlaceholderViewOutgoing.h; sourceTree = "<group>"; };
+		1439C3F21A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaPlaceholderViewOutgoing.m; sourceTree = "<group>"; };
+		1439C3F41A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMediaPlaceholderViewOutgoing.xib; sourceTree = "<group>"; };
+		1439C3F61A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMediaPlaceholderViewIncoming.xib; sourceTree = "<group>"; };
 		146E30411A48685900DA7BDE /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
 		146E30421A48685900DA7BDE /* SKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKButton.m; sourceTree = "<group>"; };
 		146E30451A487D7300DA7BDE /* SKMediaPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaPlaceholderView.h; sourceTree = "<group>"; };
 		146E30461A487D7300DA7BDE /* SKMediaPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaPlaceholderView.m; sourceTree = "<group>"; };
-		147F7C261A49B93E007F0FBF /* SKVideoMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKVideoMediaItem.h; sourceTree = "<group>"; };
-		147F7C271A49B93E007F0FBF /* SKVideoMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKVideoMediaItem.m; sourceTree = "<group>"; };
-		147F7C291A49BA9D007F0FBF /* SKMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaItem.h; sourceTree = "<group>"; };
-		147F7C2A1A49BA9D007F0FBF /* SKMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaItem.m; sourceTree = "<group>"; };
 		147F7C2C1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMediaPlaceholderView.xib; sourceTree = "<group>"; };
 		147F7C2E1A49C657007F0FBF /* SKBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBorderView.h; sourceTree = "<group>"; };
 		147F7C2F1A49C657007F0FBF /* SKBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBorderView.m; sourceTree = "<group>"; };
@@ -355,10 +363,7 @@
 				14E044481A3DCC0700A7BDB0 /* SKMessage.h */,
 				14E044491A3DCC0700A7BDB0 /* SKMessage.m */,
 				14E044651A409DCA00A7BDB0 /* SKMessageData.h */,
-				147F7C261A49B93E007F0FBF /* SKVideoMediaItem.h */,
-				147F7C271A49B93E007F0FBF /* SKVideoMediaItem.m */,
-				147F7C291A49BA9D007F0FBF /* SKMediaItem.h */,
-				147F7C2A1A49BA9D007F0FBF /* SKMediaItem.m */,
+				141B9FD01A4E830800DF87A5 /* SKMessagesCollectionViewDataSource.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -390,6 +395,12 @@
 				147F7C2C1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib */,
 				147F7C2E1A49C657007F0FBF /* SKBorderView.h */,
 				147F7C2F1A49C657007F0FBF /* SKBorderView.m */,
+				1439C3EE1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.h */,
+				1439C3EF1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m */,
+				1439C3F11A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.h */,
+				1439C3F21A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m */,
+				1439C3F41A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib */,
+				1439C3F61A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -650,6 +661,8 @@
 				88A25FA019D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.h */,
 				88A25FA119D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.m */,
 				88A25FA219D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.xib */,
+				1439C3EB1A4F02930074A853 /* SKMediaView.h */,
+				1439C3EC1A4F02930074A853 /* SKMediaView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -821,6 +834,7 @@
 				88E4D7131A0DBD6B000CC061 /* JSQMessages.strings in Resources */,
 				886C33FF19F45E30006B4997 /* JSQMessagesViewController.podspec in Resources */,
 				14F3BC751A3C38FC00052C81 /* SKMessagesCollectionViewCellIncoming.xib in Resources */,
+				1439C3F51A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib in Resources */,
 				147F7C2D1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib in Resources */,
 				8861666D19F492B70025B958 /* JSQMessagesAssets.bundle in Resources */,
 				88A25FCF19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
@@ -832,6 +846,7 @@
 				88A25FD819D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				88A25F3919D8DF2500924534 /* Main.storyboard in Resources */,
 				88A25FD419D8E01A00924534 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
+				1439C3F71A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -915,10 +930,8 @@
 			files = (
 				88078A9D19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				88A25FCE19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
-				147F7C281A49B93E007F0FBF /* SKVideoMediaItem.m in Sources */,
 				88A25FD119D8E01A00924534 /* JSQMessagesInputToolbar.m in Sources */,
 				146E30431A48685900DA7BDE /* SKButton.m in Sources */,
-				147F7C2B1A49BA9D007F0FBF /* SKMediaItem.m in Sources */,
 				88A25FCB19D8E01A00924534 /* JSQMessagesCollectionViewCell.m in Sources */,
 				88A25FBB19D8E01A00924534 /* JSQMessagesViewController.m in Sources */,
 				8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */,
@@ -951,10 +964,13 @@
 				88A25FCC19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				88A25FBE19D8E01A00924534 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				88A25FDF19D8E0C400924534 /* DemoMessagesViewController.m in Sources */,
+				1439C3F01A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m in Sources */,
 				88A25FB719D8E01A00924534 /* UIColor+JSQMessages.m in Sources */,
 				886C33FD19F4371E006B4997 /* JSQVideoMediaItem.m in Sources */,
 				88A25FBA19D8E01A00924534 /* JSQMessagesKeyboardController.m in Sources */,
+				1439C3ED1A4F02930074A853 /* SKMediaView.m in Sources */,
 				147F7C301A49C657007F0FBF /* SKBorderView.m in Sources */,
+				1439C3F31A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m in Sources */,
 				88A25FC019D8E01A00924534 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				88A25FC219D8E01A00924534 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
 				88A25FE119D8E0C400924534 /* TableViewController.m in Sources */,

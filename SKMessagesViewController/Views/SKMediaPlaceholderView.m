@@ -21,9 +21,4 @@
 
 @implementation SKMediaPlaceholderView
 
-+ (instancetype)view
-{
-    return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:kNilOptions] firstObject];
-}
-
 @end

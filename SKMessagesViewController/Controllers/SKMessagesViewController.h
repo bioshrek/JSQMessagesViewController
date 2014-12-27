@@ -12,12 +12,14 @@
 
 #import "MRProgress.h"
 
-@interface SKMessagesViewController : JSQMessagesViewController
+#import "SKMessagesCollectionViewDataSource.h"
 
-- (void)updateItemWithUUID:(NSString *)uuid
-                   handler:(void (^)(NSIndexPath *indexPath,
-                                     id<SKMessageData> message,
-                                     JSQMessagesCollectionViewCell *cell))updateHandler
-                  complete:(void (^)())completionCallback;
+
+
+@interface SKMessagesViewController : JSQMessagesViewController <SKMessagesCollectionViewDataSource>
+
+#pragma mark - Actions
+
+- (void)updateTextMessageState:(SKMessageState)textMessageState forItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

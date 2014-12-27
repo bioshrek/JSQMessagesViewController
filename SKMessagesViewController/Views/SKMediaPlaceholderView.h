@@ -10,7 +10,9 @@
 
 #import "MRProgress.h"
 
-@interface SKMediaPlaceholderView : UIView
+#import "SKMediaView.h"
+
+@interface SKMediaPlaceholderView : SKMediaView
 
 @property (nonatomic, weak, readonly) UIImageView *backgroundImageView;
 @property (nonatomic, weak, readonly) UIView *mediaTextInfoHolderView;
@@ -18,7 +20,5 @@
 @property (nonatomic, weak, readonly) UILabel *mediaSizeLabel;
 
 @property (nonatomic, weak, readonly) MRCircularProgressView *circularProgressView;
-
-+ (instancetype)view;
 
 @end

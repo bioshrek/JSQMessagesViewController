@@ -98,4 +98,12 @@
  */
 - (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath;
 
+
+- (void)registerNib:(UINib *)nib forMediaViewWithReuseIdentifier:(NSString *)identifier;
+
+- (void)registerClass:(Class)cellClass forMediaViewWithReuseIdentifier:(NSString *)identifier;
+
+// dequeue media view
+- (SKMediaView *)dequeueReusableMediaViewWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
+
 @end

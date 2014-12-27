@@ -16,6 +16,4 @@
 
 @property (nonatomic, assign) CGFloat cornerRadius;
 
-- (void)becomeRoundIfPossible;
-
 @end

@@ -372,10 +372,74 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - JSQMessages collection view data source
 
-- (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+// sender id
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView senderIdForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
     return nil;
+}
+
+// sender display name
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView senderDisplayNameForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return nil;
+}
+
+// date
+- (NSDate *)collectionView:(JSQMessagesCollectionView *)collectionView dateForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return nil;
+}
+
+// hash
+- (NSUInteger)collectionView:(JSQMessagesCollectionView *)collectionView hashForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return 0;
+}
+
+// is media message
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView isMediaMessageForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return NO;
+}
+
+// attributed text
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return nil;
+}
+
+// media view display size
+- (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView mediaViewDisplaySizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return CGSizeZero;
+}
+
+// media view
+- (SKMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return nil;
+}
+
+// media placeholder view
+- (SKMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaPlaceholderViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return nil;
+}
+
+// media hash
+- (NSUInteger)collectionView:(JSQMessagesCollectionView *)collectionView mediaHashForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return 0;
 }
 
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -419,14 +483,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    NSParameterAssert(messageItem != nil);
+    id<JSQMessagesCollectionViewDataSource> messageDataSource = collectionView.dataSource;
+    NSParameterAssert(nil != messageDataSource);
     
-    NSString *messageSenderId = [messageItem senderId];
+    NSString *messageSenderId = [messageDataSource collectionView:collectionView senderIdForItemAtIndexPath:indexPath];
     NSParameterAssert(messageSenderId != nil);
     
     BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
-    BOOL isMediaMessage = [messageItem isMediaMessage];
+    BOOL isMediaMessage = [messageDataSource collectionView:collectionView isMediaMessageForItemAtIndexPath:indexPath];
     
     NSString *cellIdentifier = nil;
     if (isMediaMessage) {
@@ -441,7 +505,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     if (!isMediaMessage) {
         NSMutableAttributedString *mutableAttrText = cell.textView.textStorage;
-        [mutableAttrText setAttributedString:[messageItem attributedText]];
+        [mutableAttrText setAttributedString:[messageDataSource collectionView:collectionView attributedTextForItemAtIndexPath:indexPath]];
         NSRange range = NSMakeRange(0, [mutableAttrText length]);
         [mutableAttrText removeAttribute:@"NSOriginalFont"
                                    range:range];  // clear original font attribute
@@ -451,15 +515,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         
         NSParameterAssert(cell.textView.attributedText != nil);
         
-        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
+        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [messageDataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
         if (bubbleImageDataSource != nil) {
             cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
             cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
         }
     }
     else {
-        id<JSQMessageMediaData> messageMedia = [messageItem media];
-        cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
+        SKMediaView *mediaView = [messageDataSource collectionView:collectionView mediaViewForItemAtIndexPath:indexPath isOutgoing:isOutgoingMessage];
+        if (mediaView) {
+            cell.mediaView = mediaView;
+        } else {
+            cell.mediaView = [messageDataSource collectionView:collectionView mediaPlaceholderViewForItemAtIndexPath:indexPath isOutgoing:isOutgoingMessage];
+        }
         NSParameterAssert(cell.mediaView != nil);
     }
     
@@ -548,8 +616,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //  disable menu for media messages
-    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    if ([messageItem isMediaMessage]) {
+    id<JSQMessagesCollectionViewDataSource> messageDataSource = collectionView.dataSource;
+    if ([messageDataSource collectionView:self.collectionView isMediaMessageForItemAtIndexPath:indexPath]) {
         return NO;
     }
     
@@ -577,8 +645,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
     if (action == @selector(copy:)) {
-        id<JSQMessageData> messageData = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-        [[UIPasteboard generalPasteboard] setString:[[messageData attributedText] string]];
+        id<JSQMessagesCollectionViewDataSource> messageDataSource = collectionView.dataSource;
+        [[UIPasteboard generalPasteboard] setString:[[messageDataSource collectionView:self.collectionView attributedTextForItemAtIndexPath:indexPath] string]];
     }
 }
 

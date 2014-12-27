@@ -25,6 +25,9 @@
 #import "SKMessagesCollectionViewCellOutgoing.h"
 #import "SKMessagesCollectionViewCellIncoming.h"
 
+#import "SKMediaPlaceholderViewIncoming.h"
+#import "SKMediaPlaceholderViewOutgoing.h"
+
 @implementation DemoMessagesViewController
 
 #pragma mark - View lifecycle
@@ -74,6 +77,11 @@
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
+    // register nib for media view
+    [self.collectionView registerNib:[SKMediaPlaceholderViewIncoming nib]
+     forMediaViewWithReuseIdentifier:[SKMediaPlaceholderViewIncoming reuseIdentifier]];
+    [self.collectionView registerNib:[SKMediaPlaceholderViewOutgoing nib]
+     forMediaViewWithReuseIdentifier:[SKMediaPlaceholderViewOutgoing reuseIdentifier]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -244,6 +252,9 @@
 
 - (void)receiveMediaMessageWithProgressTotalUnitCount:(NSUInteger)totalUnitCount completedUnitCount:(NSUInteger)completedUnitCount uuid:(NSString *)uuid copiedMediaAttachmentCopy:(id)copiedMediaAttachmentCopy
 {
+    
+    /*
+    
     __weak DemoMessagesViewController *weakSelf = self;
     
     if (completedUnitCount <= totalUnitCount) {
@@ -300,6 +311,8 @@
             }];
         });
     }
+     
+     */
 }
 
 - (void)closePressed:(UIBarButtonItem *)sender
@@ -333,10 +346,10 @@
                                                           attributedText:attributedText
                                                         uuid:uuid
                                                        state:SKMessageStateSending];
-    [self sendTextMessage:message];
+    [self sendTextMessage:message finalState:SKMessageStateSent];
 }
 
-- (void)sendTextMessage:(id<SKMessageData>)textMessage
+- (void)sendTextMessage:(id<SKMessageData>)textMessage finalState:(SKMessageState)state
 {
     [self.demoData.messages addObject:textMessage];
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
@@ -346,43 +359,20 @@
     __weak DemoMessagesViewController *weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // update sending progress
-        [weakSelf updateItemWithUUID:[textMessage uuid] handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
-            
-            [messageItem setState:SKMessageStateSent];
-            
-            // stop animation if visible
-            if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
-                SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
-                [outgoingCell configSendingStatusWithMessage:messageItem];
+        NSInteger index = NSNotFound;
+        for (NSInteger i = 0; i < [self.demoData.messages count]; i++) {
+            @autoreleasepool {
+                SKMessage *message = [self.demoData.messages objectAtIndex:i];
+                if ([message.uuid isEqualToString:[textMessage uuid]]) {
+                    index = i;
+                    break;
+                }
             }
-        } complete:^{
-            // TODO:
-        }];
-    });
-}
-
-- (void)sendTextMessageWillFailed:(id<SKMessageData>)textMessage
-{
-    [self.demoData.messages addObject:textMessage];
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
-    [self finishSendingMessage];
-    
-    // sending status change
-    __weak DemoMessagesViewController *weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        // update sending progress
-        [weakSelf updateItemWithUUID:[textMessage uuid] handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
-            
-            [messageItem setState:SKMessageStateSendingFailure];
-            
-            // stop animation if visible
-            if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
-                SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
-                [outgoingCell configSendingStatusWithMessage:messageItem];
-            }
-        } complete:^{
-            // TODO:
-        }];
+        }
+        
+        if (NSNotFound == index) return;
+        
+        [weakSelf updateTextMessageState:state forItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     });
 }
 
@@ -449,7 +439,7 @@
                                                       attributedText:mutableAttrText
                                                                 uuid:uuid
                                                                state:SKMessageStateSending];
-            [self sendTextMessage:message];
+            [self sendTextMessage:message finalState:SKMessageStateSent];
         } break;
             
         case 4: {
@@ -477,7 +467,7 @@
                                                       attributedText:text
                                                                 uuid:uuid
                                                                state:SKMessageStateSending];
-            [self sendTextMessageWillFailed:message];
+            [self sendTextMessage:message finalState:SKMessageStateSendingFailure];
         } break;
     }
 }
@@ -496,6 +486,8 @@
 
 - (void)sendMediaMessageWithProgressTotalUnitCount:(NSUInteger)totalUnitCount completedUnitCount:(NSUInteger)completedUnitCount uuid:(NSString *)uuid
 {
+    /*
+    
     __weak DemoMessagesViewController *weakSelf = self;
     
     if (completedUnitCount <= totalUnitCount) {
@@ -536,13 +528,104 @@
             }];
         });
     }
+     
+     */
 }
 
-#pragma mark - JSQMessages CollectionView DataSource
+#pragma mark - SKMessages CollectionView DataSource
 
-- (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+// sender id
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView senderIdForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.demoData.messages objectAtIndex:indexPath.item];
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return message.senderId;
+}
+
+// sender display name
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView senderDisplayNameForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return message.senderDisplayName;
+}
+
+// date
+- (NSDate *)collectionView:(JSQMessagesCollectionView *)collectionView dateForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return message.date;
+}
+
+// hash
+- (NSUInteger)collectionView:(JSQMessagesCollectionView *)collectionView hashForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return message.hash;
+}
+
+// is media message
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView isMediaMessageForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return message.isMediaMessage;
+}
+
+// attributed text
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return message.attributedText;
+}
+
+// text message state
+- (SKMessageState)collectionView:(JSQMessagesCollectionView *)collectionView textMessageStateForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    SKMessageState state = SKMessageStateDraft;
+    if (!message.isMediaMessage) {
+        state = message.state;
+    }
+    return state;
+}
+
+// update text message state
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView updateTextMessageState:(SKMessageState)textMessageState forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    if (nil != message && !message.isMediaMessage) {
+        message.state = textMessageState;
+    }
+}
+
+// media view display size
+- (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView mediaViewDisplaySizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return [[message media] mediaViewDisplaySize];
+}
+
+// media view
+- (SKMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing
+{
+    NSString *reuseIdentifier = isOutgoing ? [SKMediaPlaceholderViewOutgoing reuseIdentifier] : [SKMediaPlaceholderViewIncoming reuseIdentifier];
+    SKMediaView *mediaView = [collectionView dequeueReusableMediaViewWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    // TODO:
+    return mediaView;
+}
+
+// media placeholder view
+- (SKMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaPlaceholderViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing
+{
+    NSString *reuseIdentifier = isOutgoing ? [SKMediaPlaceholderViewOutgoing reuseIdentifier] : [SKMediaPlaceholderViewIncoming reuseIdentifier];
+    SKMediaView *mediaView = [collectionView dequeueReusableMediaViewWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    // TODO:
+    return mediaView;
+}
+
+// media hash
+- (NSUInteger)collectionView:(JSQMessagesCollectionView *)collectionView mediaHashForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return [[message media] hash];
 }
 
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -554,7 +637,7 @@
      *  Otherwise, return your previously created bubble image data objects.
      */
     
-    JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
     
     if ([message.senderId isEqualToString:self.senderId]) {
         return self.demoData.outgoingBubbleImageData;
@@ -585,7 +668,7 @@
      *
      *  Override the defaults in `viewDidLoad`
      */
-    JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
     
     if ([message.senderId isEqualToString:self.senderId]) {
         if (![NSUserDefaults outgoingAvatarSetting]) {
@@ -611,7 +694,7 @@
      *  Show a timestamp for every 3rd message
      */
     if (indexPath.item % 3 == 0) {
-        JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
+        SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
     
@@ -620,7 +703,7 @@
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
     
     /**
      *  iOS7-style sender name labels
@@ -630,7 +713,7 @@
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
+        SKMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
         if ([[previousMessage senderId] isEqualToString:message.senderId]) {
             return nil;
         }

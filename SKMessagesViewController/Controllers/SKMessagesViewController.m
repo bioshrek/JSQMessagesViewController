@@ -13,113 +13,94 @@
 
 #import "SKMessageData.h"
 
+#import "JSQMessageBubbleImageDataSource.h"
+#import "JSQMessageAvatarImageDataSource.h"
+
 @interface SKMessagesViewController ()
 
 @end
 
 @implementation SKMessagesViewController
 
+#pragma mark - life cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // register new collection cells
-    [self.collectionView registerNib:[SKMessagesCollectionViewCellIncoming nib]
-          forCellWithReuseIdentifier:[SKMessagesCollectionViewCellIncoming cellReuseIdentifier]];
-    [self.collectionView registerNib:[SKMessagesCollectionViewCellIncoming nib]
-          forCellWithReuseIdentifier:[SKMessagesCollectionViewCellIncoming mediaCellReuseIdentifier]];
+    // override
     [self.collectionView registerNib:[SKMessagesCollectionViewCellOutgoing nib]
-            forCellWithReuseIdentifier:[SKMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
+          forCellWithReuseIdentifier:[SKMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
     [self.collectionView registerNib:[SKMessagesCollectionViewCellOutgoing nib]
           forCellWithReuseIdentifier:[SKMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier]];
-    
-    // override
-    self.incomingCellIdentifier = [SKMessagesCollectionViewCellIncoming cellReuseIdentifier];
-    self.incomingMediaCellIdentifier = [SKMessagesCollectionViewCellIncoming mediaCellReuseIdentifier];
     self.outgoingCellIdentifier = [SKMessagesCollectionViewCellOutgoing cellReuseIdentifier];
     self.outgoingMediaCellIdentifier = [SKMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier];
 }
 
-// override point
-
+#pragma mark - Collection view data source
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    id<JSQMessageData> message = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    if (![message conformsToProtocol:@protocol(SKMessageData)]) {
-        return cell;
-    }
-    id<SKMessageData> messageItem = (id<SKMessageData>)message;
+    id<JSQMessagesCollectionViewDataSource> messageDataSource = collectionView.dataSource;
     
-    NSParameterAssert(messageItem != nil);
+    BOOL isMediaMessage = [messageDataSource collectionView:collectionView isMediaMessageForItemAtIndexPath:indexPath];
     
-    NSString *messageSenderId = [messageItem senderId];
-    NSParameterAssert(messageSenderId != nil);
-    
-    BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
-    
-    if (isOutgoingMessage && [cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
-        // outgoing message
-        
-        SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
-        [outgoingCell configSendingStatusWithMessage:messageItem];
-    }
-    
-    if (!isOutgoingMessage && [cell isKindOfClass:[SKMessagesCollectionViewCellIncoming class]]) {
-        // incoming message
-        
-        SKMessagesCollectionViewCellIncoming *incomingCell = (SKMessagesCollectionViewCellIncoming *)cell;
-        [incomingCell configReceivingStatusWithMessage:messageItem];
+    if (!isMediaMessage) {
+        [self renderCell:cell withTextMessageState:[self collectionView:collectionView textMessageStateForItemAtIndexPath:indexPath]];
     }
     
     return cell;
 }
 
-#pragma mark - update messages
-
-- (void)updateItemWithUUID:(NSString *)uuid
-                   handler:(void (^)(NSIndexPath *,
-                                     id<SKMessageData>,
-                                     JSQMessagesCollectionViewCell *))updateHandler
-                  complete:(void (^)())completionCallback
+- (void)renderCell:(JSQMessagesCollectionViewCell *)cell withTextMessageState:(SKMessageState)messageState
 {
-    if ([uuid length] <= 0) {
-        if (completionCallback) completionCallback();
-    }
+    if (nil == cell) return;
     
-    __weak SKMessagesViewController *weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        // locate item
-        NSInteger sectionCount = [weakSelf.collectionView.dataSource numberOfSectionsInCollectionView:weakSelf.collectionView];
-        NSInteger itemCount = 0;
-        NSIndexPath *indexPath = nil;
-        id<JSQMessageData> message = nil;
-        id<SKMessageData> messageItem = nil;
-        BOOL found = NO;
-        for (NSInteger section = 0; section < sectionCount; section++) {
-            itemCount = [weakSelf.collectionView.dataSource collectionView:weakSelf.collectionView numberOfItemsInSection:section];
-            for (NSInteger i = 0; i < itemCount; i++) {
-                indexPath = [NSIndexPath indexPathForItem:i inSection:section];
-                message = [weakSelf.collectionView.dataSource collectionView:weakSelf.collectionView messageDataForItemAtIndexPath:indexPath];
-                if ([message conformsToProtocol:@protocol(SKMessageData)]) {
-                    messageItem = (id<SKMessageData>)message;
-                    if ([[messageItem uuid] isEqualToString:uuid]) {
-                        found = YES;
-                        break;
-                    }
-                }
-            }
+    if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
+        SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
+        if (SKMessageStateSending == messageState) {
+            [outgoingCell.activityIndicatorView startAnimating];
+            outgoingCell.activityIndicatorView.hidden = NO;
+            outgoingCell.errorIndicatorButton.hidden = YES;
+        } else if (SKMessageStateSendingFailure == messageState) {
+            outgoingCell.activityIndicatorView.hidden = YES;
+            [outgoingCell.activityIndicatorView stopAnimating];
+            outgoingCell.errorIndicatorButton.hidden = NO;
+        } else {
+            outgoingCell.activityIndicatorView.hidden = YES;
+            [outgoingCell.activityIndicatorView stopAnimating];
+            outgoingCell.errorIndicatorButton.hidden = YES;
         }
-        
-        if (found) {
-            UICollectionViewCell *cell = [weakSelf.collectionView cellForItemAtIndexPath:indexPath];
-            if (updateHandler) updateHandler(indexPath, messageItem, (JSQMessagesCollectionViewCell *)cell);
-        }
-        if (completionCallback) completionCallback();
-    });
+    }
+}
+
+#pragma mark - SKMessages CollectionView DataSource
+
+// text message state
+- (SKMessageState)collectionView:(JSQMessagesCollectionView *)collectionView textMessageStateForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+    return SKMessageStateDraft;
+}
+
+// update text message state
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView updateTextMessageState:(SKMessageState)textMessageState forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
+}
+
+#pragma mark - Actions
+
+- (void)updateTextMessageState:(SKMessageState)textMessageState forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // update data source
+    [self collectionView:self.collectionView updateTextMessageState:textMessageState forItemAtIndexPath:indexPath];
+    
+    // if text message visible, update text message view
+    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    [self renderCell:cell withTextMessageState:textMessageState];
 }
 
 @end

@@ -10,13 +10,28 @@
 
 @implementation SKButton
 
+#pragma mark - life cycle
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layer.masksToBounds = YES;
+        [self commentInit];
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self commentInit];
+}
+
+- (void)commentInit
+{
+    self.layer.masksToBounds = YES;
+    [self becomeRoundIfPossible];
 }
 
 #pragma mark - setter

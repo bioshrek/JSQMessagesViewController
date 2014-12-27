@@ -10,16 +10,9 @@
 
 #import "JSQMessageData.h"
 
+#import "SKMessagesCollectionViewDataSource.h"
+
 // type: message transfer state
-typedef NS_ENUM(NSInteger, SKMessageState) {
-    SKMessageStateDraft = 1,
-    SKMessageStateSending = 2,
-    SKMessageStateSent = 3,
-    SKMessageStateReceiving = 4,
-    SKMessageStateReceived = 5,
-    SKMessageStateRead = 6,
-    SKMessageStateSendingFailure = 7
-};
 
 @protocol SKMessageData <JSQMessageData>
 

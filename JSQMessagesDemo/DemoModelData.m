@@ -22,8 +22,6 @@
 
 #import "SKMessage.h"
 
-#import "SKVideoMediaItem.h"
-
 #import "SKMediaPlaceholderView.h"
 
 
@@ -105,35 +103,47 @@
      *  You should have a mutable array or orderedSet, or something.
      */
     self.messages = [[NSMutableArray alloc] initWithObjects:
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                     [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                             senderDisplayName:kJSQDemoAvatarDisplayNameSquires
                                                          date:[NSDate distantPast]
-                                               attributedText:[[NSAttributedString alloc] initWithString:@"Welcome to JSQMessages: A messaging UI framework for iOS."]],
+                                               attributedText:[[NSAttributedString alloc] initWithString:@"Welcome to JSQMessages: A messaging UI framework for iOS."]
+                                                    uuid:[[NSUUID UUID] UUIDString]
+                                                   state:SKMessageStateReceived],
                      
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdWoz
+                     [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdWoz
                                             senderDisplayName:kJSQDemoAvatarDisplayNameWoz
                                                          date:[NSDate distantPast]
-                                               attributedText:[[NSAttributedString alloc] initWithString:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy."]],
+                                           attributedText:[[NSAttributedString alloc] initWithString:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy."]
+                                                     uuid:[[NSUUID UUID] UUIDString]
+                                                    state:SKMessageStateReceived],
                      
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                     [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                             senderDisplayName:kJSQDemoAvatarDisplayNameSquires
                                                          date:[NSDate distantPast]
-                                               attributedText:[[NSAttributedString alloc] initWithString:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com."]],
+                                          attributedText:[[NSAttributedString alloc] initWithString:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com."]
+                                                    uuid:[[NSUUID UUID] UUIDString]
+                                                   state:SKMessageStateReceived],
                      
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdJobs
+                     [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdJobs
                                             senderDisplayName:kJSQDemoAvatarDisplayNameJobs
                                                          date:[NSDate date]
-                                               attributedText:[[NSAttributedString alloc] initWithString:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better."]],
+                                          attributedText:[[NSAttributedString alloc] initWithString:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better."]
+                                                    uuid:[[NSUUID UUID] UUIDString]
+                                                   state:SKMessageStateReceived],
                      
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdCook
+                     [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdCook
                                             senderDisplayName:kJSQDemoAvatarDisplayNameCook
                                                          date:[NSDate date]
-                                               attributedText:[[NSAttributedString alloc] initWithString:@"It is unit-tested, free, open-source, and documented."]],
+                                          attributedText:[[NSAttributedString alloc] initWithString:@"It is unit-tested, free, open-source, and documented."]
+                                                    uuid:[[NSUUID UUID] UUIDString]
+                                                   state:SKMessageStateReceived],
                      
-                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                     [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                             senderDisplayName:kJSQDemoAvatarDisplayNameSquires
                                                          date:[NSDate date]
-                                               attributedText:[[NSAttributedString alloc] initWithString:@"Now with media messages!"]],
+                                          attributedText:[[NSAttributedString alloc] initWithString:@"Now with media messages!"]
+                                                    uuid:[[NSUUID UUID] UUIDString]
+                                                   state:SKMessageStateReceived],
                      nil];
     
     [self addPhotoMediaMessage];
@@ -154,9 +164,7 @@
      *  You should see "END" twice
      */
     if ([NSUserDefaults longMessageSetting]) {
-        JSQMessage *reallyLongMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                                    displayName:kJSQDemoAvatarDisplayNameSquires
-                                                                 attributedText:[[NSAttributedString alloc] initWithString:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END"]];
+        SKMessage *reallyLongMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires senderDisplayName:kJSQDemoAvatarDisplayNameSquires date:[NSDate date] attributedText:[[NSAttributedString alloc] initWithString:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END"] uuid:[[NSUUID UUID] UUIDString] state:SKMessageStateReceived];
         
         [self.messages addObject:reallyLongMessage];
     }
@@ -165,9 +173,12 @@
 - (void)addPhotoMediaMessage
 {
     JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
-    JSQMessage *photoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                             displayName:kJSQDemoAvatarDisplayNameSquires
-                                                                   media:photoItem];
+    SKMessage *photoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                                                senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+                                                             date:[NSDate date]
+                                                            media:photoItem
+                                                             uuid:[[NSUUID UUID] UUIDString]
+                                                            state:SKMessageStateSent];
     [self.messages addObject:photoMessage];
 }
 
@@ -191,9 +202,12 @@
     JSQLocationMediaItem *locationItem = [[JSQLocationMediaItem alloc] init];
     [locationItem setLocation:ferryBuildingInSF withCompletionHandler:completion];
     
-    JSQMessage *locationMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                                displayName:kJSQDemoAvatarDisplayNameSquires
-                                                                      media:locationItem];
+    SKMessage *locationMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                                                    senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+                                                                 date:[NSDate date]
+                                                                media:locationItem
+                                                                 uuid:[[NSUUID UUID] UUIDString]
+                                                                state:SKMessageStateSent];
     [self.messages addObject:locationMessage];
 }
 
@@ -220,28 +234,36 @@
     NSURL *videoURL = [NSURL URLWithString:@"file://"];
     
     JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
-    JSQMessage *videoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                   displayName:kJSQDemoAvatarDisplayNameSquires
-                                                         media:videoItem];
+    SKMessage *videoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                                                 senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+                                                              date:[NSDate date]
+                                                             media:videoItem
+                                                              uuid:[[NSUUID UUID] UUIDString]
+                                                             state:SKMessageStateSending];
     [self.messages addObject:videoMessage];
 }
 
 - (id<SKMessageData>)createVideoMediaMessageWithUUID:(NSString *)uuid
 {
     // don't have a real video, just pretending
-//    NSURL *videoURL = [NSURL URLWithString:@"file://"];
+    NSURL *videoURL = [NSURL URLWithString:@"file://"];
+    
+    /*
     NSURL *videoURL = nil;
     NSString *fileName = @"Star War 2.mp4";
     NSString *fileSize = @"1.35 GB";
-    
-//    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
-    SKVideoMediaItem *videoItem = [[SKVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:NO];
+    */
+     
+    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
+//    SKVideoMediaItem *videoItem = [[SKVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:NO];
+    /*
     if ([videoItem.mediaPlaceholderView isKindOfClass:[SKMediaPlaceholderView class]]) {
         SKMediaPlaceholderView *placeholderView = (SKMediaPlaceholderView *)videoItem.mediaPlaceholderView;
         placeholderView.mediaNameLabel.text = fileName;
         placeholderView.mediaSizeLabel.text = fileSize;
         placeholderView.backgroundImageView.image = [UIImage imageNamed:@"star_wars"];
     }
+     */
     
     SKMessage *videoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                                    senderDisplayName:kJSQDemoAvatarDisplayNameSquires
