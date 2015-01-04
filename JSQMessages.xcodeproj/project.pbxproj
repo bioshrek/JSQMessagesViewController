@@ -7,19 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1439C3ED1A4F02930074A853 /* SKMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439C3EC1A4F02930074A853 /* SKMediaView.m */; };
-		1439C3F01A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439C3EF1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m */; };
-		1439C3F31A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439C3F21A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m */; };
-		1439C3F51A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1439C3F41A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib */; };
-		1439C3F71A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1439C3F61A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib */; };
+		1413A2D91A5842350056C31B /* libMAKVONotificationCenter-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1413A2D81A5842350056C31B /* libMAKVONotificationCenter-iOS.a */; };
+		141A7AEC1A59A09D00BCDD4A /* SKMediaViewIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 141A7AEB1A59A09D00BCDD4A /* SKMediaViewIncoming.xib */; };
+		1439C3ED1A4F02930074A853 /* JSQMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439C3EC1A4F02930074A853 /* JSQMediaView.m */; };
+		1439C3F01A4F16840074A853 /* SKMediaViewIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439C3EF1A4F16840074A853 /* SKMediaViewIncoming.m */; };
+		1439C3F31A4F16980074A853 /* SKMediaViewOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439C3F21A4F16980074A853 /* SKMediaViewOutgoing.m */; };
+		1439C3F51A4F1CE10074A853 /* SKMediaViewOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1439C3F41A4F1CE10074A853 /* SKMediaViewOutgoing.xib */; };
 		146E30431A48685900DA7BDE /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E30421A48685900DA7BDE /* SKButton.m */; };
-		146E30471A487D7300DA7BDE /* SKMediaPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E30461A487D7300DA7BDE /* SKMediaPlaceholderView.m */; };
-		147F7C2D1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 147F7C2C1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib */; };
+		146E30471A487D7300DA7BDE /* SKMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 146E30461A487D7300DA7BDE /* SKMediaView.m */; };
 		147F7C301A49C657007F0FBF /* SKBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F7C2F1A49C657007F0FBF /* SKBorderView.m */; };
+		14A340F51A56900E00C6D048 /* SKMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A340F41A56900E00C6D048 /* SKMediaItem.m */; };
+		14A340F81A56A2AD00C6D048 /* SKVideoMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A340F71A56A2AD00C6D048 /* SKVideoMediaItem.m */; };
+		14A340FB1A56A98A00C6D048 /* SKPhotoMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A340FA1A56A98A00C6D048 /* SKPhotoMediaItem.m */; };
 		14E0444A1A3DCC0700A7BDB0 /* SKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E044491A3DCC0700A7BDB0 /* SKMessage.m */; };
-		14F3BC701A3C384700052C81 /* SKMessagesCollectionViewCellIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F3BC6F1A3C384700052C81 /* SKMessagesCollectionViewCellIncoming.m */; };
 		14F3BC731A3C385F00052C81 /* SKMessagesCollectionViewCellOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F3BC721A3C385F00052C81 /* SKMessagesCollectionViewCellOutgoing.m */; };
-		14F3BC751A3C38FC00052C81 /* SKMessagesCollectionViewCellIncoming.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F3BC741A3C38FC00052C81 /* SKMessagesCollectionViewCellIncoming.xib */; };
 		14F3BC771A3C391A00052C81 /* SKMessagesCollectionViewCellOutgoing.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F3BC761A3C391A00052C81 /* SKMessagesCollectionViewCellOutgoing.xib */; };
 		14F3BC7B1A3C3ABD00052C81 /* SKMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F3BC7A1A3C3ABD00052C81 /* SKMessagesViewController.m */; };
 		36CF33BD29CF36EB06D0CCFD /* libPods-JSQMessagesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 782026E9E518622532ED474D /* libPods-JSQMessagesTests.a */; };
@@ -131,30 +132,36 @@
 
 /* Begin PBXFileReference section */
 		0844AD596023C7658D39E241 /* Pods-JSQMessagesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessagesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.release.xcconfig"; sourceTree = "<group>"; };
+		1413A2D21A583A570056C31B /* libMAKVONotificationCenter-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libMAKVONotificationCenter-iOS.a"; path = "../MAKVONotificationCenter/build/Debug-iphoneos/libMAKVONotificationCenter-iOS.a"; sourceTree = "<group>"; };
+		1413A2D41A583B100056C31B /* libMAKVONotificationCenter-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libMAKVONotificationCenter-iOS.a"; path = "MAKVONotificationCenter/build/Debug-iphoneos/libMAKVONotificationCenter-iOS.a"; sourceTree = "<group>"; };
+		1413A2D61A583F520056C31B /* libMAKVONotificationCenter-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libMAKVONotificationCenter-iOS.a"; path = "MAKVONotificationCenter/build/Debug-iphoneos/libMAKVONotificationCenter-iOS.a"; sourceTree = "<group>"; };
+		1413A2D81A5842350056C31B /* libMAKVONotificationCenter-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libMAKVONotificationCenter-iOS.a"; path = "MAKVONotificationCenter/build/Debug-iphoneos/libMAKVONotificationCenter-iOS.a"; sourceTree = "<group>"; };
+		141A7AEB1A59A09D00BCDD4A /* SKMediaViewIncoming.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMediaViewIncoming.xib; sourceTree = "<group>"; };
 		141B9FD01A4E830800DF87A5 /* SKMessagesCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessagesCollectionViewDataSource.h; sourceTree = "<group>"; };
-		1439C3EB1A4F02930074A853 /* SKMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaView.h; sourceTree = "<group>"; };
-		1439C3EC1A4F02930074A853 /* SKMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaView.m; sourceTree = "<group>"; };
-		1439C3EE1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaPlaceholderViewIncoming.h; sourceTree = "<group>"; };
-		1439C3EF1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaPlaceholderViewIncoming.m; sourceTree = "<group>"; };
-		1439C3F11A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaPlaceholderViewOutgoing.h; sourceTree = "<group>"; };
-		1439C3F21A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaPlaceholderViewOutgoing.m; sourceTree = "<group>"; };
-		1439C3F41A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMediaPlaceholderViewOutgoing.xib; sourceTree = "<group>"; };
-		1439C3F61A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMediaPlaceholderViewIncoming.xib; sourceTree = "<group>"; };
+		1439C3EB1A4F02930074A853 /* JSQMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMediaView.h; sourceTree = "<group>"; };
+		1439C3EC1A4F02930074A853 /* JSQMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMediaView.m; sourceTree = "<group>"; };
+		1439C3EE1A4F16840074A853 /* SKMediaViewIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaViewIncoming.h; sourceTree = "<group>"; };
+		1439C3EF1A4F16840074A853 /* SKMediaViewIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaViewIncoming.m; sourceTree = "<group>"; };
+		1439C3F11A4F16980074A853 /* SKMediaViewOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaViewOutgoing.h; sourceTree = "<group>"; };
+		1439C3F21A4F16980074A853 /* SKMediaViewOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaViewOutgoing.m; sourceTree = "<group>"; };
+		1439C3F41A4F1CE10074A853 /* SKMediaViewOutgoing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMediaViewOutgoing.xib; sourceTree = "<group>"; };
 		146E30411A48685900DA7BDE /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
 		146E30421A48685900DA7BDE /* SKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKButton.m; sourceTree = "<group>"; };
-		146E30451A487D7300DA7BDE /* SKMediaPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaPlaceholderView.h; sourceTree = "<group>"; };
-		146E30461A487D7300DA7BDE /* SKMediaPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaPlaceholderView.m; sourceTree = "<group>"; };
-		147F7C2C1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMediaPlaceholderView.xib; sourceTree = "<group>"; };
+		146E30451A487D7300DA7BDE /* SKMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaView.h; sourceTree = "<group>"; };
+		146E30461A487D7300DA7BDE /* SKMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaView.m; sourceTree = "<group>"; };
 		147F7C2E1A49C657007F0FBF /* SKBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKBorderView.h; sourceTree = "<group>"; };
 		147F7C2F1A49C657007F0FBF /* SKBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKBorderView.m; sourceTree = "<group>"; };
+		14A340F31A56900E00C6D048 /* SKMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMediaItem.h; sourceTree = "<group>"; };
+		14A340F41A56900E00C6D048 /* SKMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMediaItem.m; sourceTree = "<group>"; };
+		14A340F61A56A2AD00C6D048 /* SKVideoMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKVideoMediaItem.h; sourceTree = "<group>"; };
+		14A340F71A56A2AD00C6D048 /* SKVideoMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKVideoMediaItem.m; sourceTree = "<group>"; };
+		14A340F91A56A98A00C6D048 /* SKPhotoMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPhotoMediaItem.h; sourceTree = "<group>"; };
+		14A340FA1A56A98A00C6D048 /* SKPhotoMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPhotoMediaItem.m; sourceTree = "<group>"; };
 		14E044481A3DCC0700A7BDB0 /* SKMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessage.h; sourceTree = "<group>"; };
 		14E044491A3DCC0700A7BDB0 /* SKMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessage.m; sourceTree = "<group>"; };
 		14E044651A409DCA00A7BDB0 /* SKMessageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessageData.h; sourceTree = "<group>"; };
-		14F3BC6E1A3C384700052C81 /* SKMessagesCollectionViewCellIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessagesCollectionViewCellIncoming.h; sourceTree = "<group>"; };
-		14F3BC6F1A3C384700052C81 /* SKMessagesCollectionViewCellIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessagesCollectionViewCellIncoming.m; sourceTree = "<group>"; };
 		14F3BC711A3C385F00052C81 /* SKMessagesCollectionViewCellOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessagesCollectionViewCellOutgoing.h; sourceTree = "<group>"; };
 		14F3BC721A3C385F00052C81 /* SKMessagesCollectionViewCellOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessagesCollectionViewCellOutgoing.m; sourceTree = "<group>"; };
-		14F3BC741A3C38FC00052C81 /* SKMessagesCollectionViewCellIncoming.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMessagesCollectionViewCellIncoming.xib; sourceTree = "<group>"; };
 		14F3BC761A3C391A00052C81 /* SKMessagesCollectionViewCellOutgoing.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKMessagesCollectionViewCellOutgoing.xib; sourceTree = "<group>"; };
 		14F3BC791A3C3ABD00052C81 /* SKMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessagesViewController.h; sourceTree = "<group>"; };
 		14F3BC7A1A3C3ABD00052C81 /* SKMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessagesViewController.m; sourceTree = "<group>"; };
@@ -321,6 +328,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1413A2D91A5842350056C31B /* libMAKVONotificationCenter-iOS.a in Frameworks */,
 				88445B4419E1B5110014F889 /* MapKit.framework in Frameworks */,
 				88445B4219E1B50B0014F889 /* CoreLocation.framework in Frameworks */,
 				88445B3719E0AE5C0014F889 /* QuartzCore.framework in Frameworks */,
@@ -364,6 +372,12 @@
 				14E044491A3DCC0700A7BDB0 /* SKMessage.m */,
 				14E044651A409DCA00A7BDB0 /* SKMessageData.h */,
 				141B9FD01A4E830800DF87A5 /* SKMessagesCollectionViewDataSource.h */,
+				14A340F31A56900E00C6D048 /* SKMediaItem.h */,
+				14A340F41A56900E00C6D048 /* SKMediaItem.m */,
+				14A340F61A56A2AD00C6D048 /* SKVideoMediaItem.h */,
+				14A340F71A56A2AD00C6D048 /* SKVideoMediaItem.m */,
+				14A340F91A56A98A00C6D048 /* SKPhotoMediaItem.h */,
+				14A340FA1A56A98A00C6D048 /* SKPhotoMediaItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -384,23 +398,19 @@
 			children = (
 				146E30411A48685900DA7BDE /* SKButton.h */,
 				146E30421A48685900DA7BDE /* SKButton.m */,
-				14F3BC6E1A3C384700052C81 /* SKMessagesCollectionViewCellIncoming.h */,
-				14F3BC6F1A3C384700052C81 /* SKMessagesCollectionViewCellIncoming.m */,
 				14F3BC711A3C385F00052C81 /* SKMessagesCollectionViewCellOutgoing.h */,
 				14F3BC721A3C385F00052C81 /* SKMessagesCollectionViewCellOutgoing.m */,
-				14F3BC741A3C38FC00052C81 /* SKMessagesCollectionViewCellIncoming.xib */,
 				14F3BC761A3C391A00052C81 /* SKMessagesCollectionViewCellOutgoing.xib */,
-				146E30451A487D7300DA7BDE /* SKMediaPlaceholderView.h */,
-				146E30461A487D7300DA7BDE /* SKMediaPlaceholderView.m */,
-				147F7C2C1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib */,
+				146E30451A487D7300DA7BDE /* SKMediaView.h */,
+				146E30461A487D7300DA7BDE /* SKMediaView.m */,
 				147F7C2E1A49C657007F0FBF /* SKBorderView.h */,
 				147F7C2F1A49C657007F0FBF /* SKBorderView.m */,
-				1439C3EE1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.h */,
-				1439C3EF1A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m */,
-				1439C3F11A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.h */,
-				1439C3F21A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m */,
-				1439C3F41A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib */,
-				1439C3F61A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib */,
+				1439C3EE1A4F16840074A853 /* SKMediaViewIncoming.h */,
+				1439C3EF1A4F16840074A853 /* SKMediaViewIncoming.m */,
+				1439C3F11A4F16980074A853 /* SKMediaViewOutgoing.h */,
+				1439C3F21A4F16980074A853 /* SKMediaViewOutgoing.m */,
+				1439C3F41A4F1CE10074A853 /* SKMediaViewOutgoing.xib */,
+				141A7AEB1A59A09D00BCDD4A /* SKMediaViewIncoming.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -428,6 +438,10 @@
 		636A8663AEEE5C37B65C515D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1413A2D81A5842350056C31B /* libMAKVONotificationCenter-iOS.a */,
+				1413A2D61A583F520056C31B /* libMAKVONotificationCenter-iOS.a */,
+				1413A2D41A583B100056C31B /* libMAKVONotificationCenter-iOS.a */,
+				1413A2D21A583A570056C31B /* libMAKVONotificationCenter-iOS.a */,
 				88445B4319E1B5110014F889 /* MapKit.framework */,
 				88445B4119E1B50B0014F889 /* CoreLocation.framework */,
 				88445B3419E0AE4A0014F889 /* CoreGraphics.framework */,
@@ -661,8 +675,8 @@
 				88A25FA019D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.h */,
 				88A25FA119D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.m */,
 				88A25FA219D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.xib */,
-				1439C3EB1A4F02930074A853 /* SKMediaView.h */,
-				1439C3EC1A4F02930074A853 /* SKMediaView.m */,
+				1439C3EB1A4F02930074A853 /* JSQMediaView.h */,
+				1439C3EC1A4F02930074A853 /* JSQMediaView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -833,10 +847,9 @@
 			files = (
 				88E4D7131A0DBD6B000CC061 /* JSQMessages.strings in Resources */,
 				886C33FF19F45E30006B4997 /* JSQMessagesViewController.podspec in Resources */,
-				14F3BC751A3C38FC00052C81 /* SKMessagesCollectionViewCellIncoming.xib in Resources */,
-				1439C3F51A4F1CE10074A853 /* SKMediaPlaceholderViewOutgoing.xib in Resources */,
-				147F7C2D1A49BFAE007F0FBF /* SKMediaPlaceholderView.xib in Resources */,
+				1439C3F51A4F1CE10074A853 /* SKMediaViewOutgoing.xib in Resources */,
 				8861666D19F492B70025B958 /* JSQMessagesAssets.bundle in Resources */,
+				141A7AEC1A59A09D00BCDD4A /* SKMediaViewIncoming.xib in Resources */,
 				88A25FCF19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				88A25FCD19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 				14F3BC771A3C391A00052C81 /* SKMessagesCollectionViewCellOutgoing.xib in Resources */,
@@ -846,7 +859,6 @@
 				88A25FD819D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				88A25F3919D8DF2500924534 /* Main.storyboard in Resources */,
 				88A25FD419D8E01A00924534 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
-				1439C3F71A4F1D460074A853 /* SKMediaPlaceholderViewIncoming.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,7 +957,6 @@
 				88A25FD519D8E01A00924534 /* JSQMessagesToolbarContentView.m in Sources */,
 				88A25FC119D8E01A00924534 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				8885734A19DE540400E89D20 /* DemoSettingsViewController.m in Sources */,
-				14F3BC701A3C384700052C81 /* SKMessagesCollectionViewCellIncoming.m in Sources */,
 				88A25FC719D8E01A00924534 /* JSQMessagesBubbleImage.m in Sources */,
 				88A25FC519D8E01A00924534 /* JSQMessage.m in Sources */,
 				88A25FD719D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
@@ -964,22 +975,25 @@
 				88A25FCC19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				88A25FBE19D8E01A00924534 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				88A25FDF19D8E0C400924534 /* DemoMessagesViewController.m in Sources */,
-				1439C3F01A4F16840074A853 /* SKMediaPlaceholderViewIncoming.m in Sources */,
+				1439C3F01A4F16840074A853 /* SKMediaViewIncoming.m in Sources */,
+				14A340F81A56A2AD00C6D048 /* SKVideoMediaItem.m in Sources */,
 				88A25FB719D8E01A00924534 /* UIColor+JSQMessages.m in Sources */,
 				886C33FD19F4371E006B4997 /* JSQVideoMediaItem.m in Sources */,
 				88A25FBA19D8E01A00924534 /* JSQMessagesKeyboardController.m in Sources */,
-				1439C3ED1A4F02930074A853 /* SKMediaView.m in Sources */,
+				1439C3ED1A4F02930074A853 /* JSQMediaView.m in Sources */,
 				147F7C301A49C657007F0FBF /* SKBorderView.m in Sources */,
-				1439C3F31A4F16980074A853 /* SKMediaPlaceholderViewOutgoing.m in Sources */,
+				1439C3F31A4F16980074A853 /* SKMediaViewOutgoing.m in Sources */,
 				88A25FC019D8E01A00924534 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				88A25FC219D8E01A00924534 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
 				88A25FE119D8E0C400924534 /* TableViewController.m in Sources */,
 				88A25FBD19D8E01A00924534 /* JSQMessagesAvatarImageFactory.m in Sources */,
+				14A340FB1A56A98A00C6D048 /* SKPhotoMediaItem.m in Sources */,
 				88A25FB519D8E01A00924534 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				88A25FD019D8E01A00924534 /* JSQMessagesComposerTextView.m in Sources */,
 				88A25FC319D8E01A00924534 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
 				14E0444A1A3DCC0700A7BDB0 /* SKMessage.m in Sources */,
-				146E30471A487D7300DA7BDE /* SKMediaPlaceholderView.m in Sources */,
+				146E30471A487D7300DA7BDE /* SKMediaView.m in Sources */,
+				14A340F51A56900E00C6D048 /* SKMediaItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1147,8 +1161,14 @@
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/shrek/Documents/git_repos2/MAKVONotificationCenter/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/MAKVONotificationCenter/build/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../MAKVONotificationCenter;
 			};
 			name = Debug;
 		};
@@ -1162,8 +1182,14 @@
 				INFOPLIST_FILE = "$(SRCROOT)/JSQMessagesDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/shrek/Documents/git_repos2/MAKVONotificationCenter/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/MAKVONotificationCenter/build/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../MAKVONotificationCenter;
 			};
 			name = Release;
 		};

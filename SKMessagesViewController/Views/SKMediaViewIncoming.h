@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Hexed Bits. All rights reserved.
 //
 
-#import "SKMediaPlaceholderView.h"
+#import "SKMediaView.h"
 
-@interface SKMediaPlaceholderViewIncoming : SKMediaPlaceholderView
+@interface SKMediaViewIncoming : SKMediaView
 
 @end

@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Hexed Bits. All rights reserved.
 //
 
-#import "SKMediaView.h"
+#import "JSQMediaView.h"
 
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
-@implementation SKMediaView
+@implementation JSQMediaView
 
 - (id)initWithFrame:(CGRect)frame
 {

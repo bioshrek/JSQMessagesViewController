@@ -21,7 +21,7 @@
 #import "JSQMessagesLabel.h"
 #import "JSQMessagesCellTextView.h"
 
-#import "SKMediaView.h"
+#import "JSQMediaView.h"
 
 @class JSQMessagesCollectionViewCell;
 
@@ -62,7 +62,7 @@
  */
 - (void)messagesCollectionViewCellDidTapCell:(JSQMessagesCollectionViewCell *)cell atPosition:(CGPoint)position;
 
-- (void)recycleMediaView:(SKMediaView *)mediaView;
+- (void)recycleMediaView:(JSQMediaView *)mediaView;
 
 @end
 
@@ -152,7 +152,7 @@
  *
  *  @warning If this value is non-nil, then textView and messageBubbleImageView will both be `nil`.
  */
-@property (weak, nonatomic) SKMediaView *mediaView;
+@property (weak, nonatomic) JSQMediaView *mediaView;
 
 /**
  *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.

@@ -20,6 +20,16 @@
 
 #pragma mark - Actions
 
-- (void)updateTextMessageState:(SKMessageState)textMessageState forItemAtIndexPath:(NSIndexPath *)indexPath;
+// update mesage state
+// notice: called in UI thread
+- (void)updateMessageState:(SKMessageState)messageState forItemAtIndexPath:(NSIndexPath *)indexPath;
+
+// update media state
+// notice: called in UI thread
+- (void)updateMediaState:(SKMessageMediaState)mediaState forItemAtIndexPath:(NSIndexPath *)indexPath;
+
+// update media message progress
+// notice: called in UI thread
+- (void)updateMediaProgress:(NSProgress *)progress forItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

@@ -23,6 +23,9 @@
 #import "JSQMessages.h"
 
 #import "SKMessageData.h"
+#import "SKMessage.h"
+
+#import "SKMediaItem.h"
 
 /**
  *  This is for demo/testing purposes only. 
@@ -56,15 +59,12 @@ static NSString * const kJSQDemoAvatarIdWoz = @"309-41802-93823";
 
 - (void)addPhotoMediaMessage;
 
-- (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion;
+//- (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion;
 
 - (void)addVideoMediaMessage;
 
-- (id<SKMessageData>)createPhotoMessageWithUUID:(NSString *)uuid;
+- (SKMessage *)createPhotoMessageWithUUID:(NSString *)uuid senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName;
 
-- (id<SKMessageData>)createLocationMediaMessageWithUUID:(NSString *)uuid
-                                             completion:(JSQLocationMediaItemCompletionBlock)completion;
-
-- (id<SKMessageData>)createVideoMediaMessageWithUUID:(NSString *)uuid;
+- (SKMessage *)createVideoMediaMessageWithUUID:(NSString *)uuid senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName;
 
 @end

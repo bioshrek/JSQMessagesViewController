@@ -260,7 +260,7 @@
     [self jsq_updateConstraint:self.textViewMarginHorizontalSpaceConstraint withConstant:textViewFrameInsets.left];
 }
 
-- (void)setMediaView:(SKMediaView *)mediaView
+- (void)setMediaView:(JSQMediaView *)mediaView
 {
     if (mediaView) {
         [self.messageBubbleImageView removeFromSuperview];

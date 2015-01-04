@@ -22,7 +22,10 @@
 
 #import "SKMessage.h"
 
-#import "SKMediaPlaceholderView.h"
+#import "SKMediaView.h"
+
+#import "SKPhotoMediaItem.h"
+#import "SKVideoMediaItem.h"
 
 
 /**
@@ -172,29 +175,31 @@
 
 - (void)addPhotoMediaMessage
 {
-    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
-    SKMessage *photoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
-                                                senderDisplayName:kJSQDemoAvatarDisplayNameSquires
-                                                             date:[NSDate date]
-                                                            media:photoItem
-                                                             uuid:[[NSUUID UUID] UUIDString]
-                                                            state:SKMessageStateSent];
-    [self.messages addObject:photoMessage];
+    NSString *uuid = [[NSUUID UUID] UUIDString];
+    SKMessage *photoMediaMessage = [self createPhotoMessageWithUUID:uuid senderId:kJSQDemoAvatarIdSquires senderDisplayName:kJSQDemoAvatarDisplayNameSquires];
+    photoMediaMessage.media.mediaState = SKMessageMediaStateDownloaded;
+    [self.messages addObject:photoMediaMessage];
 }
 
-- (id<SKMessageData>)createPhotoMessageWithUUID:(NSString *)uuid
+- (SKMessage *)createPhotoMessageWithUUID:(NSString *)uuid senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName
 {
-    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
-    SKMessage *photoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
-                                                senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+    SKPhotoMediaItem *photoMediaItem = [[SKPhotoMediaItem alloc] initWithMediaDisplaySize:CGSizeMake(210, 150)
+                                                              progressTotalUnitCount:100
+                                                                          mediaTitle:@"image_picked_1458554454"
+                                                                           mediaSize:5845644558];
+    photoMediaItem.thumbnail = [UIImage imageNamed:@"goldengate"];
+    
+    SKMessage *photoMessage = [[SKMessage alloc] initWithSenderId:senderId
+                                                senderDisplayName:senderDisplayName
                                                              date:[NSDate date]
-                                                            media:photoItem
+                                                            media:photoMediaItem
                                                              uuid:uuid
                                                             state:SKMessageStateSending];
     
     return photoMessage;
 }
 
+/*
 - (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion
 {
     CLLocation *ferryBuildingInSF = [[CLLocation alloc] initWithLatitude:37.795313 longitude:-122.393757];
@@ -210,7 +215,9 @@
                                                                 state:SKMessageStateSent];
     [self.messages addObject:locationMessage];
 }
+*/
 
+/*
 - (id<SKMessageData>)createLocationMediaMessageWithUUID:(NSString *)uuid
                                              completion:(JSQLocationMediaItemCompletionBlock)completion
 {
@@ -227,48 +234,28 @@
                                                             state:SKMessageStateSending];
     return locationMessage;
 }
+*/
 
 - (void)addVideoMediaMessage
 {
-    // don't have a real video, just pretending
-    NSURL *videoURL = [NSURL URLWithString:@"file://"];
-    
-    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
-    SKMessage *videoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
-                                                 senderDisplayName:kJSQDemoAvatarDisplayNameSquires
-                                                              date:[NSDate date]
-                                                             media:videoItem
-                                                              uuid:[[NSUUID UUID] UUIDString]
-                                                             state:SKMessageStateSending];
-    [self.messages addObject:videoMessage];
+    NSString *uuid = [[NSUUID UUID] UUIDString];
+    SKMessage *videoMediaMessage = [self createVideoMediaMessageWithUUID:uuid senderId:kJSQDemoAvatarIdSquires senderDisplayName:kJSQDemoAvatarDisplayNameSquires];
+    videoMediaMessage.media.mediaState = SKMessageMediaStateDownloaded;
+    [self.messages addObject:videoMediaMessage];
 }
 
-- (id<SKMessageData>)createVideoMediaMessageWithUUID:(NSString *)uuid
+- (SKMessage *)createVideoMediaMessageWithUUID:(NSString *)uuid senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName
 {
-    // don't have a real video, just pretending
-    NSURL *videoURL = [NSURL URLWithString:@"file://"];
+    SKVideoMediaItem *videoMediaItem = [[SKVideoMediaItem alloc] initWithMediaDisplaySize:CGSizeMake(210, 150)
+                                                              progressTotalUnitCount:100
+                                                                          mediaTitle:@"star_wars.mp4"
+                                                                           mediaSize:5685564552];
+    videoMediaItem.thumbnail = [UIImage imageNamed:@"star_wars"];
     
-    /*
-    NSURL *videoURL = nil;
-    NSString *fileName = @"Star War 2.mp4";
-    NSString *fileSize = @"1.35 GB";
-    */
-     
-    JSQVideoMediaItem *videoItem = [[JSQVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:YES];
-//    SKVideoMediaItem *videoItem = [[SKVideoMediaItem alloc] initWithFileURL:videoURL isReadyToPlay:NO];
-    /*
-    if ([videoItem.mediaPlaceholderView isKindOfClass:[SKMediaPlaceholderView class]]) {
-        SKMediaPlaceholderView *placeholderView = (SKMediaPlaceholderView *)videoItem.mediaPlaceholderView;
-        placeholderView.mediaNameLabel.text = fileName;
-        placeholderView.mediaSizeLabel.text = fileSize;
-        placeholderView.backgroundImageView.image = [UIImage imageNamed:@"star_wars"];
-    }
-     */
-    
-    SKMessage *videoMessage = [[SKMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
-                                                   senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+    SKMessage *videoMessage = [[SKMessage alloc] initWithSenderId:senderId
+                                                   senderDisplayName:senderDisplayName
                                                                 date:[NSDate date]
-                                                               media:videoItem
+                                                               media:videoMediaItem
                                                                 uuid:uuid
                                                                state:SKMessageStateSending];
     return videoMessage;

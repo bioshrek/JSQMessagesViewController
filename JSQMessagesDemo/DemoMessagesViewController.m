@@ -23,10 +23,12 @@
 #import "SKMessage.h"
 
 #import "SKMessagesCollectionViewCellOutgoing.h"
-#import "SKMessagesCollectionViewCellIncoming.h"
 
-#import "SKMediaPlaceholderViewIncoming.h"
-#import "SKMediaPlaceholderViewOutgoing.h"
+#import "SKMediaViewIncoming.h"
+#import "SKMediaViewOutgoing.h"
+
+#import "SKPhotoMediaItem.h"
+#import "SKVideoMediaItem.h"
 
 @implementation DemoMessagesViewController
 
@@ -78,10 +80,10 @@
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
     // register nib for media view
-    [self.collectionView registerNib:[SKMediaPlaceholderViewIncoming nib]
-     forMediaViewWithReuseIdentifier:[SKMediaPlaceholderViewIncoming reuseIdentifier]];
-    [self.collectionView registerNib:[SKMediaPlaceholderViewOutgoing nib]
-     forMediaViewWithReuseIdentifier:[SKMediaPlaceholderViewOutgoing reuseIdentifier]];
+    [self.collectionView registerNib:[SKMediaViewIncoming nib]
+     forMediaViewWithReuseIdentifier:[SKMediaViewIncoming reuseIdentifier]];
+    [self.collectionView registerNib:[SKMediaViewOutgoing nib]
+     forMediaViewWithReuseIdentifier:[SKMediaViewOutgoing reuseIdentifier]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -143,7 +145,7 @@
                                                      date:[NSDate date]
                                            attributedText:[[NSAttributedString alloc] initWithString:@"First received!"]
                                                      uuid:uuid
-                                                    state:SKMessageStateReceiving];
+                                                    state:SKMessageStateReceived];
     }
     
     /**
@@ -156,76 +158,36 @@
         NSString *randomUserId = userIds[arc4random_uniform((int)[userIds count])];
         
         SKMessage *newMessage = nil;
-        id<JSQMessageMediaData> newMediaData = nil;
-        id newMediaAttachmentCopy = nil;
+        NSString *uuid = [[NSUUID UUID] UUIDString];
         
         if (copyMessage.isMediaMessage) {
             /**
              *  Last message was a media message
              */
-            id<JSQMessageMediaData> copyMediaData = copyMessage.media;
+            SKMediaItem *copyMediaData = copyMessage.media;
             
-            if ([copyMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                JSQPhotoMediaItem *photoItemCopy = [((JSQPhotoMediaItem *)copyMediaData) copy];
-                photoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [UIImage imageWithCGImage:photoItemCopy.image.CGImage];
-                
-                /**
-                 *  Set image to nil to simulate "downloading" the image
-                 *  and show the placeholder view
-                 */
-                photoItemCopy.image = nil;
-                
-                newMediaData = photoItemCopy;
+            if ([copyMediaData isKindOfClass:[SKPhotoMediaItem class]]) {
+                newMessage = [self.demoData createPhotoMessageWithUUID:uuid senderId:randomUserId senderDisplayName:self.demoData.users[randomUserId]];
             }
-            else if ([copyMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                JSQLocationMediaItem *locationItemCopy = [((JSQLocationMediaItem *)copyMediaData) copy];
-                locationItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [locationItemCopy.location copy];
-                
-                /**
-                 *  Set location to nil to simulate "downloading" the location data
-                 */
-                locationItemCopy.location = nil;
-                
-                newMediaData = locationItemCopy;
-            }
-            else if ([copyMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
-                JSQVideoMediaItem *videoItemCopy = [((JSQVideoMediaItem *)copyMediaData) copy];
-                videoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [videoItemCopy.fileURL copy];
-                
-                /**
-                 *  Reset video item to simulate "downloading" the video
-                 */
-                videoItemCopy.fileURL = nil;
-                videoItemCopy.isReadyToPlay = NO;
-                
-                newMediaData = videoItemCopy;
+            else if ([copyMediaData isKindOfClass:[SKVideoMediaItem class]]) {
+                newMessage = [self.demoData createVideoMediaMessageWithUUID:uuid senderId:randomUserId senderDisplayName:self.demoData.users[randomUserId]];
             }
             else {
                 NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
             }
-            
-            NSString *uuid = [[NSUUID UUID] UUIDString];
-            newMessage = [[SKMessage alloc] initWithSenderId:randomUserId
-                                           senderDisplayName:self.demoData.users[randomUserId]
-                                                        date:[NSDate date]
-                                                       media:newMediaData
-                                                        uuid:uuid
-                                                       state:SKMessageStateReceiving];
+            newMessage.state = SKMessageStateReceived;
+            newMessage.media.mediaState = SKMessageMediaStateToBeDownloaded;
         }
         else {
             /**
              *  Last message was a text message
              */
-            NSString *uuid = [[NSUUID UUID] UUIDString];
             newMessage = [[SKMessage alloc] initWithSenderId:randomUserId
                                            senderDisplayName:self.demoData.users[randomUserId]
                                                         date:[NSDate date]
                                               attributedText:copyMessage.attributedText
                                                         uuid:uuid
-                                                       state:SKMessageStateReceiving];
+                                                       state:SKMessageStateReceived];
         }
         
         /**
@@ -244,75 +206,62 @@
             /**
              *  Simulate "downloading" media
              */
-            [self receiveMediaMessageWithProgressTotalUnitCount:10 completedUnitCount:1 uuid:newMessage.uuid copiedMediaAttachmentCopy:newMediaAttachmentCopy];
+            [self receiveMediaMessageWithProgressTotalUnitCount:10 completedUnitCount:1 uuid:newMessage.uuid];
         }
         
     });
 }
 
-- (void)receiveMediaMessageWithProgressTotalUnitCount:(NSUInteger)totalUnitCount completedUnitCount:(NSUInteger)completedUnitCount uuid:(NSString *)uuid copiedMediaAttachmentCopy:(id)copiedMediaAttachmentCopy
+- (void)receiveMediaMessageWithProgressTotalUnitCount:(NSUInteger)totalUnitCount
+                                   completedUnitCount:(NSUInteger)completedUnitCount
+                                                 uuid:(NSString *)uuid
 {
-    
-    /*
-    
     __weak DemoMessagesViewController *weakSelf = self;
     
     if (completedUnitCount <= totalUnitCount) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             // update sending progress
-            [self updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
-                
-                // update progress
-                [messageItem setState:SKMessageStateReceiving];
-                NSProgress *progress = [NSProgress progressWithTotalUnitCount:totalUnitCount];
-                progress.completedUnitCount = completedUnitCount;
-                [messageItem setProgress:progress];
-                
-                // update ui if visible
-                if ([cell isKindOfClass:[SKMessagesCollectionViewCellIncoming class]]) {
-                    SKMessagesCollectionViewCellIncoming *outgoingCell = (SKMessagesCollectionViewCellIncoming *)cell;
-                    [outgoingCell configReceivingStatusWithMessage:messageItem];
+            NSInteger index = NSNotFound;
+            for (NSInteger i = 0; i < [self.demoData.messages count]; i++) {
+                @autoreleasepool {
+                    SKMessage *message = [weakSelf.demoData.messages objectAtIndex:i];
+                    if ([message.uuid isEqualToString:uuid]) {
+                        index = i;
+                        break;
+                    }
                 }
-            } complete:^{
-                
-                [weakSelf receiveMediaMessageWithProgressTotalUnitCount:totalUnitCount completedUnitCount:(completedUnitCount + 1) uuid:uuid copiedMediaAttachmentCopy:copiedMediaAttachmentCopy];
-            }];
+            }
+            
+            if (NSNotFound == index) return;
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            NSProgress *progress = [NSProgress progressWithTotalUnitCount:totalUnitCount];
+            progress.completedUnitCount = completedUnitCount;
+            [self updateMediaState:SKMessageMediaStateDownloading forItemAtIndexPath:indexPath];
+            [self updateMediaProgress:progress forItemAtIndexPath:indexPath];
+            
+            [weakSelf receiveMediaMessageWithProgressTotalUnitCount:totalUnitCount completedUnitCount:(completedUnitCount + 1) uuid:uuid];
         });
     } else {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             // update sending progress
-            [self updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
-                
-                [messageItem setState:SKMessageStateReceived];
-                
-                id<JSQMessageMediaData> newMediaData = [messageItem media];
-                if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                    JSQPhotoMediaItem *photoItemCopy = (JSQPhotoMediaItem *)newMediaData;
-                    photoItemCopy.image = copiedMediaAttachmentCopy;
+            NSInteger index = NSNotFound;
+            for (NSInteger i = 0; i < [self.demoData.messages count]; i++) {
+                @autoreleasepool {
+                    SKMessage *message = [weakSelf.demoData.messages objectAtIndex:i];
+                    if ([message.uuid isEqualToString:uuid]) {
+                        index = i;
+                        break;
+                    }
                 }
-                else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                    JSQLocationMediaItem *locationItemCopy = (JSQLocationMediaItem *)newMediaData;
-                    [locationItemCopy setLocation:copiedMediaAttachmentCopy withCompletionHandler:^{
-                        // TODO:
-                    }];
-                }
-                else if ([newMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
-                    JSQVideoMediaItem *videoItemCopy = (JSQVideoMediaItem *)newMediaData;
-                    videoItemCopy.isReadyToPlay = YES;
-                    videoItemCopy.fileURL = copiedMediaAttachmentCopy;
-                }
-                else {
-                    NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
-                }
-                
-                [weakSelf.collectionView reloadItemsAtIndexPaths:@[indexPath]];
-            } complete:^{
-                // TODO:
-            }];
+            }
+            
+            if (NSNotFound == index) return;
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            [self updateMediaState:SKMessageMediaStateDownloaded forItemAtIndexPath:indexPath];
         });
     }
-     
-     */
 }
 
 - (void)closePressed:(UIBarButtonItem *)sender
@@ -349,7 +298,7 @@
     [self sendTextMessage:message finalState:SKMessageStateSent];
 }
 
-- (void)sendTextMessage:(id<SKMessageData>)textMessage finalState:(SKMessageState)state
+- (void)sendTextMessage:(SKMessage *)textMessage finalState:(SKMessageState)state
 {
     [self.demoData.messages addObject:textMessage];
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
@@ -362,7 +311,7 @@
         NSInteger index = NSNotFound;
         for (NSInteger i = 0; i < [self.demoData.messages count]; i++) {
             @autoreleasepool {
-                SKMessage *message = [self.demoData.messages objectAtIndex:i];
+                SKMessage *message = [weakSelf.demoData.messages objectAtIndex:i];
                 if ([message.uuid isEqualToString:[textMessage uuid]]) {
                     index = i;
                     break;
@@ -372,7 +321,7 @@
         
         if (NSNotFound == index) return;
         
-        [weakSelf updateTextMessageState:state forItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+        [self updateMessageState:state forItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     });
 }
 
@@ -382,40 +331,43 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send text emoji mixture", @"Input text emoji mixture", @"Send text failed", nil];
+                                              otherButtonTitles:@"Send photo", @"Send photo failed", @"Send video", @"Send video failed", @"Send text emoji mixture", @"Input text emoji mixture", @"Send text failed", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    __weak DemoMessagesViewController *weakSelf = self;
-    
     if (buttonIndex == actionSheet.cancelButtonIndex) {
         return;
     }
     
     switch (buttonIndex) {
-        case 0: {
+        case 0: {  // send photo
             NSString *uuid = [[NSUUID UUID] UUIDString];
-            id<SKMessageData> photoMessage = [self.demoData createPhotoMessageWithUUID:uuid];
-            [self sendMediaMessage:photoMessage];
+            SKMessage *photoMessage = [self.demoData createPhotoMessageWithUUID:uuid senderId:self.senderId senderDisplayName:self.senderDisplayName];
+            [self sendMediaMessage:photoMessage failed:NO];
+        } break;
+        
+        case 1: {  // send photo failed
+            NSString *uuid = [[NSUUID UUID] UUIDString];
+            SKMessage *photoMessage = [self.demoData createPhotoMessageWithUUID:uuid senderId:self.senderId senderDisplayName:self.senderDisplayName];
+            [self sendMediaMessage:photoMessage failed:YES];
         } break;
             
-        case 1: {
+        case 2: {  // send video message
             NSString *uuid = [[NSUUID UUID] UUIDString];
-            id<SKMessageData> locationMessage = [self.demoData createLocationMediaMessageWithUUID:uuid completion:^{
-                // TODO:
-            }];
-            [weakSelf sendMediaMessage:locationMessage];
+            SKMessage *videoMessage = [self.demoData createVideoMediaMessageWithUUID:uuid senderId:self.senderId senderDisplayName:self.senderDisplayName];
+            [self sendMediaMessage:videoMessage failed:NO];
         } break;
             
-        case 2: {
+        case 3: {  // send video failed
             NSString *uuid = [[NSUUID UUID] UUIDString];
-            id<SKMessageData> videoMessage = [self.demoData createVideoMediaMessageWithUUID:uuid];
-            [self sendMediaMessage:videoMessage];
-        } break;        
-        case 3: {
+            SKMessage *videoMessage = [self.demoData createVideoMediaMessageWithUUID:uuid senderId:self.senderId senderDisplayName:self.senderDisplayName];
+            [self sendMediaMessage:videoMessage failed:YES];
+        } break;
+            
+        case 4: {  // send emoji text
             UIImage *emojiImage = [UIImage imageNamed:@"smiley"];
             NSTextAttachment *attach = [[NSTextAttachment alloc] initWithData:UIImagePNGRepresentation(emojiImage)
                                                                        ofType:(__bridge NSString *)kUTTypePNG];
@@ -442,7 +394,7 @@
             [self sendTextMessage:message finalState:SKMessageStateSent];
         } break;
             
-        case 4: {
+        case 5: {  // input emoji text
             UIImage *emojiImage = [UIImage imageNamed:@"smiley"];
             NSTextAttachment *attach = [[NSTextAttachment alloc] initWithData:UIImagePNGRepresentation(emojiImage)
                                                                        ofType:(__bridge NSString *)kUTTypePNG];
@@ -458,7 +410,7 @@
             [self.inputToolbar toggleSendButtonEnabled];  // change text view programmatically
         } break;
         
-        case 5: {  // send text failed
+        case 6: {  // send text failed
             NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"Bilibili bon si wa."];
             NSString *uuid = [[NSUUID UUID] UUIDString];
             SKMessage *message = [[SKMessage alloc] initWithSenderId:self.senderId
@@ -472,7 +424,7 @@
     }
 }
 
-- (void)sendMediaMessage:(id<SKMessageData>)mediaMessage
+- (void)sendMediaMessage:(SKMessage *)mediaMessage failed:(BOOL)failed
 {
     NSString *uuid = [mediaMessage uuid];
     
@@ -481,55 +433,62 @@
     [self finishSendingMessage];
     
     // sending progress change
-    [self sendMediaMessageWithProgressTotalUnitCount:10 completedUnitCount:1 uuid:uuid];
+    mediaMessage.media.progress.totalUnitCount = 10;
+    [self sendMediaMessageWithProgressTotalUnitCount:10 completedUnitCount:1 uuid:uuid failed:failed];
 }
 
-- (void)sendMediaMessageWithProgressTotalUnitCount:(NSUInteger)totalUnitCount completedUnitCount:(NSUInteger)completedUnitCount uuid:(NSString *)uuid
+- (void)sendMediaMessageWithProgressTotalUnitCount:(NSUInteger)totalUnitCount completedUnitCount:(NSUInteger)completedUnitCount uuid:(NSString *)uuid failed:(BOOL)failed
 {
-    /*
-    
     __weak DemoMessagesViewController *weakSelf = self;
     
     if (completedUnitCount <= totalUnitCount) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             // update sending progress
-            [self updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
-                
-                // update progress
-                [messageItem setState:SKMessageStateSending];
-                NSProgress *progress = [NSProgress progressWithTotalUnitCount:totalUnitCount];
-                progress.completedUnitCount = completedUnitCount;
-                [messageItem setProgress:progress];
-                
-                // update ui if visible
-                if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
-                    SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
-                    [outgoingCell configSendingStatusWithMessage:messageItem];
+            NSInteger index = NSNotFound;
+            for (NSInteger i = 0; i < [self.demoData.messages count]; i++) {
+                @autoreleasepool {
+                    SKMessage *message = [weakSelf.demoData.messages objectAtIndex:i];
+                    if ([message.uuid isEqualToString:uuid]) {
+                        index = i;
+                        break;
+                    }
                 }
-            } complete:^{
-                
-                [weakSelf sendMediaMessageWithProgressTotalUnitCount:totalUnitCount completedUnitCount:(completedUnitCount + 1) uuid:uuid];
-            }];
+            }
+            
+            if (NSNotFound == index) return;
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            NSProgress *progress = [NSProgress progressWithTotalUnitCount:totalUnitCount];
+            progress.completedUnitCount = completedUnitCount;
+            [self updateMessageState:SKMessageStateSending forItemAtIndexPath:indexPath];
+            [self updateMediaState:SKMessageMediaStateUploading forItemAtIndexPath:indexPath];
+            [self updateMediaProgress:progress forItemAtIndexPath:indexPath];
+            
+            [weakSelf sendMediaMessageWithProgressTotalUnitCount:totalUnitCount completedUnitCount:(completedUnitCount + 1) uuid:uuid failed:failed];
         });
     } else {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             // update sending progress
-            [self updateItemWithUUID:uuid handler:^(NSIndexPath *indexPath, id<SKMessageData> messageItem, JSQMessagesCollectionViewCell *cell) {
-                
-                [messageItem setState:SKMessageStateSent];
-                
-                // stop animation if visible
-                if ([cell isKindOfClass:[SKMessagesCollectionViewCellOutgoing class]]) {
-                    SKMessagesCollectionViewCellOutgoing *outgoingCell = (SKMessagesCollectionViewCellOutgoing *)cell;
-                    [outgoingCell configSendingStatusWithMessage:messageItem];
+            NSInteger index = NSNotFound;
+            for (NSInteger i = 0; i < [self.demoData.messages count]; i++) {
+                @autoreleasepool {
+                    SKMessage *message = [weakSelf.demoData.messages objectAtIndex:i];
+                    if ([message.uuid isEqualToString:uuid]) {
+                        index = i;
+                        break;
+                    }
                 }
-            } complete:^{
-                // TODO:
-            }];
+            }
+            
+            if (NSNotFound == index) return;
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            SKMessageState finalMessageState = failed ? SKMessageStateSendingFailure : SKMessageStateSent;
+            SKMessageMediaState finalMediaState = failed ? SKMessageMediaStateUploadingFailure : SKMessageMediaStateUploaded;
+            [self updateMessageState:finalMessageState forItemAtIndexPath:indexPath];
+            [self updateMediaState:finalMediaState forItemAtIndexPath:indexPath];
         });
     }
-     
-     */
 }
 
 #pragma mark - SKMessages CollectionView DataSource
@@ -576,22 +535,19 @@
     return message.attributedText;
 }
 
-// text message state
-- (SKMessageState)collectionView:(JSQMessagesCollectionView *)collectionView textMessageStateForItemAtIndexPath:(NSIndexPath *)indexPath
+// message state
+- (SKMessageState)collectionView:(JSQMessagesCollectionView *)collectionView messageStateForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
-    SKMessageState state = SKMessageStateDraft;
-    if (!message.isMediaMessage) {
-        state = message.state;
-    }
+    SKMessageState state = message.state;
     return state;
 }
 
-// update text message state
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView updateTextMessageState:(SKMessageState)textMessageState forItemAtIndexPath:(NSIndexPath *)indexPath
+// update message state
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView updateMessageState:(SKMessageState)textMessageState forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
-    if (nil != message && !message.isMediaMessage) {
+    if (nil != message) {
         message.state = textMessageState;
     }
 }
@@ -600,25 +556,7 @@
 - (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView mediaViewDisplaySizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
-    return [[message media] mediaViewDisplaySize];
-}
-
-// media view
-- (SKMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing
-{
-    NSString *reuseIdentifier = isOutgoing ? [SKMediaPlaceholderViewOutgoing reuseIdentifier] : [SKMediaPlaceholderViewIncoming reuseIdentifier];
-    SKMediaView *mediaView = [collectionView dequeueReusableMediaViewWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    // TODO:
-    return mediaView;
-}
-
-// media placeholder view
-- (SKMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaPlaceholderViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing
-{
-    NSString *reuseIdentifier = isOutgoing ? [SKMediaPlaceholderViewOutgoing reuseIdentifier] : [SKMediaPlaceholderViewIncoming reuseIdentifier];
-    SKMediaView *mediaView = [collectionView dequeueReusableMediaViewWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    // TODO:
-    return mediaView;
+    return message.media.mediaDisplaySize;
 }
 
 // media hash
@@ -626,6 +564,83 @@
 {
     SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
     return [[message media] hash];
+}
+
+// media progress
+- (NSProgress *)collectionView:(JSQMessagesCollectionView *)collectionView mediaProgressForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return message.media.progress;
+}
+
+// update media progress
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView updateMediaProgress:(NSProgress *)progress forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    message.media.progress = progress;
+}
+
+// media title
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView mediaNameAttributedTextForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return [[NSAttributedString alloc] initWithString:message.media.mediaTitle
+                                           attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16.0f]}];
+}
+
+// media size
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView mediaSizeAttributedTextForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    NSString *mediaSize = [NSByteCountFormatter stringFromByteCount:message.media.mediaSize countStyle:NSByteCountFormatterCountStyleFile];
+    return [[NSAttributedString alloc] initWithString:mediaSize
+                                           attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12.0f]}];
+}
+
+// should show media title, size for states
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView shouldShowMediaTextInfoForMediaState:(SKMessageMediaState)mediaState forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return [message.media shouldShowMediaTextInfoForMediaState:mediaState];
+}
+
+// media icon for states
+- (UIImage *)collectionView:(JSQMessagesCollectionView *)collectionView mediaIconForMediaState:(SKMessageMediaState)mediaState forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return [message.media mediaIconForMediaState:mediaState];
+}
+
+// media description for states
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView mediaDescriptionForMediaState:(SKMessageMediaState)mediaState forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    NSString *description = [message.media mediaDescriptionForMediaState:mediaState];
+    return description ?
+        [[NSAttributedString alloc] initWithString:description
+                                        attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14.0f]}] :
+        nil;
+}
+
+// media thumbnail
+- (UIImage *)collectionView:(JSQMessagesCollectionView *)collectionView thumbnailForMediaState:(SKMessageMediaState)mediaState forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return [message.media thumbnailForMediaState:mediaState];
+}
+
+// media state
+- (SKMessageMediaState)collectionView:(JSQMessagesCollectionView *)collectionView mediaStateForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    return message.media.mediaState;
+}
+
+// update media state
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView updateMediaState:(SKMessageMediaState)mediaState forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SKMessage *message = [self.demoData.messages objectAtIndex:indexPath.row];
+    message.media.mediaState = mediaState;
 }
 
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath

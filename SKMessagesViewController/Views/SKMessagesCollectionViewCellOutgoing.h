@@ -20,8 +20,4 @@
 
 @property (weak, nonatomic, readonly) SKButton *errorIndicatorButton;
 
-#pragma mark - rendering
-
-- (void)configSendingStatusWithMessage:(id<SKMessageData>)message;
-
 @end

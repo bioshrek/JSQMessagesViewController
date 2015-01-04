@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SKMediaView : UICollectionReusableView
+@interface JSQMediaView : UICollectionReusableView
 
 @property (assign, nonatomic) BOOL appliesMediaViewMaskAsOutgoing;
 

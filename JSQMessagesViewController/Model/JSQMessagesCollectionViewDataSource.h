@@ -19,7 +19,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "SKMediaView.h"
+#import "JSQMediaView.h"
 
 @class JSQMessagesCollectionView;
 @protocol JSQMessageData;
@@ -32,11 +32,10 @@
 typedef NS_ENUM(NSInteger, SKMessageState) {
     SKMessageStateDraft = 1,
     SKMessageStateSending = 2,
-    SKMessageStateSent = 3,
-    SKMessageStateReceiving = 4,
+    SKMessageStateSendingFailure = 3,
+    SKMessageStateSent = 4,
     SKMessageStateReceived = 5,
     SKMessageStateRead = 6,
-    SKMessageStateSendingFailure = 7
 };
 
 /**
@@ -215,7 +214,7 @@ typedef NS_ENUM(NSInteger, SKMessageState) {
  *
  *  @discussion You may return `nil` from this method while the media data is being downloaded.
  */
-- (SKMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing;
+- (JSQMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing;
 
 /**
  *  @return A placeholder media view to be displayed if mediaView is not yet available, or `nil`.
@@ -229,7 +228,7 @@ typedef NS_ENUM(NSInteger, SKMessageState) {
  *
  *  @see JSQMessagesMediaPlaceholderView.
  */
-- (SKMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaPlaceholderViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing;
+- (JSQMediaView *)collectionView:(JSQMessagesCollectionView *)collectionView mediaPlaceholderViewForItemAtIndexPath:(NSIndexPath *)indexPath isOutgoing:(BOOL)isOutgoing;
 
 /**
  *  @return An integer that can be used as a table address in a hash table structure.

@@ -104,6 +104,6 @@
 - (void)registerClass:(Class)cellClass forMediaViewWithReuseIdentifier:(NSString *)identifier;
 
 // dequeue media view
-- (SKMediaView *)dequeueReusableMediaViewWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
+- (JSQMediaView *)dequeueReusableMediaViewWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "SKMessagesCollectionViewCellOutgoing.h"
 
-#import "SKMediaPlaceholderView.h"
+#import "SKMediaView.h"
 
 @interface SKMessagesCollectionViewCellOutgoing ()
 
@@ -28,55 +28,6 @@
     [super prepareForReuse];
     
     [self.activityIndicatorView stopAnimating];
-}
-
-#pragma mark - rendering
-
-- (void)configSendingStatusWithMessage:(id<SKMessageData>)message
-{
-    NSParameterAssert(nil != message);
-    
-    if ([message isMediaMessage]) {  // media message
-        [self.activityIndicatorView removeFromSuperview];
-        
-        UIView *mediaPlaceHolderView = [[message media] mediaPlaceholderView];
-        if (![mediaPlaceHolderView isKindOfClass:[SKMediaPlaceholderView class]]) {
-            return;
-        }
-        SKMediaPlaceholderView *skMediaPlaceholderView = (SKMediaPlaceholderView *)mediaPlaceHolderView;
-        MRCircularProgressView *circularProgressView = skMediaPlaceholderView.circularProgressView;
-        
-        circularProgressView.lineWidth = CGRectGetWidth(circularProgressView.bounds) / 2.0f;
-        circularProgressView.borderWidth = 1.0f;
-        [circularProgressView.valueLabel removeFromSuperview];
-        
-        float fractionCompleted = [message progress].fractionCompleted;
-        if (SKMessageStateSending == [message state]) {
-            circularProgressView.hidden = NO;
-            [circularProgressView setProgress:fractionCompleted
-                                          animated:YES];
-        } else {
-            circularProgressView.hidden = YES;
-        }
-    } else {  // text message
-        
-        if (SKMessageStateSending == [message state]) {
-            self.activityIndicatorView.hidden = NO;
-            [self.activityIndicatorView startAnimating];
-            
-            self.errorIndicatorButton.hidden = YES;
-        } else if (SKMessageStateSendingFailure == [message state]) {
-            self.errorIndicatorButton.hidden = NO;
-            
-            self.activityIndicatorView.hidden = YES;
-            [self.activityIndicatorView stopAnimating];
-        } else {
-            self.activityIndicatorView.hidden = YES;
-            [self.activityIndicatorView stopAnimating];
-            
-            self.errorIndicatorButton.hidden = YES;
-        }
-    }
 }
 
 @end

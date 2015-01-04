@@ -216,31 +216,31 @@
     [self.mediaViewClassMap setValue:cellClass forKey:identifier];
 }
 
-- (SKMediaView *)createMediaViewWithReuseIdentifier:(NSString *)identifier withFrame:(CGRect)frame
+- (JSQMediaView *)createMediaViewWithReuseIdentifier:(NSString *)identifier withFrame:(CGRect)frame
 {
     // nib, or class
     
     UINib *nib = [self.mediaViewNibMap valueForKey:identifier];
     Class class = [self.mediaViewClassMap valueForKey:identifier];
     
-    SKMediaView *mediaView = nil;
+    JSQMediaView *mediaView = nil;
     if (nib) {
         mediaView = [[nib instantiateWithOwner:nil options:kNilOptions] firstObject];
     } else {
         if (class) {
-            mediaView = [(SKMediaView *)[class alloc] initWithFrame:frame];
+            mediaView = [(JSQMediaView *)[class alloc] initWithFrame:frame];
         }
     }
     
     return mediaView;
 }
 
-- (SKMediaView *)dequeueReusableMediaViewWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath
+- (JSQMediaView *)dequeueReusableMediaViewWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath
 {
     id<JSQMessagesCollectionViewDataSource> messageDataSource = self.dataSource;
     
     CGSize mediaViewDisplaySize = [messageDataSource collectionView:self mediaViewDisplaySizeForItemAtIndexPath:indexPath];
-    SKMediaView *mediaView = [self dqueueMediaViewForMediaViewDisplaySize:mediaViewDisplaySize inMediaViewReusableQueue:[self mediaViewReusableQueueForReuseIdentifier:identifier]];
+    JSQMediaView *mediaView = [self dqueueMediaViewForMediaViewDisplaySize:mediaViewDisplaySize inMediaViewReusableQueue:[self mediaViewReusableQueueForReuseIdentifier:identifier]];
     if (mediaView) {  // reusable media view available
         [mediaView prepareForReuse];
     } else {  // new instance
@@ -262,7 +262,7 @@
 }
 
 // Map<size, List<mediaView>>
-- (SKMediaView *)dqueueMediaViewForMediaViewDisplaySize:(CGSize)mediaViewDisplaySize
+- (JSQMediaView *)dqueueMediaViewForMediaViewDisplaySize:(CGSize)mediaViewDisplaySize
                                       inMediaViewReusableQueue:(NSMutableDictionary *)mediaViewReusableQueue
 {
     NSParameterAssert(nil != mediaViewReusableQueue);
@@ -274,7 +274,7 @@
         [mediaViewReusableQueue setObject:mediaViews forKey:sizeKey];
     }
     
-    SKMediaView *mediaView = nil;
+    JSQMediaView *mediaView = nil;
     if ([mediaViews count]) {
         mediaView = [mediaViews firstObject];
         [mediaViews removeObjectAtIndex:0];
@@ -300,7 +300,7 @@
     [mediaViews addObject:mediaView];
 }
 
-- (void)recycleMediaView:(SKMediaView *)mediaView
+- (void)recycleMediaView:(JSQMediaView *)mediaView
 {
     if (nil == mediaView) {
         return;

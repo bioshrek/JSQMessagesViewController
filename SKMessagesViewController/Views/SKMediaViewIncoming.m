@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Hexed Bits. All rights reserved.
 //
 
-#import "SKMediaPlaceholderViewIncoming.h"
+#import "SKMediaViewIncoming.h"
 
-@implementation SKMediaPlaceholderViewIncoming
+@implementation SKMediaViewIncoming
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self commonInit];
+        [self commonInitSKMediaViewIncoming];
     }
     return self;
 }
@@ -23,10 +23,10 @@
 {
     [super awakeFromNib];
     
-    [self commonInit];
+    [self commonInitSKMediaViewIncoming];
 }
 
-- (void)commonInit
+- (void)commonInitSKMediaViewIncoming
 {
     [self setAppliesMediaViewMaskAsOutgoing:NO];
 }
