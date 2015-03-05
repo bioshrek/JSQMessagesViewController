@@ -32,18 +32,7 @@
 
 #pragma mark - Lifecycle
 
-- (void)dealloc
-{
-    _messageBubbleFont = nil;
-}
-
 #pragma mark - Setters
-
-- (void)setMessageBubbleFont:(UIFont *)messageBubbleFont
-{
-    NSParameterAssert(messageBubbleFont != nil);
-    _messageBubbleFont = messageBubbleFont;
-}
 
 - (void)setMessageBubbleContainerViewWidth:(CGFloat)messageBubbleContainerViewWidth
 {
@@ -116,8 +105,7 @@
     if (self.representedElementCategory == UICollectionElementCategoryCell) {
         JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
         
-        if (![layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
-            || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewFrameInsets, self.textViewFrameInsets)
+        if (!UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewFrameInsets, self.textViewFrameInsets)
             || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
             || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
             || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
@@ -147,7 +135,6 @@
         return copy;
     }
     
-    copy.messageBubbleFont = self.messageBubbleFont;
     copy.messageBubbleContainerViewWidth = self.messageBubbleContainerViewWidth;
     copy.textViewFrameInsets = self.textViewFrameInsets;
     copy.textViewTextContainerInsets = self.textViewTextContainerInsets;

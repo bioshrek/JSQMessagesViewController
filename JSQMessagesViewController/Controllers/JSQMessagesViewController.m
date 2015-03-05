@@ -442,12 +442,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (!isMediaMessage) {
         NSMutableAttributedString *mutableAttrText = cell.textView.textStorage;
         [mutableAttrText setAttributedString:[messageItem attributedText]];
-        NSRange range = NSMakeRange(0, [mutableAttrText length]);
-        [mutableAttrText removeAttribute:@"NSOriginalFont"
-                                   range:range];  // clear original font attribute
-        [mutableAttrText addAttribute:NSFontAttributeName
-                                value:collectionView.collectionViewLayout.messageBubbleFont
-                                range:range];  // add new font attribute
         
         NSParameterAssert(cell.textView.attributedText != nil);
         

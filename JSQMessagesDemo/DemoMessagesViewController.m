@@ -126,7 +126,8 @@
     if (!copyMessage) {
         copyMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdJobs
                                               displayName:kJSQDemoAvatarDisplayNameJobs
-                                           attributedText:[[NSAttributedString alloc] initWithString:@"First received!"]];
+                                       attributedText:[[NSAttributedString alloc] initWithString:@"First received!"
+                                                                                      attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16.0f]}]];
     }
     
     /**
@@ -337,6 +338,7 @@
             [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
             [mutableAttrText appendAttributedString:[[NSAttributedString alloc] initWithString:@", enjoy! xxxx eeea eea ega a ee ae33sss"]];
             [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            [self ensureFont:[UIFont systemFontOfSize:16.0f] forAttributedText:mutableAttrText];
             
             JSQMessage *message = [[JSQMessage alloc] initWithSenderId:self.senderId
                                                              senderDisplayName:self.senderDisplayName
@@ -357,6 +359,7 @@
             [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
             [mutableAttrText appendAttributedString:[[NSAttributedString alloc] initWithString:@", enjoy! xxxx eeea eea ega a ee ae33sss"]];
             [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
+            [self ensureFont:[UIFont systemFontOfSize:16.0f] forAttributedText:mutableAttrText];
             
             [self.inputToolbar.contentView.textView.textStorage appendAttributedString:mutableAttrText];
             [self.inputToolbar toggleSendButtonEnabled];  // change text view programmatically
@@ -364,6 +367,15 @@
     }
 }
 
+- (void)ensureFont:(UIFont *)font forAttributedText:(NSMutableAttributedString *)attributedText
+{
+    NSParameterAssert(font);
+    NSParameterAssert(attributedText);
+    
+    NSRange range = NSMakeRange(0, [attributedText length]);
+    [attributedText removeAttribute:@"NSOriginalFont" range:range];
+    [attributedText addAttribute:NSFontAttributeName value:font range:range];
+}
 
 
 #pragma mark - JSQMessages CollectionView DataSource

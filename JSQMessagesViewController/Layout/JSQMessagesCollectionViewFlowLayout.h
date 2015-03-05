@@ -84,14 +84,6 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault;
 @property (readonly, nonatomic) CGFloat itemWidth;
 
 /**
- *  The font used to display the body a text message in the message bubble of each 
- *  `JSQMessagesCollectionViewCell` in the collectionView. 
- *  
- *  @discussion The default value is the preferred system font for `UIFontTextStyleBody`. This value must not be `nil`.
- */
-@property (strong, nonatomic) UIFont *messageBubbleFont;
-
-/**
  *  The horizontal spacing used to lay out the `messageBubbleContainerView` frame within each `JSQMessagesCollectionViewCell`.
  *  This container view holds the message bubble image and message contents of a cell.
  *

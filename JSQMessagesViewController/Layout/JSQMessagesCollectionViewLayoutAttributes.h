@@ -25,12 +25,6 @@
 @interface JSQMessagesCollectionViewLayoutAttributes : UICollectionViewLayoutAttributes <NSCopying>
 
 /**
- *  The font used to display the body of a text message in a message bubble within a `JSQMessagesCollectionViewCell`.
- *  This value must not be `nil`.
- */
-@property (strong, nonatomic) UIFont *messageBubbleFont;
-
-/**
  *  The width of the `messageBubbleContainerView` of a `JSQMessagesCollectionViewCell`.
  *  This value should be greater than `0.0`.
  *
