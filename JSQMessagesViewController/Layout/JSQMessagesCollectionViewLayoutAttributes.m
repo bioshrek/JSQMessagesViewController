@@ -30,26 +30,22 @@
 
 @implementation JSQMessagesCollectionViewLayoutAttributes
 
-#pragma mark - Lifecycle
+#pragma mark - Getters
+
+- (NSMutableDictionary *)customAttributes
+{
+    if (!_customAttributes) {
+        _customAttributes = [[NSMutableDictionary alloc] init];
+    }
+    return _customAttributes;
+}
 
 #pragma mark - Setters
 
-- (void)setMessageBubbleContainerViewWidth:(CGFloat)messageBubbleContainerViewWidth
+- (void)setAvatarViewSize:(CGSize)avatarViewSize
 {
-    NSParameterAssert(messageBubbleContainerViewWidth > 0.0f);
-    _messageBubbleContainerViewWidth = ceilf(messageBubbleContainerViewWidth);
-}
-
-- (void)setIncomingAvatarViewSize:(CGSize)incomingAvatarViewSize
-{
-    NSParameterAssert(incomingAvatarViewSize.width >= 0.0f && incomingAvatarViewSize.height >= 0.0f);
-    _incomingAvatarViewSize = [self jsq_correctedAvatarSizeFromSize:incomingAvatarViewSize];
-}
-
-- (void)setOutgoingAvatarViewSize:(CGSize)outgoingAvatarViewSize
-{
-    NSParameterAssert(outgoingAvatarViewSize.width >= 0.0f && outgoingAvatarViewSize.height >= 0.0f);
-    _outgoingAvatarViewSize = [self jsq_correctedAvatarSizeFromSize:outgoingAvatarViewSize];
+    NSParameterAssert(avatarViewSize.width >= 0.0f && avatarViewSize.height >= 0.0f);
+    _avatarViewSize = [self jsq_correctedAvatarSizeFromSize:avatarViewSize];
 }
 
 - (void)setCellTopLabelHeight:(CGFloat)cellTopLabelHeight
@@ -105,11 +101,7 @@
     if (self.representedElementCategory == UICollectionElementCategoryCell) {
         JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
         
-        if (!UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewFrameInsets, self.textViewFrameInsets)
-            || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
-            || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
-            || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
-            || (int)layoutAttributes.messageBubbleContainerViewWidth != (int)self.messageBubbleContainerViewWidth
+        if (!CGSizeEqualToSize(layoutAttributes.avatarViewSize, self.avatarViewSize)
             || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
             || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
             || (int)layoutAttributes.cellBottomLabelHeight != (int)self.cellBottomLabelHeight) {
@@ -134,12 +126,8 @@
     if (copy.representedElementCategory != UICollectionElementCategoryCell) {
         return copy;
     }
-    
-    copy.messageBubbleContainerViewWidth = self.messageBubbleContainerViewWidth;
-    copy.textViewFrameInsets = self.textViewFrameInsets;
-    copy.textViewTextContainerInsets = self.textViewTextContainerInsets;
-    copy.incomingAvatarViewSize = self.incomingAvatarViewSize;
-    copy.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
+
+    copy.avatarViewSize = self.avatarViewSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;
     copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight;
     copy.cellBottomLabelHeight = self.cellBottomLabelHeight;

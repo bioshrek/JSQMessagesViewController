@@ -33,25 +33,18 @@
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellBottomLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
-@property (weak, nonatomic) IBOutlet UIImageView *messageBubbleImageView;
-@property (weak, nonatomic) IBOutlet JSQMessagesCellTextView *textView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerWidthConstraint;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerWidthConstraint;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewTopVerticalSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottomVerticalSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewAvatarHorizontalSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewMarginHorizontalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeightConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightConstraint;
+
 
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 
@@ -125,10 +118,6 @@
     _messageBubbleTopLabel = nil;
     _cellBottomLabel = nil;
     
-    _textView = nil;
-    _messageBubbleImageView = nil;
-    _mediaView = nil;
-    
     _avatarImageView = nil;
     
     [_tapGestureRecognizer removeTarget:nil action:NULL];
@@ -145,10 +134,6 @@
     self.messageBubbleTopLabel.text = nil;
     self.cellBottomLabel.text = nil;
     
-    self.textView.dataDetectorTypes = UIDataDetectorTypeNone;
-    self.textView.text = nil;
-    self.textView.attributedText = nil;
-    
     self.avatarImageView.image = nil;
     self.avatarImageView.highlightedImage = nil;
 }
@@ -158,12 +143,6 @@
     [super applyLayoutAttributes:layoutAttributes];
     
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
-    
-    if (!UIEdgeInsetsEqualToEdgeInsets(self.textView.textContainerInset, customAttributes.textViewTextContainerInsets)) {
-        self.textView.textContainerInset = customAttributes.textViewTextContainerInsets;
-    }
-    
-    self.textViewFrameInsets = customAttributes.textViewFrameInsets;
     
     [self jsq_updateConstraint:self.messageBubbleContainerWidthConstraint
                   withConstant:customAttributes.messageBubbleContainerViewWidth];
@@ -177,24 +156,12 @@
     [self jsq_updateConstraint:self.cellBottomLabelHeightConstraint
                   withConstant:customAttributes.cellBottomLabelHeight];
     
-    if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]) {
-        self.avatarViewSize = customAttributes.incomingAvatarViewSize;
-    }
-    else if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
-        self.avatarViewSize = customAttributes.outgoingAvatarViewSize;
-    }
+    self.avatarViewSize = customAttributes.avatarViewSize;
 }
 
-- (void)setHighlighted:(BOOL)highlighted
+- (void)applyMessageContentData:(id<SKMessageContent>)messageContent
 {
-    [super setHighlighted:highlighted];
-    self.messageBubbleImageView.highlighted = highlighted;
-}
-
-- (void)setSelected:(BOOL)selected
-{
-    [super setSelected:selected];
-    self.messageBubbleImageView.highlighted = selected;
+    // subclass should override
 }
 
 //  FIXME: radar 18326340
@@ -222,7 +189,6 @@
     self.messageBubbleTopLabel.backgroundColor = backgroundColor;
     self.cellBottomLabel.backgroundColor = backgroundColor;
     
-    self.messageBubbleImageView.backgroundColor = backgroundColor;
     self.avatarImageView.backgroundColor = backgroundColor;
     
     self.messageBubbleContainerView.backgroundColor = backgroundColor;
@@ -239,60 +205,12 @@
     [self jsq_updateConstraint:self.avatarContainerViewHeightConstraint withConstant:avatarViewSize.height];
 }
 
-- (void)setTextViewFrameInsets:(UIEdgeInsets)textViewFrameInsets
-{
-    if (UIEdgeInsetsEqualToEdgeInsets(textViewFrameInsets, self.textViewFrameInsets)) {
-        return;
-    }
-    
-    [self jsq_updateConstraint:self.textViewTopVerticalSpaceConstraint withConstant:textViewFrameInsets.top];
-    [self jsq_updateConstraint:self.textViewBottomVerticalSpaceConstraint withConstant:textViewFrameInsets.bottom];
-    [self jsq_updateConstraint:self.textViewAvatarHorizontalSpaceConstraint withConstant:textViewFrameInsets.right];
-    [self jsq_updateConstraint:self.textViewMarginHorizontalSpaceConstraint withConstant:textViewFrameInsets.left];
-}
-
-- (void)setMediaView:(UIView *)mediaView
-{
-    if ([_mediaView isEqual:mediaView]) {
-        return;
-    }
-    
-    [self.messageBubbleImageView removeFromSuperview];
-    [self.textView removeFromSuperview];
-    
-    [mediaView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    mediaView.frame = self.messageBubbleContainerView.bounds;
-    
-    [self.messageBubbleContainerView addSubview:mediaView];
-    [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:mediaView];
-    _mediaView = mediaView;
-    
-    //  because of cell re-use (and caching media views, if using built-in library media item)
-    //  we may have dequeued a cell with a media view and add this one on top
-    //  thus, remove any additional subviews hidden behind the new media view
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for (NSUInteger i = 0; i < self.messageBubbleContainerView.subviews.count; i++) {
-            if (self.messageBubbleContainerView.subviews[i] != _mediaView) {
-                [self.messageBubbleContainerView.subviews[i] removeFromSuperview];
-            }
-        }
-    });
-}
-
 #pragma mark - Getters
 
 - (CGSize)avatarViewSize
 {
     return CGSizeMake(self.avatarContainerViewWidthConstraint.constant,
                       self.avatarContainerViewHeightConstraint.constant);
-}
-
-- (UIEdgeInsets)textViewFrameInsets
-{
-    return UIEdgeInsetsMake(self.textViewTopVerticalSpaceConstraint.constant,
-                            self.textViewMarginHorizontalSpaceConstraint.constant,
-                            self.textViewBottomVerticalSpaceConstraint.constant,
-                            self.textViewAvatarHorizontalSpaceConstraint.constant);
 }
 
 #pragma mark - Utilities

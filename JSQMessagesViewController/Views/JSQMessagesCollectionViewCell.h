@@ -21,6 +21,8 @@
 #import "JSQMessagesLabel.h"
 #import "JSQMessagesCellTextView.h"
 
+#import "SKMessageContent.h"
+
 @class JSQMessagesCollectionViewCell;
 
 /**
@@ -99,20 +101,6 @@
 @property (weak, nonatomic, readonly) JSQMessagesLabel *cellBottomLabel;
 
 /**
- *  Returns the text view of the cell. This text view contains the message body text.
- *
- *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
- */
-@property (weak, nonatomic, readonly) JSQMessagesCellTextView *textView;
-
-/**
- *  Returns the bubble image view of the cell that is responsible for displaying message bubble images. 
- *
- *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
- */
-@property (weak, nonatomic, readonly) UIImageView *messageBubbleImageView;
-
-/**
  *  Returns the message bubble container view of the cell. This view is the superview of
  *  the cell's textView and messageBubbleImageView.
  *
@@ -144,13 +132,6 @@
 @property (weak, nonatomic, readonly) UIView *avatarContainerView;
 
 /**
- *  The media view of the cell. This view displays the contents of a media message.
- *
- *  @warning If this value is non-nil, then textView and messageBubbleImageView will both be `nil`.
- */
-@property (weak, nonatomic) UIView *mediaView;
-
-/**
  *  Returns the underlying gesture recognizer for tap gestures in the avatarImageView of the cell.
  *  This gesture handles the tap event for the avatarImageView and notifies the cell's delegate.
  */
@@ -174,10 +155,8 @@
 + (NSString *)cellReuseIdentifier;
 
 /**
- *  Returns the default string used to identify a reusable cell for media message items.
- *
- *  @return The string used to identify a reusable cell.
+ *  Subclass should override this method
  */
-+ (NSString *)mediaCellReuseIdentifier;
+- (void)applyMessageContentData:(id<SKMessageContent>)messageContent;
 
 @end

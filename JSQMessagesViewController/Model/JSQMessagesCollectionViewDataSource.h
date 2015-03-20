@@ -21,8 +21,10 @@
 
 @class JSQMessagesCollectionView;
 @protocol JSQMessageData;
+@protocol SKMessageContent;
 @protocol JSQMessageBubbleImageDataSource;
 @protocol JSQMessageAvatarImageDataSource;
+@protocol SKCollectionViewCellLayout;
 
 
 /**
@@ -61,6 +63,18 @@
  *  @return An initialized object that conforms to the `JSQMessageData` protocol. You must not return `nil` from this method.
  */
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  provide message content: text, image, file ...
+ */
+- (id<SKMessageContent>)collectionView:(JSQMessagesCollectionView *)collectionView messageContentDataForItemAtIndexPath:(NSIndexPath *)indexPath;
+
+
+/**
+ *  Asks layout for calculating layout attributes for messages.
+ */
+- (id<SKCollectionViewCellLayout>)collectionView:(JSQMessagesCollectionView *)collectionView messageLayoutForItemAtIndexPath:(NSIndexPath *)indexPath;
+
 
 /**
  *  Asks the data source for the message bubble image data that corresponds to the specified message data item at indexPath in the collectionView.

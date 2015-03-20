@@ -119,4 +119,14 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender;
 
+/**
+ *  Cell did disapper
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didEndDisplayingCell:(JSQMessagesCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Cell will appear
+ */
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView willDisplayingCell:(JSQMessagesCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
