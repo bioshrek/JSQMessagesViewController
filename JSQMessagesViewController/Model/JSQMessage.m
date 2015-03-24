@@ -18,6 +18,8 @@
 
 #import "JSQMessage.h"
 
+#import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCellIncoming.h"
 
 @interface JSQMessage ()
 
@@ -233,6 +235,31 @@
     }
     
     return message;
+}
+
+- (NSString *)reusableCellIdentifierForOutgoing:(BOOL)outgoing
+{
+    NSString *identifier = nil;
+    
+    switch (self.messageType) {
+        case JSQMessageDataTypeText:
+            identifier = outgoing ? [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier] : [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
+            break;
+        case JSQMessageDataTypeImage:
+        case JSQMessageDataTypeVideo:
+            identifier = outgoing ? [JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier] : [JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier];
+            break;
+        case JSQMessageDataTypeAudio:
+            // TODO:
+            break;
+        case JSQMessageDataTypeFile:
+            // TODO:
+            break;
+        default:
+            break;
+    }
+    
+    return identifier;
 }
 
 @end

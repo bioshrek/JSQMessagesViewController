@@ -59,6 +59,8 @@ typedef NS_ENUM(NSInteger, JSQMessageDataType) {
  */
 - (NSString *)senderId;
 
+- (NSString *)reusableCellIdentifierForOutgoing:(BOOL)outgoing;
+
 /**
  *  @return The display name for the user who sent the message.
  *

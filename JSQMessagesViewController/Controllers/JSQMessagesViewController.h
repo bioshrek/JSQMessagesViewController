@@ -87,7 +87,7 @@
  *  completely overriding many delegate and data source methods for the collectionView, 
  *  including `collectionView:cellForItemAtIndexPath:`.
  */
-@property (copy, nonatomic) NSString *outgoingCellIdentifier;
+//@property (copy, nonatomic) NSString *outgoingCellIdentifier;
 
 /**
  *  The collection view cell identifier to use for dequeuing outgoing message collection view cells 
@@ -105,7 +105,7 @@
  *  completely overriding many delegate and data source methods for the collectionView,
  *  including `collectionView:cellForItemAtIndexPath:`.
  */
-@property (copy, nonatomic) NSString *outgoingMediaCellIdentifier;
+//@property (copy, nonatomic) NSString *outgoingMediaCellIdentifier;
 
 /**
  *  The collection view cell identifier to use for dequeuing incoming message collection view cells 
@@ -123,7 +123,7 @@
  *  completely overriding many delegate and data source methods for the collectionView, 
  *  including `collectionView:cellForItemAtIndexPath:`.
  */
-@property (copy, nonatomic) NSString *incomingCellIdentifier;
+//@property (copy, nonatomic) NSString *incomingCellIdentifier;
 
 /**
  *  The collection view cell identifier to use for dequeuing incoming message collection view cells 
@@ -141,7 +141,7 @@
  *  completely overriding many delegate and data source methods for the collectionView,
  *  including `collectionView:cellForItemAtIndexPath:`.
  */
-@property (copy, nonatomic) NSString *incomingMediaCellIdentifier;
+//@property (copy, nonatomic) NSString *incomingMediaCellIdentifier;
 
 /**
  *  Specifies whether or not the view controller should show the typing indicator for an incoming message.

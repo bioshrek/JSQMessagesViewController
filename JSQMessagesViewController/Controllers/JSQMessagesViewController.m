@@ -136,12 +136,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     self.automaticallyScrollsToMostRecentMessage = YES;
     
-    self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
-    self.outgoingMediaCellIdentifier = [JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier];
-    
-    self.incomingCellIdentifier = [JSQMessagesCollectionViewCellIncoming cellReuseIdentifier];
-    self.incomingMediaCellIdentifier = [JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier];
-    
     self.showTypingIndicator = NO;
     
     self.showLoadEarlierMessagesHeader = NO;
@@ -171,8 +165,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     _senderId = nil;
     _senderDisplayName = nil;
-    _outgoingCellIdentifier = nil;
-    _incomingCellIdentifier = nil;
     
     [_keyboardController endListeningForKeyboard];
     _keyboardController = nil;
@@ -427,24 +419,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
     
-    NSString *cellIdentifier = nil;
-    switch ([messageItem messageType]) {
-        case JSQMessageDataTypeText: {
-            cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
-        } break;
-        case JSQMessageDataTypeAudio: {
-            
-        } break;
-        case JSQMessageDataTypeImage:
-        case JSQMessageDataTypeVideo: {
-            cellIdentifier = isOutgoingMessage ? self.outgoingMediaCellIdentifier : self.incomingMediaCellIdentifier;
-        } break;
-        case JSQMessageDataTypeFile: {
-        
-        } break;
-        default:
-            break;
-    }
+    NSString *cellIdentifier = [messageItem reusableCellIdentifierForOutgoing:isOutgoingMessage];
     
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = collectionView;
