@@ -143,65 +143,76 @@
         id<JSQMessageMediaData> newMediaData = nil;
         id newMediaAttachmentCopy = nil;
         
-        if (copyMessage.isMediaMessage) {
-            /**
-             *  Last message was a media message
-             */
-            id<JSQMessageMediaData> copyMediaData = copyMessage.media;
-            
-            if ([copyMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                JSQPhotoMediaItem *photoItemCopy = [((JSQPhotoMediaItem *)copyMediaData) copy];
-                photoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [UIImage imageWithCGImage:photoItemCopy.image.CGImage];
-                
+        switch (copyMessage.messageType) {
+            case JSQMessageDataTypeText: {
                 /**
-                 *  Set image to nil to simulate "downloading" the image
-                 *  and show the placeholder view
+                 *  Last message was a text message
                  */
-                photoItemCopy.image = nil;
-                
-                newMediaData = photoItemCopy;
-            }
-            else if ([copyMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                JSQLocationMediaItem *locationItemCopy = [((JSQLocationMediaItem *)copyMediaData) copy];
-                locationItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [locationItemCopy.location copy];
-                
-                /**
-                 *  Set location to nil to simulate "downloading" the location data
-                 */
-                locationItemCopy.location = nil;
-                
-                newMediaData = locationItemCopy;
-            }
-            else if ([copyMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
-                JSQVideoMediaItem *videoItemCopy = [((JSQVideoMediaItem *)copyMediaData) copy];
-                videoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [videoItemCopy.fileURL copy];
-                
-                /**
-                 *  Reset video item to simulate "downloading" the video
-                 */
-                videoItemCopy.fileURL = nil;
-                videoItemCopy.isReadyToPlay = NO;
-                
-                newMediaData = videoItemCopy;
-            }
-            else {
-                NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
-            }
-            
-            newMessage = [JSQMessage messageWithSenderId:randomUserId
-                                             displayName:self.demoData.users[randomUserId]
-                                                   media:newMediaData];
-        }
-        else {
-            /**
-             *  Last message was a text message
-             */
-            newMessage = [JSQMessage messageWithSenderId:randomUserId
+                newMessage = [JSQMessage messageWithSenderId:randomUserId
                                                  displayName:self.demoData.users[randomUserId]
                                               attributedText:copyMessage.attributedText];
+            } break;
+            case JSQMessageDataTypeImage:
+            case JSQMessageDataTypeVideo: {
+                /**
+                 *  Last message was a media message
+                 */
+                id<JSQMessageMediaData> copyMediaData = copyMessage.media;
+                
+                if ([copyMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
+                    JSQPhotoMediaItem *photoItemCopy = [((JSQPhotoMediaItem *)copyMediaData) copy];
+                    photoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
+                    newMediaAttachmentCopy = [UIImage imageWithCGImage:photoItemCopy.image.CGImage];
+                    
+                    /**
+                     *  Set image to nil to simulate "downloading" the image
+                     *  and show the placeholder view
+                     */
+                    photoItemCopy.image = nil;
+                    
+                    newMediaData = photoItemCopy;
+                }
+                else if ([copyMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
+                    JSQLocationMediaItem *locationItemCopy = [((JSQLocationMediaItem *)copyMediaData) copy];
+                    locationItemCopy.appliesMediaViewMaskAsOutgoing = NO;
+                    newMediaAttachmentCopy = [locationItemCopy.location copy];
+                    
+                    /**
+                     *  Set location to nil to simulate "downloading" the location data
+                     */
+                    locationItemCopy.location = nil;
+                    
+                    newMediaData = locationItemCopy;
+                }
+                else if ([copyMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
+                    JSQVideoMediaItem *videoItemCopy = [((JSQVideoMediaItem *)copyMediaData) copy];
+                    videoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
+                    newMediaAttachmentCopy = [videoItemCopy.fileURL copy];
+                    
+                    /**
+                     *  Reset video item to simulate "downloading" the video
+                     */
+                    videoItemCopy.fileURL = nil;
+                    videoItemCopy.isReadyToPlay = NO;
+                    
+                    newMediaData = videoItemCopy;
+                }
+                else {
+                    NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
+                }
+                
+                newMessage = [JSQMessage messageWithSenderId:randomUserId
+                                                 displayName:self.demoData.users[randomUserId]
+                                                       media:newMediaData];
+            } break;
+            case JSQMessageDataTypeAudio:
+                // TODO:
+                break;
+            case JSQMessageDataTypeFile:
+                // TODO:
+                break;
+            default:
+                break;
         }
         
         /**
@@ -216,7 +227,8 @@
         [self finishReceivingMessage];
         
         
-        if (newMessage.isMediaMessage) {
+        if (JSQMessageDataTypeImage == newMessage.messageType ||
+            JSQMessageDataTypeVideo == newMessage.messageType) {
             /**
              *  Simulate "downloading" media
              */
@@ -517,7 +529,7 @@
     
     JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
     
-    if (!msg.isMediaMessage) {
+    if (JSQMessageDataTypeText == msg.messageType) {
         
         if ([msg.senderId isEqualToString:self.senderId]) {
             cell.textView.textColor = [UIColor blackColor];

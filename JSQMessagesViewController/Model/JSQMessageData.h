@@ -19,6 +19,18 @@
 #import <Foundation/Foundation.h>
 
 #import "JSQMessageMediaData.h"
+#import "JSQMessageFileData.h"
+#import "JSQMessageAudioData.h"
+
+// message type
+typedef NS_ENUM(NSInteger, JSQMessageDataType) {
+    JSQMessageDataTypeUnknown = 0,
+    JSQMessageDataTypeText = 1,
+    JSQMessageDataTypeAudio = 2,
+    JSQMessageDataTypeImage = 3,
+    JSQMessageDataTypeVideo = 4,
+    JSQMessageDataTypeFile = 5
+};
 
 /**
  *  The `JSQMessageData` protocol defines the common interface through which 
@@ -73,7 +85,8 @@
  *  @return A boolean value specifying whether or not this is a media message or a text message.
  *  Return `YES` if this item is a media message, and `NO` if it is a text message.
  */
-- (BOOL)isMediaMessage;
+//- (BOOL)isMediaMessage;
+- (JSQMessageDataType)messageType;
 
 /**
  *  @return An integer that can be used as a table address in a hash table structure.
@@ -95,5 +108,13 @@
  *  @warning You must not return `nil` from this method.
  */
 - (id<JSQMessageMediaData>)media;
+
+/**
+ *  @return The data item of audio message.
+ */
+- (id<JSQMessageAudioData>)audio;
+
+- (id<JSQMessageFileData>)file;
+
 
 @end

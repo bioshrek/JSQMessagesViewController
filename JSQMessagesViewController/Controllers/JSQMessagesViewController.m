@@ -426,35 +426,56 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSParameterAssert(messageSenderId != nil);
     
     BOOL isOutgoingMessage = [messageSenderId isEqualToString:self.senderId];
-    BOOL isMediaMessage = [messageItem isMediaMessage];
     
     NSString *cellIdentifier = nil;
-    if (isMediaMessage) {
-        cellIdentifier = isOutgoingMessage ? self.outgoingMediaCellIdentifier : self.incomingMediaCellIdentifier;
-    }
-    else {
-        cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+    switch ([messageItem messageType]) {
+        case JSQMessageDataTypeText: {
+            cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
+        } break;
+        case JSQMessageDataTypeAudio: {
+            
+        } break;
+        case JSQMessageDataTypeImage:
+        case JSQMessageDataTypeVideo: {
+            cellIdentifier = isOutgoingMessage ? self.outgoingMediaCellIdentifier : self.incomingMediaCellIdentifier;
+        } break;
+        case JSQMessageDataTypeFile: {
+        
+        } break;
+        default:
+            break;
     }
     
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = collectionView;
     
-    if (!isMediaMessage) {
-        NSMutableAttributedString *mutableAttrText = cell.textView.textStorage;
-        [mutableAttrText setAttributedString:[messageItem attributedText]];
-        
-        NSParameterAssert(cell.textView.attributedText != nil);
-        
-        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
-        if (bubbleImageDataSource != nil) {
-            cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
-            cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
-        }
-    }
-    else {
-        id<JSQMessageMediaData> messageMedia = [messageItem media];
-        cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
-        NSParameterAssert(cell.mediaView != nil);
+    switch ([messageItem messageType]) {
+        case JSQMessageDataTypeText: {
+            NSMutableAttributedString *mutableAttrText = cell.textView.textStorage;
+            [mutableAttrText setAttributedString:[messageItem attributedText]];
+            
+            NSParameterAssert(cell.textView.attributedText != nil);
+            
+            id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
+            if (bubbleImageDataSource != nil) {
+                cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
+                cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+            }
+        } break;
+        case JSQMessageDataTypeAudio: {
+            
+        } break;
+        case JSQMessageDataTypeImage:
+        case JSQMessageDataTypeVideo: {
+            id<JSQMessageMediaData> messageMedia = [messageItem media];
+            cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
+            NSParameterAssert(cell.mediaView != nil);
+        } break;
+        case JSQMessageDataTypeFile: {
+            
+        } break;
+        default:
+            break;
     }
     
     BOOL needsAvatar = YES;
@@ -543,7 +564,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     //  disable menu for media messages
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    if ([messageItem isMediaMessage]) {
+    if (JSQMessageDataTypeText != [messageItem messageType]) {
         return NO;
     }
     
