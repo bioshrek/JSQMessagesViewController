@@ -19,7 +19,6 @@
 #import <Foundation/Foundation.h>
 
 #import "JSQMessageData.h"
-#import "SKTextMessageData.h"
 
 /**
  *  The `JSQMessage` class is a concrete class for message model objects that represents a single user message.
@@ -28,7 +27,7 @@
  *  and the date that the message was sent. If initialized as a media message it also contains a media attachment,
  *  otherwise it contains the message text.
  */
-@interface JSQMessage : NSObject <JSQMessageData, SKTextMessageData, NSCoding, NSCopying>
+@interface JSQMessage : NSObject <JSQMessageData, NSCoding, NSCopying>
 
 /**
  *  Returns the string identifier that uniquely identifies the user who sent the message. 
@@ -46,10 +45,23 @@
 @property (copy, nonatomic, readonly) NSDate *date;
 
 /**
+ *  Returns a boolean value specifying whether or not the message contains media.
+ *  If `NO`, the message contains text. If `YES`, the message contains media.
+ *  The value of this property depends on how the object was initialized.
+ */
+@property (assign, nonatomic, readonly) BOOL isMediaMessage;
+
+/**
  *  Returns the body text of the message, or `nil` if the message is a media message.
  *  That is, if `isMediaMessage` is equal to `YES` then this value will be `nil`.
  */
 @property (copy, nonatomic, readonly) NSAttributedString *attributedText;
+
+/**
+ *  Returns the media item attachment of the message, or `nil` if the message is not a media message.
+ *  That is, if `isMediaMessage` is equal to `NO` then this value will be `nil`.
+ */
+@property (copy, nonatomic, readonly) id<JSQMessageMediaData> media;
 
 
 #pragma mark - Initialization

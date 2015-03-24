@@ -385,18 +385,6 @@
     return [self.demoData.messages objectAtIndex:indexPath.item];
 }
 
-- (id<SKMessageContent>)collectionView:(JSQMessagesCollectionView *)collectionView messageContentDataForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TODO:
-    return nil;
-}
-
-- (id<SKCollectionViewCellLayout>)collectionView:(JSQMessagesCollectionView *)collectionView messageLayoutForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TODO:
-    return nil;
-}
-
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /**
@@ -527,24 +515,27 @@
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
+    JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
+    
+    if (!msg.isMediaMessage) {
+        
+        if ([msg.senderId isEqualToString:self.senderId]) {
+            cell.textView.textColor = [UIColor blackColor];
+        }
+        else {
+            cell.textView.textColor = [UIColor whiteColor];
+        }
+        
+        cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
+                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+    }
+    
     return cell;
 }
 
+
+
 #pragma mark - JSQMessages collection view flow layout delegate
-
-// cell will appear
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView willDisplayingCell:(JSQMessagesCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TODO: if photo message, request thumbnail
-}
-
-
-// cell did disappear
-- (void)collectionView:(JSQMessagesCollectionView *)collectionView didEndDisplayingCell:(JSQMessagesCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    // TODO: if photo message, remove thumbnail
-    
-}
 
 #pragma mark - Adjusting cell label heights
 

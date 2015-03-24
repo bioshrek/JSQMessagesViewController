@@ -61,5 +61,39 @@
  */
 - (NSDate *)date;
 
+/**
+ *  This method is used to determine if the message data item contains text or media.
+ *  If this method returns `YES`, an instance of `JSQMessagesViewController` will ignore 
+ *  the `text` method of this protocol when dequeuing a `JSQMessagesCollectionViewCell`
+ *  and only call the `media` method. 
+ *
+ *  Similarly, if this method returns `NO` then the `media` method will be ignored and
+ *  and only the `text` method will be called.
+ *
+ *  @return A boolean value specifying whether or not this is a media message or a text message.
+ *  Return `YES` if this item is a media message, and `NO` if it is a text message.
+ */
+- (BOOL)isMediaMessage;
+
+/**
+ *  @return An integer that can be used as a table address in a hash table structure.
+ */
+- (NSUInteger)hash;
+
+@optional
+
+/**
+ *  @return The body text of the message.
+ *
+ *  @warning You must not return `nil` from this method.
+ */
+- (NSAttributedString *)attributedText;
+
+/**
+ *  @return The media item of the message.
+ *  
+ *  @warning You must not return `nil` from this method.
+ */
+- (id<JSQMessageMediaData>)media;
 
 @end

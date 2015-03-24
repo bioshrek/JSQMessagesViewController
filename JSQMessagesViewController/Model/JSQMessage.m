@@ -77,6 +77,7 @@
     
     self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:YES];
     if (self) {
+        _media = media;
     }
     return self;
 }
@@ -95,6 +96,7 @@
         _senderId = [senderId copy];
         _senderDisplayName = [senderDisplayName copy];
         _date = [date copy];
+        _isMediaMessage = isMedia;
     }
     return self;
 }
@@ -111,6 +113,7 @@
     _senderDisplayName = nil;
     _date = nil;
     _attributedText = nil;
+    _media = nil;
 }
 
 #pragma mark - NSObject
@@ -201,13 +204,6 @@
                                              senderDisplayName:self.senderDisplayName
                                                           date:self.date
                                                 attributedText:self.attributedText];
-}
-
-#pragma mark - SKMessageContent
-
-- (NSUInteger)hash
-{
-    
 }
 
 @end

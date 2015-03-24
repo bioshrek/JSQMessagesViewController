@@ -19,10 +19,8 @@
 #import "JSQMessagesCollectionView.h"
 
 #import "JSQMessagesCollectionViewFlowLayout.h"
-#import "SKTextMessagesCollectionViewCellIncoming.h"
-#import "SKTextMessagesCollectionViewCellOutgoing.h"
-#import "SKPhotoMessagesCollectionViewCellIncoming.h"
-#import "SKPhotoMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCellOutgoing.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -50,17 +48,17 @@
     self.alwaysBounceVertical = YES;
     self.bounces = YES;
     
-    [self registerNib:[SKTextMessagesCollectionViewCellIncoming nib]
-          forCellWithReuseIdentifier:[SKTextMessagesCollectionViewCellIncoming cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming cellReuseIdentifier]];
     
-    [self registerNib:[SKTextMessagesCollectionViewCellOutgoing nib]
-          forCellWithReuseIdentifier:[SKTextMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
     
-    [self registerNib:[SKPhotoMessagesCollectionViewCellIncoming nib]
-          forCellWithReuseIdentifier:[SKPhotoMessagesCollectionViewCellIncoming cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewCellIncoming nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier]];
     
-    [self registerNib:[SKPhotoMessagesCollectionViewCellOutgoing nib]
-          forCellWithReuseIdentifier:[SKPhotoMessagesCollectionViewCellOutgoing cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoing nib]
+          forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier]];
     
     [self registerNib:[JSQMessagesTypingIndicatorFooterView nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
