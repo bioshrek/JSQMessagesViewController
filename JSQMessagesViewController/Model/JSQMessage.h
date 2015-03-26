@@ -64,6 +64,8 @@
 @property (copy, nonatomic, readonly) id<JSQMessageMediaData> media;
 
 
+@property (copy, nonatomic, readonly) id<JSQMessageAudioData> audio;
+
 #pragma mark - Initialization
 
 /**
@@ -130,5 +132,11 @@
                senderDisplayName:(NSString *)senderDisplayName
                             date:(NSDate *)date
                            media:(id<JSQMessageMediaData>)media;
+
+
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                           audio:(id<JSQMessageAudioData>)audio;
 
 @end

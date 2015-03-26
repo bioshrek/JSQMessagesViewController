@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141CE2F71AC3047500E6FDEC /* JSQAudioItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 141CE2F61AC3047500E6FDEC /* JSQAudioItem.m */; };
 		14FCC06A1AC1D73300D47748 /* JSQMessagesCollectionViewCellIncomingAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FCC0691AC1D73300D47748 /* JSQMessagesCollectionViewCellIncomingAudio.m */; };
 		14FCC06D1AC1D78800D47748 /* JSQMessagesCollectionViewCellOutgoingAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FCC06C1AC1D78800D47748 /* JSQMessagesCollectionViewCellOutgoingAudio.m */; };
 		14FCC0701AC1D7C000D47748 /* JSQMessagesCollectionViewCellOutgoingFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FCC06F1AC1D7C000D47748 /* JSQMessagesCollectionViewCellOutgoingFile.m */; };
@@ -124,6 +125,8 @@
 
 /* Begin PBXFileReference section */
 		0844AD596023C7658D39E241 /* Pods-JSQMessagesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessagesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.release.xcconfig"; sourceTree = "<group>"; };
+		141CE2F51AC3047500E6FDEC /* JSQAudioItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQAudioItem.h; sourceTree = "<group>"; };
+		141CE2F61AC3047500E6FDEC /* JSQAudioItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQAudioItem.m; sourceTree = "<group>"; };
 		14FCC0661AC1C63E00D47748 /* JSQMessageFileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessageFileData.h; sourceTree = "<group>"; };
 		14FCC0671AC1C6CE00D47748 /* JSQMessageAudioData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessageAudioData.h; sourceTree = "<group>"; };
 		14FCC0681AC1D73300D47748 /* JSQMessagesCollectionViewCellIncomingAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellIncomingAudio.h; sourceTree = "<group>"; };
@@ -542,6 +545,8 @@
 				886C33FC19F4371E006B4997 /* JSQVideoMediaItem.m */,
 				14FCC0661AC1C63E00D47748 /* JSQMessageFileData.h */,
 				14FCC0671AC1C6CE00D47748 /* JSQMessageAudioData.h */,
+				141CE2F51AC3047500E6FDEC /* JSQAudioItem.h */,
+				141CE2F61AC3047500E6FDEC /* JSQAudioItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -900,6 +905,7 @@
 				88A25FB519D8E01A00924534 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				88A25FD019D8E01A00924534 /* JSQMessagesComposerTextView.m in Sources */,
 				88A25FC319D8E01A00924534 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
+				141CE2F71AC3047500E6FDEC /* JSQAudioItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

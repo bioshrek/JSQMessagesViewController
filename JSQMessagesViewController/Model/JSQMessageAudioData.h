@@ -12,8 +12,6 @@
 
 - (NSTimeInterval)duration;
 
-- (BOOL)played;
-
 - (NSUInteger)hash;
 
 @end

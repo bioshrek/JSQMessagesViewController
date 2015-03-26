@@ -31,6 +31,8 @@
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
+#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
+
 #import "UIImage+JSQMessages.h"
 
 
@@ -455,14 +457,28 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
             finalSize = CGSizeMake(finalWidth, stringSize.height + verticalInsets);
         } break;
         case JSQMessageDataTypeAudio: {
+            CGSize avatarSize = [self jsq_avatarSizeForIndexPath:indexPath];
             
+            //  from the cell xibs, there is a 2 point space between avatar and bubble
+            CGFloat spacingBetweenAvatarAndBubble = 2.0f;
+            CGFloat originalMaxBubbleWidth = self.itemWidth - avatarSize.width - spacingBetweenAvatarAndBubble - self.messageBubbleLeftRightMargin;
+            CGFloat maximumAudioBubbleWidth = originalMaxBubbleWidth - kOutgoingAudioDurationLeftRightSpacing - kOutgoingAudioDurationLabelWidth;
+            CGFloat minimumAudioBubbleWidth = kOutgoingAudioAnimationViewHeading + kOutgoingAudioAnimationViewWidth + kOutgoingAudioAnimationViewTrailing;
+            
+            CGFloat finalWidth = [self audioBubbleWidthForDuration:[[messageItem audio] duration]
+                                                 minVisibleDuration:kOutgoingAudioMinVisibleDuration
+                                                 maxVisibleDuration:kOutgoingAudioMaxVisibleDuration
+                                                     minBubbleWidth:minimumAudioBubbleWidth
+                                                     maxBubbleWidth:maximumAudioBubbleWidth];
+            CGFloat finalHeight = kOutgoingAudioAnimationViewTop + kOutgoingAudioAnimationViewHeight + kOutgoingAudioAnimationViewBottom;
+            finalSize = CGSizeMake(finalWidth, finalHeight);
         } break;
         case JSQMessageDataTypeImage:
         case JSQMessageDataTypeVideo: {
             finalSize = [[messageItem media] mediaViewDisplaySize];
         } break;
         case JSQMessageDataTypeFile: {
-            
+            // TODO:
         } break;
         default:
             break;
@@ -471,6 +487,24 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     [self.messageBubbleCache setObject:[NSValue valueWithCGSize:finalSize] forKey:@(messageItem.hash)];
     
     return finalSize;
+}
+
+- (CGFloat)audioBubbleWidthForDuration:(NSTimeInterval)duration
+                    minVisibleDuration:(NSTimeInterval)minVisibleDuration
+                    maxVisibleDuration:(NSTimeInterval)maxVisibleDuration
+                        minBubbleWidth:(CGFloat)minBubbleWidth
+                        maxBubbleWidth:(CGFloat)maxBubbleWidth
+{
+    NSParameterAssert(minVisibleDuration < maxBubbleWidth);
+    NSParameterAssert(minBubbleWidth < maxBubbleWidth);
+    
+    duration = MAX(duration, minVisibleDuration);
+    duration = MIN(duration, maxVisibleDuration);
+    
+    NSTimeInterval deltaDuration = maxVisibleDuration - minVisibleDuration;
+    CGFloat deltaWidth = maxBubbleWidth - minBubbleWidth;
+    CGFloat result = (duration - minVisibleDuration) * deltaWidth / deltaDuration + minBubbleWidth;
+    return result;
 }
 
 - (CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath

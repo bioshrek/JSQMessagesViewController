@@ -20,6 +20,8 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#import "JSQAudioItem.h"
+
 @implementation DemoMessagesViewController
 
 #pragma mark - View lifecycle
@@ -205,9 +207,15 @@
                                                  displayName:self.demoData.users[randomUserId]
                                                        media:newMediaData];
             } break;
-            case JSQMessageDataTypeAudio:
-                // TODO:
-                break;
+            case JSQMessageDataTypeAudio: {
+                // max visible duration: 5 minutes
+                JSQAudioItem *audioItem = [[JSQAudioItem alloc] initWithDuration:arc4random_uniform(6 * 60)];
+                
+                newMessage = [[JSQMessage alloc] initWithSenderId:randomUserId
+                                                senderDisplayName:self.demoData.users[randomUserId]
+                                                             date:[NSDate date]
+                                                            audio:audioItem];
+            } break;
             case JSQMessageDataTypeFile:
                 // TODO:
                 break;
@@ -305,7 +313,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send text emoji mixture", @"Input text emoji mixture", nil];
+                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send text emoji mixture", @"Input text emoji mixture", @"Send voice", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -376,6 +384,14 @@
             [self.inputToolbar.contentView.textView.textStorage appendAttributedString:mutableAttrText];
             [self.inputToolbar toggleSendButtonEnabled];  // change text view programmatically
         } break;
+            
+        case 5: {
+            JSQAudioItem *audioItem = [[JSQAudioItem alloc] initWithDuration:arc4random_uniform(90)];
+            JSQMessage *voiceMessage = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:[NSDate date] audio:audioItem];
+            [self.demoData.messages addObject:voiceMessage];
+            [self finishSendingMessage];
+        } break;
+        default: break;
     }
 }
 
@@ -547,7 +563,66 @@
 
 
 
-#pragma mark - JSQMessages collection view flow layout delegate
+#pragma mark - JSQMessages collection view Delegate
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView willDisplayingCell:(JSQMessagesCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<JSQMessageData> messageItem = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    
+    BOOL isOutgoing = [messageItem senderId] == self.senderId;
+    
+    // view will appear: enter STATE MACHINE
+    // STATE1: render view
+    // STATE1 -> STATE2: if view visible, enter STATE MACHINE
+    
+    // config cell
+    switch ([messageItem messageType]) {
+        case JSQMessageDataTypeText:
+            // text status: received/sent, sending, sending failure
+            // 1. sending(outgoing message): show progress. hide failure mark.
+            // 2. sending failure:(outgoing message): hide progress. show failure mark.
+            // 3. received/sent: hide progress, failure mark.
+            // 4. user tap under status 'sending failure': ask user to confirm resending message.
+            break;
+        case JSQMessageDataTypeImage: {
+            // image status: not downloaded/uploaded, downloading/uploading, downloaded/uploaded, uploading failure.
+            // 1. not downloade/uploaded: hide progress. hide failure mark. trigger downloading.
+            // 2. downloading/uploading: show progress. hide failure mark.
+            // 3. downloaded/uploaded: hide progress. hide failure mark. lazily load image from cache.
+            // 4. uploading failure(outgoing message): hide progress. show failure mark.
+            // 5. user tap under status 'not downloaded': trigger downloading.
+            // 6. user tap under status 'uploading failure': ask user to confirm resending message.
+        } break;
+        case JSQMessageDataTypeVideo:
+            // same as image message
+            break;
+        case JSQMessageDataTypeAudio: {
+            // audio status: not downloaded/uploaded, downloading/uploading, uploading failure, not yet played, playing, played
+            // 1. not downloaded/uploaded: hide animate, duration label, play mark. hide progress, failure mark. trigger downloading.
+            // 2. downloading/uploading: hide animate, duration label, play mark. show progress. hide failure mark.
+            // 3. uploading failure(outgoing message): hide animate, duration label, play mark. hide progress. show failure mark.
+            // 3. not yet played: show animate, duration label, play mark(incoming message). hide progress. hide failure mark.
+            // 4. playing: start animating. hide play mark, progress, failure mark.
+            // 5. played: stop animating. hide play mark, progress, failure mark.
+            // 6. user tap under status 'not yet played', 'played': play current audio, stop playing other audio.
+            // 7. user tap under status 'playing': stop playing current audio.
+            // 9. user tap under status 'not downloaded': trigger downloading.
+            // 10. user tap under status 'uploading failure': ask user to confirm resending message.
+        } break;
+        case JSQMessageDataTypeFile:
+            // file status: not downloaded/uploaded, downloading/uploading, uploading failure.
+            // 1. not downloade/uploaded: hide progress. hide failure mark. lazily load icon from cache. trigger downloading.
+            // 2. downloading/uploading: show progress. hide failure mark. lazily load icon from cache.
+            // 3. downloaded/uploaded: hide progress. hide failure mark. lazily load icon from cache.
+            // 4. uploading failure(outgoing message): hide progress. show failure mark. lazily load icon from cache.
+            // 5. user tap under status 'not downloaded': trigger downloading.
+            // 6. user tap under status 'uploading failure': ask user to confirm resending message.
+            break;
+        default:
+            break;
+    }
+    
+}
 
 #pragma mark - Adjusting cell label heights
 

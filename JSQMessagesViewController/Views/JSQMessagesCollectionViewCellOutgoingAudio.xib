@@ -98,11 +98,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SZ4-MH-Qfg" userLabel="Play Mark Image View">
-                        <rect key="frame" x="101" y="40" width="15" height="15"/>
+                        <rect key="frame" x="106" y="40" width="10" height="10"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="15" id="EeQ-TV-vEY"/>
-                            <constraint firstAttribute="height" constant="15" id="FF7-VA-uKe"/>
+                            <constraint firstAttribute="width" constant="10" id="EeQ-TV-vEY"/>
+                            <constraint firstAttribute="height" constant="10" id="FF7-VA-uKe"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -131,6 +131,9 @@
             <size key="customSize" width="317" height="222"/>
             <connections>
                 <outlet property="animationImageView" destination="FEo-Vb-T9y" id="V8X-Hc-F77"/>
+                <outlet property="audioAnimationImageViewHeadingContraint" destination="5EE-5K-Jh3" id="nRV-Zq-eI4"/>
+                <outlet property="audioAnimationImageViewHeightConstraint" destination="Wy4-3X-RQs" id="RSW-W9-Pbc"/>
+                <outlet property="audioAnimationImageViewWidthContraint" destination="nOB-TZ-ElG" id="hfq-Cd-KUB"/>
                 <outlet property="avatarContainerView" destination="fhZ-bI-NT0" id="JKC-OQ-R62"/>
                 <outlet property="avatarContainerViewHeightConstraint" destination="bBU-gB-F2F" id="1xT-fG-GpG"/>
                 <outlet property="avatarContainerViewWidthConstraint" destination="fle-WC-Zlz" id="TZ3-7Z-MXu"/>

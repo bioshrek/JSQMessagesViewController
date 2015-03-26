@@ -29,6 +29,9 @@
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 
+#import "JSQMessagesCollectionViewCellIncomingAudio.h"
+#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
+
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
 
@@ -426,11 +429,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     switch ([messageItem messageType]) {
         case JSQMessageDataTypeText: {
+            // attributed text
             NSMutableAttributedString *mutableAttrText = cell.textView.textStorage;
             [mutableAttrText setAttributedString:[messageItem attributedText]];
             
             NSParameterAssert(cell.textView.attributedText != nil);
             
+            // bubble image
             id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
             if (bubbleImageDataSource != nil) {
                 cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
@@ -438,7 +443,23 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             }
         } break;
         case JSQMessageDataTypeAudio: {
+            // bubble image
+            id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
+            if (bubbleImageDataSource != nil) {
+                cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
+                cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+            }
             
+            // duration text, play mark
+            if (isOutgoingMessage) {
+                JSQMessagesCollectionViewCellOutgoingAudio *audioCell = (JSQMessagesCollectionViewCellOutgoingAudio *)cell;
+                NSTimeInterval duration = [[messageItem audio] duration];
+                audioCell.durationLabel.text = [self stringForDuration:duration];
+            } else {
+                JSQMessagesCollectionViewCellIncomingAudio *audioCell = (JSQMessagesCollectionViewCellIncomingAudio *)cell;
+                NSTimeInterval duration = [[messageItem audio] duration];
+                audioCell.durationLabel.text = [self stringForDuration:duration];
+            }
         } break;
         case JSQMessageDataTypeImage:
         case JSQMessageDataTypeVideo: {
@@ -496,7 +517,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     cell.layer.shouldRasterize = YES;
     
+    [self collectionView:collectionView willDisplayingCell:cell forItemAtIndexPath:indexPath];
+    
     return cell;
+}
+
+- (NSString *)stringForDuration:(NSTimeInterval)duration
+{
+    NSParameterAssert(duration >= 0);
+    return [NSString stringWithFormat:@"%llu'%u\"", (unsigned long long)duration / 60, (unsigned int)duration % 60];
 }
 
 - (UICollectionReusableView *)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -570,6 +599,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         id<JSQMessageData> messageData = [self collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
         [[UIPasteboard generalPasteboard] setString:[[messageData attributedText] string]];
     }
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView willDisplayingCell:(JSQMessagesCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"ERROR: required method not implemented: %s", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - Collection view delegate flow layout

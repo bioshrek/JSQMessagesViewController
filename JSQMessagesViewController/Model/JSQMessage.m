@@ -20,6 +20,8 @@
 
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
+#import "JSQMessagesCollectionViewCellOutgoingAudio.h"
+#import "JSQMessagesCollectionViewCellIncomingAudio.h"
 
 @interface JSQMessage ()
 
@@ -152,7 +154,7 @@
             contentHash = [self.media hash];
             break;
         case JSQMessageDataTypeAudio:
-            // TODO:
+            contentHash = [self.media hash];
             break;
         case JSQMessageDataTypeFile:
             // TODO:
@@ -225,7 +227,10 @@
                                                                     media:self.media];
             break;
         case JSQMessageDataTypeAudio:
-            // TODO:
+            message = [[[self class] allocWithZone:zone] initWithSenderId:self.senderId
+                                                        senderDisplayName:self.senderDisplayName
+                                                                     date:self.date
+                                                                    audio:self.audio];
             break;
         case JSQMessageDataTypeFile:
             // TODO:
@@ -250,7 +255,7 @@
             identifier = outgoing ? [JSQMessagesCollectionViewCellOutgoing mediaCellReuseIdentifier] : [JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier];
             break;
         case JSQMessageDataTypeAudio:
-            // TODO:
+            identifier = outgoing ? [JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier] : [JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier];
             break;
         case JSQMessageDataTypeFile:
             // TODO:
@@ -260,6 +265,17 @@
     }
     
     return identifier;
+}
+
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                           audio:(id<JSQMessageAudioData>)audio
+{
+    if (self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date messageType:JSQMessageDataTypeAudio]) {
+        _audio = audio;
+    }
+    return self;
 }
 
 @end

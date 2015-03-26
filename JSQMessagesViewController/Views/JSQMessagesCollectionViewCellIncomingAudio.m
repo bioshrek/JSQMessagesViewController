@@ -11,6 +11,9 @@
 @interface JSQMessagesCollectionViewCellIncomingAudio ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *animationImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *audioAnimationImageViewHeadingContraint;  // 20
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *audioAnimationImageViewWidthContraint;  // 44
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *audioAnimationImageViewHeightConstraint;  // 44
 
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *durationLeftRightSpacingContraint;  // 8
@@ -19,26 +22,43 @@
 @property (weak, nonatomic) IBOutlet UIImageView *playMarkImageView;
 
 
+
 @end
 
 @implementation JSQMessagesCollectionViewCellIncomingAudio
 
-- (id)initWithFrame:(CGRect)frame
+- (void)awakeFromNib
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    [super awakeFromNib];
+    
+    self.durationLabel.text = nil;
+    self.durationLabel.hidden = NO;
+    self.animationImageView.hidden = NO;
+    self.playMarkImageView.hidden = NO;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+// override
+- (void)prepareForReuse
 {
-    // Drawing code
+    [super prepareForReuse];
+    
+    self.durationLabel.text = nil;
+    self.durationLabel.hidden = NO;
+    self.animationImageView.hidden = NO;
+    self.playMarkImageView.hidden = NO;
 }
-*/
+
+#pragma mark - Actions
+
+- (void)startPlaying
+{
+    [self.animationImageView startAnimating];
+    self.playMarkImageView.hidden = YES;
+}
+
+- (void)stopPlaying
+{
+    [self.animationImageView stopAnimating];
+}
 
 @end
