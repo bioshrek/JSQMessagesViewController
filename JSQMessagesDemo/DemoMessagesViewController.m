@@ -22,6 +22,8 @@
 
 #import "JSQAudioItem.h"
 
+#import "JSQMessagesCollectionViewCellIncomingAudio.h"
+
 @implementation DemoMessagesViewController
 
 #pragma mark - View lifecycle
@@ -689,6 +691,7 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Tapped message bubble!");
+    
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation

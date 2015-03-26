@@ -7,10 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="gr8-Q3-fyF" customClass="JSQMessagesCollectionViewCellIncomingAudio">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cell top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VP0-X2-27Z" userLabel="Cell top label" customClass="JSQMessagesLabel">
@@ -34,17 +34,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2p-e2-zR9" userLabel="Bubble container">
-                        <rect key="frame" x="36" y="40" width="160" height="76"/>
+                        <rect key="frame" x="36" y="40" width="160" height="55"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aKb-Pc-ThX" userLabel="Bubble Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="76"/>
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="55"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g3T-Eb-UVK" userLabel="Animation Image View">
-                                <rect key="frame" x="20" y="16" width="44" height="44"/>
+                                <rect key="frame" x="20" y="18" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="Mgd-qA-r07"/>
-                                    <constraint firstAttribute="height" constant="44" id="Pfg-w3-Sos"/>
+                                    <constraint firstAttribute="width" constant="20" id="Mgd-qA-r07"/>
+                                    <constraint firstAttribute="height" constant="20" id="Pfg-w3-Sos"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -60,7 +60,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Id2-Rj-1ge" userLabel="Avatar container">
-                        <rect key="frame" x="0.0" y="82" width="34" height="34"/>
+                        <rect key="frame" x="0.0" y="61" width="34" height="34"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nRj-Tl-3MZ" userLabel="Avatar Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
@@ -77,7 +77,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cell bottom label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LM-cW-emZ" userLabel="Cell bottom label" customClass="JSQMessagesLabel">
-                        <rect key="frame" x="0.0" y="116" width="320" height="20"/>
+                        <rect key="frame" x="0.0" y="95" width="320" height="20"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="vcY-8r-tyS"/>
@@ -87,7 +87,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="59'59''" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBN-hy-Pg9" userLabel="Duration Label">
-                        <rect key="frame" x="204" y="67" width="54" height="21"/>
+                        <rect key="frame" x="204" y="57" width="54" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="54" id="CNs-lh-BLd"/>
@@ -97,7 +97,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ5-tL-ZeE" userLabel="Play Mark Image View">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-mark.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ5-tL-ZeE" userLabel="Play Mark Image View">
                         <rect key="frame" x="204" y="40" width="10" height="10"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -109,7 +109,6 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="ZQ5-tL-ZeE" firstAttribute="top" secondItem="q2p-e2-zR9" secondAttribute="top" id="24z-OM-61a"/>
                 <constraint firstAttribute="trailing" secondItem="rNV-pw-3x3" secondAttribute="trailing" id="3rQ-om-Bds"/>
                 <constraint firstItem="FBN-hy-Pg9" firstAttribute="leading" secondItem="q2p-e2-zR9" secondAttribute="trailing" constant="8" id="4EI-De-tOC"/>
                 <constraint firstItem="VP0-X2-27Z" firstAttribute="leading" secondItem="gr8-Q3-fyF" secondAttribute="leading" id="7Wl-IU-g2U"/>
@@ -124,11 +123,12 @@
                 <constraint firstAttribute="bottom" secondItem="1LM-cW-emZ" secondAttribute="bottom" id="cRe-C4-9LZ"/>
                 <constraint firstItem="1LM-cW-emZ" firstAttribute="top" secondItem="q2p-e2-zR9" secondAttribute="bottom" id="l0i-Og-OU1"/>
                 <constraint firstItem="1LM-cW-emZ" firstAttribute="leading" secondItem="gr8-Q3-fyF" secondAttribute="leading" id="lE3-bn-ths"/>
+                <constraint firstItem="ZQ5-tL-ZeE" firstAttribute="top" secondItem="q2p-e2-zR9" secondAttribute="top" id="lmF-zi-Ckv"/>
                 <constraint firstAttribute="trailing" secondItem="1LM-cW-emZ" secondAttribute="trailing" id="mXU-oh-o9c"/>
                 <constraint firstItem="1LM-cW-emZ" firstAttribute="top" secondItem="Id2-Rj-1ge" secondAttribute="bottom" id="omv-gy-GW5"/>
                 <constraint firstItem="rNV-pw-3x3" firstAttribute="leading" secondItem="gr8-Q3-fyF" secondAttribute="leading" id="siV-yX-9Tu"/>
             </constraints>
-            <size key="customSize" width="317" height="227"/>
+            <size key="customSize" width="317" height="206"/>
             <connections>
                 <outlet property="animationImageView" destination="g3T-Eb-UVK" id="uPv-ii-HsA"/>
                 <outlet property="audioAnimationImageViewHeadingContraint" destination="81d-ce-2RQ" id="ct2-w2-3XX"/>
@@ -154,4 +154,7 @@
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="play-mark.png" width="20" height="20"/>
+    </resources>
 </document>

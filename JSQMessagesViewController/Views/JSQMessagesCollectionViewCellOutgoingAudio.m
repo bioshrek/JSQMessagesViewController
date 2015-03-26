@@ -8,17 +8,19 @@
 
 #import "JSQMessagesCollectionViewCellOutgoingAudio.h"
 
+#import "UIImageView+JSQMessages.h"
+
 // constants: layout constants
 
 CGFloat const kOutgoingAudioDurationLeftRightSpacing = 8.0f;
 CGFloat const kOutgoingAudioDurationLabelWidth = 54.0f;
 
 CGFloat const kOutgoingAudioAnimationViewHeading = 20.0f;
-CGFloat const kOutgoingAudioAnimationViewTrailing = 8.0f;
-CGFloat const kOutgoingAudioAnimationViewTop = 8.0f;
-CGFloat const kOutgoingAudioAnimationViewBottom = 8.0f;
-CGFloat const kOutgoingAudioAnimationViewWidth = 44.0f;
-CGFloat const kOutgoingAudioAnimationViewHeight = 44.0f;
+CGFloat const kOutgoingAudioAnimationViewTrailing = 20.0f;
+CGFloat const kOutgoingAudioAnimationViewTop = 10.0f;
+CGFloat const kOutgoingAudioAnimationViewBottom = 10.0f;
+CGFloat const kOutgoingAudioAnimationViewWidth = 20.0f;
+CGFloat const kOutgoingAudioAnimationViewHeight = 20.0f;
 
 NSTimeInterval kOutgoingAudioMaxVisibleDuration = 5 * 60.0f;  // 5 minutes
 NSTimeInterval kOutgoingAudioMinVisibleDuration = 1.0f;  // 1 second
@@ -41,22 +43,23 @@ NSTimeInterval kOutgoingAudioMinVisibleDuration = 1.0f;  // 1 second
 
 @implementation JSQMessagesCollectionViewCellOutgoingAudio
 
-- (id)initWithFrame:(CGRect)frame
+- (void)awakeFromNib
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    [super awakeFromNib];
+    
+    [self.animationImageView configAsAudioDurationAnimationWithColor:[UIColor blackColor] outgoing:YES];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+// override
+- (void)prepareForReuse
 {
-    // Drawing code
+    [super prepareForReuse];
+    
+    self.durationLabel.text = nil;
+    self.durationLabel.hidden = NO;
+    self.animationImageView.hidden = NO;
+    [self.animationImageView stopAnimating];
+    self.playMarkImageView.hidden = NO;
 }
-*/
 
 @end

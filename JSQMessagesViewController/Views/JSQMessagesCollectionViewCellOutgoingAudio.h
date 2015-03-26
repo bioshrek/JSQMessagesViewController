@@ -28,8 +28,8 @@ extern NSTimeInterval kOutgoingAudioMinVisibleDuration;
 
 @property (weak, nonatomic, readonly) UIImageView *animationImageView;
 @property (weak, nonatomic, readonly) NSLayoutConstraint *audioAnimationImageViewHeadingContraint;  // 20
-@property (weak, nonatomic, readonly) NSLayoutConstraint *audioAnimationImageViewWidthContraint;  // 44
-@property (weak, nonatomic, readonly) NSLayoutConstraint *audioAnimationImageViewHeightConstraint;  // 44
+@property (weak, nonatomic, readonly) NSLayoutConstraint *audioAnimationImageViewWidthContraint;  // 20
+@property (weak, nonatomic, readonly) NSLayoutConstraint *audioAnimationImageViewHeightConstraint;  // 20
 
 @property (weak, nonatomic, readonly) UILabel *durationLabel;
 @property (weak, nonatomic, readonly) NSLayoutConstraint *durationLeftRightSpacingContraint;  // 8

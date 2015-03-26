@@ -8,6 +8,8 @@
 
 #import "JSQMessagesCollectionViewCellIncomingAudio.h"
 
+#import "UIImageView+JSQMessages.h"
+
 @interface JSQMessagesCollectionViewCellIncomingAudio ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *animationImageView;
@@ -31,10 +33,7 @@
 {
     [super awakeFromNib];
     
-    self.durationLabel.text = nil;
-    self.durationLabel.hidden = NO;
-    self.animationImageView.hidden = NO;
-    self.playMarkImageView.hidden = NO;
+    [self.animationImageView configAsAudioDurationAnimationWithColor:[UIColor whiteColor] outgoing:NO];
 }
 
 // override
@@ -45,20 +44,8 @@
     self.durationLabel.text = nil;
     self.durationLabel.hidden = NO;
     self.animationImageView.hidden = NO;
-    self.playMarkImageView.hidden = NO;
-}
-
-#pragma mark - Actions
-
-- (void)startPlaying
-{
-    [self.animationImageView startAnimating];
-    self.playMarkImageView.hidden = YES;
-}
-
-- (void)stopPlaying
-{
     [self.animationImageView stopAnimating];
+    self.playMarkImageView.hidden = NO;
 }
 
 @end

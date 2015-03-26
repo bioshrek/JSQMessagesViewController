@@ -7,10 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="bP1-V1-3TJ" customClass="JSQMessagesCollectionViewCellOutgoingAudio">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="131"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="131"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cell top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyF-OA-FEa" userLabel="Cell top label" customClass="JSQMessagesLabel">
@@ -34,17 +34,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPA-ma-mzs" userLabel="Bubble container">
-                        <rect key="frame" x="124" y="40" width="160" height="71"/>
+                        <rect key="frame" x="124" y="40" width="160" height="59"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ImB-6P-f0d" userLabel="Bubble Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="71"/>
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="59"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FEo-Vb-T9y" userLabel="Duration Image View">
-                                <rect key="frame" x="96" y="14" width="44" height="44"/>
+                                <rect key="frame" x="120" y="20" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Wy4-3X-RQs"/>
-                                    <constraint firstAttribute="width" constant="44" id="nOB-TZ-ElG"/>
+                                    <constraint firstAttribute="height" constant="20" id="Wy4-3X-RQs"/>
+                                    <constraint firstAttribute="width" constant="20" id="nOB-TZ-ElG"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -60,7 +60,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhZ-bI-NT0" userLabel="Avatar container">
-                        <rect key="frame" x="286" y="77" width="34" height="34"/>
+                        <rect key="frame" x="286" y="65" width="34" height="34"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mM8-8v-ONG" userLabel="Avatar Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
@@ -77,7 +77,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cell bottom label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-2L-McM" userLabel="Cell bottom label" customClass="JSQMessagesLabel">
-                        <rect key="frame" x="0.0" y="111" width="320" height="20"/>
+                        <rect key="frame" x="0.0" y="99" width="320" height="20"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="bXA-bV-FOE"/>
@@ -87,7 +87,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="59'59''" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uz2-Ft-7ge" userLabel="Duration Label">
-                        <rect key="frame" x="62" y="65" width="54" height="21"/>
+                        <rect key="frame" x="62" y="59" width="54" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="54" id="NWF-2Z-6kd"/>
@@ -128,7 +128,7 @@
                 <constraint firstAttribute="bottom" secondItem="yI0-2L-McM" secondAttribute="bottom" id="wAo-Y9-iAV"/>
                 <constraint firstAttribute="trailing" secondItem="yI0-2L-McM" secondAttribute="trailing" id="wfP-ZM-kpM"/>
             </constraints>
-            <size key="customSize" width="317" height="222"/>
+            <size key="customSize" width="317" height="210"/>
             <connections>
                 <outlet property="animationImageView" destination="FEo-Vb-T9y" id="V8X-Hc-F77"/>
                 <outlet property="audioAnimationImageViewHeadingContraint" destination="5EE-5K-Jh3" id="nRV-Zq-eI4"/>
