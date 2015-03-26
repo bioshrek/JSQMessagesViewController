@@ -22,6 +22,8 @@
 
 #import "JSQAudioItem.h"
 
+#import "JSQFileItem.h"
+
 #import "JSQMessagesCollectionViewCellIncomingAudio.h"
 
 @implementation DemoMessagesViewController
@@ -218,9 +220,13 @@
                                                              date:[NSDate date]
                                                             audio:audioItem];
             } break;
-            case JSQMessageDataTypeFile:
-                // TODO:
-                break;
+            case JSQMessageDataTypeFile: {
+                JSQFileItem *fileItem = [[JSQFileItem alloc] initWithFileName:@"Cocoa Touch Programming.pdf" bytes:12568478];
+                newMessage = [[JSQMessage alloc] initWithSenderId:randomUserId
+                                                senderDisplayName:self.demoData.users[randomUserId]
+                                                             date:[NSDate date]
+                                                             file:fileItem];
+            } break;
             default:
                 break;
         }
@@ -315,7 +321,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send text emoji mixture", @"Input text emoji mixture", @"Send voice", nil];
+                                              otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send text emoji mixture", @"Input text emoji mixture", @"Send voice", @"Send file", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -391,6 +397,13 @@
             JSQAudioItem *audioItem = [[JSQAudioItem alloc] initWithDuration:arc4random_uniform(90)];
             JSQMessage *voiceMessage = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:[NSDate date] audio:audioItem];
             [self.demoData.messages addObject:voiceMessage];
+            [self finishSendingMessage];
+        } break;
+        
+        case 6: {
+            JSQFileItem *fileItem = [[JSQFileItem alloc] initWithFileName:@"Fifty degree dark.pdf" bytes:12568478];
+            JSQMessage *fileMessage = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:self.senderDisplayName date:[NSDate date] file:fileItem];
+            [self.demoData.messages addObject:fileMessage];
             [self finishSendingMessage];
         } break;
         default: break;
@@ -583,7 +596,7 @@
             // text status: received/sent, sending, sending failure
             // 1. sending(outgoing message): show progress. hide failure mark.
             // 2. sending failure:(outgoing message): hide progress. show failure mark.
-            // 3. received/sent: hide progress, failure mark.
+            // 3. received/sent: hide progress, failure mark(outgoing).
             // 4. user tap under status 'sending failure': ask user to confirm resending message.
             break;
         case JSQMessageDataTypeImage: {

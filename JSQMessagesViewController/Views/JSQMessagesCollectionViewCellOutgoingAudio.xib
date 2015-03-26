@@ -105,6 +105,19 @@
                             <constraint firstAttribute="height" constant="10" id="FF7-VA-uKe"/>
                         </constraints>
                     </imageView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CnP-7s-riG">
+                        <rect key="frame" x="96" y="60" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </activityIndicatorView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wz7-LH-weK" userLabel="Error View">
+                        <rect key="frame" x="96" y="60" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="EC6-6L-Q4B"/>
+                            <constraint firstAttribute="height" constant="20" id="arA-ZD-uoB"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -113,15 +126,19 @@
                 <constraint firstItem="yI0-2L-McM" firstAttribute="top" secondItem="vPA-ma-mzs" secondAttribute="bottom" id="3gR-um-Hb0"/>
                 <constraint firstItem="yyF-OA-FEa" firstAttribute="top" secondItem="bP1-V1-3TJ" secondAttribute="top" id="Cgc-dC-QjA"/>
                 <constraint firstItem="ImB-6P-f0d" firstAttribute="top" secondItem="SZ4-MH-Qfg" secondAttribute="top" id="DEa-BF-fwt"/>
+                <constraint firstItem="vPA-ma-mzs" firstAttribute="leading" secondItem="Wz7-LH-weK" secondAttribute="trailing" constant="8" id="DrU-eY-Td7"/>
                 <constraint firstItem="ImB-6P-f0d" firstAttribute="leading" secondItem="uz2-Ft-7ge" secondAttribute="trailing" constant="8" id="Gqj-2l-fql"/>
                 <constraint firstItem="yI0-2L-McM" firstAttribute="leading" secondItem="bP1-V1-3TJ" secondAttribute="leading" id="JKL-t3-V9i"/>
+                <constraint firstItem="vPA-ma-mzs" firstAttribute="centerY" secondItem="Wz7-LH-weK" secondAttribute="centerY" id="Ssb-7m-LMl"/>
                 <constraint firstItem="9dI-Uk-cZC" firstAttribute="leading" secondItem="bP1-V1-3TJ" secondAttribute="leading" id="UJZ-2m-eDE"/>
                 <constraint firstItem="uz2-Ft-7ge" firstAttribute="centerY" secondItem="ImB-6P-f0d" secondAttribute="centerY" id="Vd8-a3-dja"/>
                 <constraint firstItem="fhZ-bI-NT0" firstAttribute="leading" secondItem="vPA-ma-mzs" secondAttribute="trailing" constant="2" id="bX2-H7-0Oa"/>
                 <constraint firstItem="vPA-ma-mzs" firstAttribute="top" secondItem="9dI-Uk-cZC" secondAttribute="bottom" id="cGd-Nv-ZFm"/>
+                <constraint firstItem="vPA-ma-mzs" firstAttribute="centerY" secondItem="CnP-7s-riG" secondAttribute="centerY" id="cIF-3Y-VdJ"/>
                 <constraint firstItem="yI0-2L-McM" firstAttribute="top" secondItem="fhZ-bI-NT0" secondAttribute="bottom" id="cp3-BL-Lds"/>
                 <constraint firstItem="9dI-Uk-cZC" firstAttribute="top" secondItem="yyF-OA-FEa" secondAttribute="bottom" id="jqP-8S-97o"/>
                 <constraint firstItem="ImB-6P-f0d" firstAttribute="leading" secondItem="SZ4-MH-Qfg" secondAttribute="trailing" constant="8" id="kO0-up-aCG"/>
+                <constraint firstItem="vPA-ma-mzs" firstAttribute="leading" secondItem="CnP-7s-riG" secondAttribute="trailing" constant="8" id="mWw-n5-jmM"/>
                 <constraint firstAttribute="trailing" secondItem="9dI-Uk-cZC" secondAttribute="trailing" id="nee-hD-or9"/>
                 <constraint firstItem="yyF-OA-FEa" firstAttribute="leading" secondItem="bP1-V1-3TJ" secondAttribute="leading" id="no6-X1-igW"/>
                 <constraint firstAttribute="trailing" secondItem="yyF-OA-FEa" secondAttribute="trailing" id="oPT-57-ac0"/>
@@ -130,6 +147,7 @@
             </constraints>
             <size key="customSize" width="317" height="210"/>
             <connections>
+                <outlet property="activityIndicatorView" destination="CnP-7s-riG" id="chs-qO-JAn"/>
                 <outlet property="animationImageView" destination="FEo-Vb-T9y" id="V8X-Hc-F77"/>
                 <outlet property="audioAnimationImageViewHeadingContraint" destination="5EE-5K-Jh3" id="nRV-Zq-eI4"/>
                 <outlet property="audioAnimationImageViewHeightConstraint" destination="Wy4-3X-RQs" id="RSW-W9-Pbc"/>
@@ -145,6 +163,7 @@
                 <outlet property="durationLabel" destination="uz2-Ft-7ge" id="xcc-x5-VU5"/>
                 <outlet property="durationLabelWidthContraint" destination="NWF-2Z-6kd" id="tnJ-VT-IEM"/>
                 <outlet property="durationLeftRightSpacingContraint" destination="Gqj-2l-fql" id="zrO-mR-ZGG"/>
+                <outlet property="errorView" destination="Wz7-LH-weK" id="g0v-r8-t5o"/>
                 <outlet property="messageBubbleContainerView" destination="vPA-ma-mzs" id="xz4-gK-ah6"/>
                 <outlet property="messageBubbleContainerWidthConstraint" destination="Gh3-So-kj0" id="Mmu-rZ-yml"/>
                 <outlet property="messageBubbleImageView" destination="ImB-6P-f0d" id="hLv-XD-LdM"/>

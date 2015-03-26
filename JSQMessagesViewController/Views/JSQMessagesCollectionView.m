@@ -21,8 +21,12 @@
 #import "JSQMessagesCollectionViewFlowLayout.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+
 #import "JSQMessagesCollectionViewCellIncomingAudio.h"
 #import "JSQMessagesCollectionViewCellOutgoingAudio.h"
+
+#import "JSQMessagesCollectionViewCellIncomingFile.h"
+#import "JSQMessagesCollectionViewCellOutgoingFile.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -70,9 +74,16 @@
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
           withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellIncomingAudio nib] forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewCellIncomingAudio nib]
+            forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoingAudio nib]
+            forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier]];
     
-    [self registerNib:[JSQMessagesCollectionViewCellOutgoingAudio nib] forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewCellIncomingFile nib]
+            forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellIncomingFile cellReuseIdentifier]];
+    [self registerNib:[JSQMessagesCollectionViewCellOutgoingFile nib]
+            forCellWithReuseIdentifier:[JSQMessagesCollectionViewCellOutgoingFile cellReuseIdentifier]];
+    
 
     _typingIndicatorDisplaysOnLeft = YES;
     _typingIndicatorMessageBubbleColor = [UIColor jsq_messageBubbleLightGrayColor];

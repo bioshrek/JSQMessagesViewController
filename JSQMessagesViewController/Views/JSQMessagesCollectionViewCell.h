@@ -21,6 +21,8 @@
 #import "JSQMessagesLabel.h"
 #import "JSQMessagesCellTextView.h"
 
+#import <MRProgress/MRProgress.h>
+
 @class JSQMessagesCollectionViewCell;
 
 /**
@@ -155,6 +157,11 @@
  *  This gesture handles the tap event for the avatarImageView and notifies the cell's delegate.
  */
 @property (weak, nonatomic, readonly) UITapGestureRecognizer *tapGestureRecognizer;
+
+@property (weak, nonatomic, readonly) MRCircularProgressView *circularProgressView;
+@property (weak, nonatomic, readonly) UIActivityIndicatorView *activityIndicatorView;
+@property (weak, nonatomic, readonly) UIView *errorView;
+
 
 #pragma mark - Class methods
 

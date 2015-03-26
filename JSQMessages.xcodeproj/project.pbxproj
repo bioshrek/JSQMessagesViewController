@@ -13,7 +13,10 @@
 		1407D9461AC4464B00A0395E /* VoiceNodePlaying002@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1407D9421AC4464B00A0395E /* VoiceNodePlaying002@2x.png */; };
 		1407D9471AC4464B00A0395E /* VoiceNodePlaying003@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1407D9431AC4464B00A0395E /* VoiceNodePlaying003@2x.png */; };
 		1407D9491AC4565600A0395E /* play-mark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1407D9481AC4565600A0395E /* play-mark.png */; };
+		1407D94C1AC46F3900A0395E /* JSQFileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1407D94B1AC46F3900A0395E /* JSQFileItem.m */; };
 		141CE2F71AC3047500E6FDEC /* JSQAudioItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 141CE2F61AC3047500E6FDEC /* JSQAudioItem.m */; };
+		147F35651AC4B61200F0C4A6 /* BadgeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F35621AC4B61200F0C4A6 /* BadgeStyle.m */; };
+		147F35661AC4B61200F0C4A6 /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F35641AC4B61200F0C4A6 /* CustomBadge.m */; };
 		14FCC06A1AC1D73300D47748 /* JSQMessagesCollectionViewCellIncomingAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FCC0691AC1D73300D47748 /* JSQMessagesCollectionViewCellIncomingAudio.m */; };
 		14FCC06D1AC1D78800D47748 /* JSQMessagesCollectionViewCellOutgoingAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FCC06C1AC1D78800D47748 /* JSQMessagesCollectionViewCellOutgoingAudio.m */; };
 		14FCC0701AC1D7C000D47748 /* JSQMessagesCollectionViewCellOutgoingFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FCC06F1AC1D7C000D47748 /* JSQMessagesCollectionViewCellOutgoingFile.m */; };
@@ -138,8 +141,14 @@
 		1407D9421AC4464B00A0395E /* VoiceNodePlaying002@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VoiceNodePlaying002@2x.png"; sourceTree = "<group>"; };
 		1407D9431AC4464B00A0395E /* VoiceNodePlaying003@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VoiceNodePlaying003@2x.png"; sourceTree = "<group>"; };
 		1407D9481AC4565600A0395E /* play-mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-mark.png"; sourceTree = "<group>"; };
+		1407D94A1AC46F3900A0395E /* JSQFileItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQFileItem.h; sourceTree = "<group>"; };
+		1407D94B1AC46F3900A0395E /* JSQFileItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQFileItem.m; sourceTree = "<group>"; };
 		141CE2F51AC3047500E6FDEC /* JSQAudioItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQAudioItem.h; sourceTree = "<group>"; };
 		141CE2F61AC3047500E6FDEC /* JSQAudioItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQAudioItem.m; sourceTree = "<group>"; };
+		147F35611AC4B61200F0C4A6 /* BadgeStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeStyle.h; sourceTree = "<group>"; };
+		147F35621AC4B61200F0C4A6 /* BadgeStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeStyle.m; sourceTree = "<group>"; };
+		147F35631AC4B61200F0C4A6 /* CustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBadge.h; sourceTree = "<group>"; };
+		147F35641AC4B61200F0C4A6 /* CustomBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBadge.m; sourceTree = "<group>"; };
 		14FCC0661AC1C63E00D47748 /* JSQMessageFileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessageFileData.h; sourceTree = "<group>"; };
 		14FCC0671AC1C6CE00D47748 /* JSQMessageAudioData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessageAudioData.h; sourceTree = "<group>"; };
 		14FCC0681AC1D73300D47748 /* JSQMessagesCollectionViewCellIncomingAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellIncomingAudio.h; sourceTree = "<group>"; };
@@ -358,6 +367,25 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		147F355F1AC4B5EB00F0C4A6 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				147F35601AC4B60200F0C4A6 /* CustomBadge */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		147F35601AC4B60200F0C4A6 /* CustomBadge */ = {
+			isa = PBXGroup;
+			children = (
+				147F35611AC4B61200F0C4A6 /* BadgeStyle.h */,
+				147F35621AC4B61200F0C4A6 /* BadgeStyle.m */,
+				147F35631AC4B61200F0C4A6 /* CustomBadge.h */,
+				147F35641AC4B61200F0C4A6 /* CustomBadge.m */,
+			);
+			path = CustomBadge;
+			sourceTree = "<group>";
+		};
 		2BBEF3CD91C31A49E5FF9E3C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,6 +491,7 @@
 		88A25F3E19D8E01A00924534 /* JSQMessagesViewController */ = {
 			isa = PBXGroup;
 			children = (
+				147F355F1AC4B5EB00F0C4A6 /* Libs */,
 				88A25F3F19D8E01A00924534 /* Assets */,
 				88A25F5419D8E01A00924534 /* Categories */,
 				88A25F5F19D8E01A00924534 /* Controllers */,
@@ -575,6 +604,8 @@
 				14FCC0671AC1C6CE00D47748 /* JSQMessageAudioData.h */,
 				141CE2F51AC3047500E6FDEC /* JSQAudioItem.h */,
 				141CE2F61AC3047500E6FDEC /* JSQAudioItem.m */,
+				1407D94A1AC46F3900A0395E /* JSQFileItem.h */,
+				1407D94B1AC46F3900A0395E /* JSQFileItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -901,6 +932,7 @@
 				883C11781A09FB100092A16D /* JSQMessagesCellTextView.m in Sources */,
 				88A25FB919D8E01A00924534 /* UIView+JSQMessages.m in Sources */,
 				88A25FCA19D8E01A00924534 /* JSQMessagesCollectionView.m in Sources */,
+				1407D94C1AC46F3900A0395E /* JSQFileItem.m in Sources */,
 				88A25FD219D8E01A00924534 /* JSQMessagesLabel.m in Sources */,
 				88445B4019E1B4470014F889 /* JSQLocationMediaItem.m in Sources */,
 				88A25FC619D8E01A00924534 /* JSQMessagesAvatarImage.m in Sources */,
@@ -926,6 +958,7 @@
 				88A25FCC19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				88A25FBE19D8E01A00924534 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				1407D93E1AC4403B00A0395E /* UIImageView+JSQMessages.m in Sources */,
+				147F35661AC4B61200F0C4A6 /* CustomBadge.m in Sources */,
 				88A25FDF19D8E0C400924534 /* DemoMessagesViewController.m in Sources */,
 				88A25FB719D8E01A00924534 /* UIColor+JSQMessages.m in Sources */,
 				886C33FD19F4371E006B4997 /* JSQVideoMediaItem.m in Sources */,
@@ -940,6 +973,7 @@
 				88A25FD019D8E01A00924534 /* JSQMessagesComposerTextView.m in Sources */,
 				88A25FC319D8E01A00924534 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
 				141CE2F71AC3047500E6FDEC /* JSQAudioItem.m in Sources */,
+				147F35651AC4B61200F0C4A6 /* BadgeStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

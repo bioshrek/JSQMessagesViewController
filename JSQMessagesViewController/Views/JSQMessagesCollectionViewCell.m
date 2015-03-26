@@ -25,6 +25,8 @@
 #import "UIView+JSQMessages.h"
 #import "UIDevice+JSQMessages.h"
 
+#import "CustomBadge.h"
+
 
 @interface JSQMessagesCollectionViewCell ()
 
@@ -38,6 +40,10 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
+
+@property (weak, nonatomic) IBOutlet MRCircularProgressView *circularProgressView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (weak, nonatomic) IBOutlet UIView *errorView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerWidthConstraint;
 
@@ -115,6 +121,13 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];
     [self addGestureRecognizer:tap];
     self.tapGestureRecognizer = tap;
+    
+    // config circular progress view
+    [self.circularProgressView.valueLabel removeFromSuperview];
+    self.circularProgressView.progress = 0.3;
+    
+    // custom error view
+    [self.errorView addSubview:[CustomBadge customBadgeWithString:@"!"]];
 }
 
 - (void)dealloc
@@ -151,6 +164,8 @@
     
     self.avatarImageView.image = nil;
     self.avatarImageView.highlightedImage = nil;
+    
+    [self.activityIndicatorView stopAnimating];
 }
 
 - (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
@@ -183,6 +198,9 @@
     else if ([self isKindOfClass:[JSQMessagesCollectionViewCellOutgoing class]]) {
         self.avatarViewSize = customAttributes.outgoingAvatarViewSize;
     }
+    
+    // config circular progress view
+    self.circularProgressView.lineWidth = CGRectGetWidth(self.circularProgressView.bounds) / 2;
 }
 
 - (void)setHighlighted:(BOOL)highlighted
@@ -267,13 +285,18 @@
     [self.messageBubbleContainerView jsq_pinAllEdgesOfSubview:mediaView];
     _mediaView = mediaView;
     
+    // bring circular progress view to front
+    [self.messageBubbleContainerView bringSubviewToFront:self.circularProgressView];
+    
     //  because of cell re-use (and caching media views, if using built-in library media item)
     //  we may have dequeued a cell with a media view and add this one on top
     //  thus, remove any additional subviews hidden behind the new media view
     dispatch_async(dispatch_get_main_queue(), ^{
         for (NSUInteger i = 0; i < self.messageBubbleContainerView.subviews.count; i++) {
-            if (self.messageBubbleContainerView.subviews[i] != _mediaView) {
-                [self.messageBubbleContainerView.subviews[i] removeFromSuperview];
+            UIView *subView = self.messageBubbleContainerView.subviews[i];
+            if (subView != _mediaView &&
+                subView != self.circularProgressView) {
+                [subView removeFromSuperview];
             }
         }
     });

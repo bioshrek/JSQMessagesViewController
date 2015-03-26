@@ -32,6 +32,9 @@
 #import "JSQMessagesCollectionViewCellIncomingAudio.h"
 #import "JSQMessagesCollectionViewCellOutgoingAudio.h"
 
+#import "JSQMessagesCollectionViewCellIncomingFile.h"
+#import "JSQMessagesCollectionViewCellOutgoingFile.h"
+
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
 
@@ -429,6 +432,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     switch ([messageItem messageType]) {
         case JSQMessageDataTypeText: {
+            // config view
+            [cell.circularProgressView removeFromSuperview];
+            
             // attributed text
             NSMutableAttributedString *mutableAttrText = cell.textView.textStorage;
             [mutableAttrText setAttributedString:[messageItem attributedText]];
@@ -463,12 +469,31 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         } break;
         case JSQMessageDataTypeImage:
         case JSQMessageDataTypeVideo: {
+            // config view
+            [cell.activityIndicatorView removeFromSuperview];
+            
             id<JSQMessageMediaData> messageMedia = [messageItem media];
             cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
             NSParameterAssert(cell.mediaView != nil);
         } break;
         case JSQMessageDataTypeFile: {
+            // bubble image
+            id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
+            if (bubbleImageDataSource != nil) {
+                cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
+                cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+            }
             
+            // file name, size
+            if (isOutgoingMessage) {
+                JSQMessagesCollectionViewCellOutgoingFile *fileCell = (JSQMessagesCollectionViewCellOutgoingFile *)cell;
+                fileCell.fileNameLabel.text = [[messageItem file] filename];
+                fileCell.fileSizeLabel.text = [[messageItem file] fileSize];
+            } else {
+                JSQMessagesCollectionViewCellIncomingFile *fileCell = (JSQMessagesCollectionViewCellIncomingFile *)cell;
+                fileCell.fileNameLabel.text = [[messageItem file] filename];
+                fileCell.fileSizeLabel.text = [[messageItem file] fileSize];
+            }
         } break;
         default:
             break;

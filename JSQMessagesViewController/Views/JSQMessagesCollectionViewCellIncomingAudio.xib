@@ -105,6 +105,10 @@
                             <constraint firstAttribute="width" constant="10" id="e45-hl-hRR"/>
                         </constraints>
                     </imageView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rcy-VP-Xzl">
+                        <rect key="frame" x="204" y="58" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -117,6 +121,7 @@
                 <constraint firstItem="rNV-pw-3x3" firstAttribute="top" secondItem="VP0-X2-27Z" secondAttribute="bottom" id="CMa-DQ-QSl"/>
                 <constraint firstItem="ZQ5-tL-ZeE" firstAttribute="leading" secondItem="q2p-e2-zR9" secondAttribute="trailing" constant="8" id="FPY-9o-6DC"/>
                 <constraint firstItem="Id2-Rj-1ge" firstAttribute="leading" secondItem="gr8-Q3-fyF" secondAttribute="leading" id="LP2-eY-Vfn"/>
+                <constraint firstItem="rcy-VP-Xzl" firstAttribute="leading" secondItem="q2p-e2-zR9" secondAttribute="trailing" constant="8" id="OWW-Do-0l8"/>
                 <constraint firstItem="q2p-e2-zR9" firstAttribute="centerY" secondItem="FBN-hy-Pg9" secondAttribute="centerY" constant="0.5" id="X0F-Yb-bnK"/>
                 <constraint firstItem="VP0-X2-27Z" firstAttribute="top" secondItem="gr8-Q3-fyF" secondAttribute="top" id="YrM-Dc-6l5"/>
                 <constraint firstItem="q2p-e2-zR9" firstAttribute="leading" secondItem="Id2-Rj-1ge" secondAttribute="trailing" constant="2" id="bNB-si-uyN"/>
@@ -125,11 +130,13 @@
                 <constraint firstItem="1LM-cW-emZ" firstAttribute="leading" secondItem="gr8-Q3-fyF" secondAttribute="leading" id="lE3-bn-ths"/>
                 <constraint firstItem="ZQ5-tL-ZeE" firstAttribute="top" secondItem="q2p-e2-zR9" secondAttribute="top" id="lmF-zi-Ckv"/>
                 <constraint firstAttribute="trailing" secondItem="1LM-cW-emZ" secondAttribute="trailing" id="mXU-oh-o9c"/>
+                <constraint firstItem="q2p-e2-zR9" firstAttribute="centerY" secondItem="rcy-VP-Xzl" secondAttribute="centerY" id="mZy-mg-2yJ"/>
                 <constraint firstItem="1LM-cW-emZ" firstAttribute="top" secondItem="Id2-Rj-1ge" secondAttribute="bottom" id="omv-gy-GW5"/>
                 <constraint firstItem="rNV-pw-3x3" firstAttribute="leading" secondItem="gr8-Q3-fyF" secondAttribute="leading" id="siV-yX-9Tu"/>
             </constraints>
             <size key="customSize" width="317" height="206"/>
             <connections>
+                <outlet property="activityIndicatorView" destination="rcy-VP-Xzl" id="AmM-JU-xLq"/>
                 <outlet property="animationImageView" destination="g3T-Eb-UVK" id="uPv-ii-HsA"/>
                 <outlet property="audioAnimationImageViewHeadingContraint" destination="81d-ce-2RQ" id="ct2-w2-3XX"/>
                 <outlet property="audioAnimationImageViewHeightConstraint" destination="Pfg-w3-Sos" id="dGs-Eu-GTQ"/>

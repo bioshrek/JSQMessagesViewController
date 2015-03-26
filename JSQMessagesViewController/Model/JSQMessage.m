@@ -20,8 +20,12 @@
 
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 #import "JSQMessagesCollectionViewCellIncoming.h"
+
 #import "JSQMessagesCollectionViewCellOutgoingAudio.h"
 #import "JSQMessagesCollectionViewCellIncomingAudio.h"
+
+#import "JSQMessagesCollectionViewCellOutgoingFile.h"
+#import "JSQMessagesCollectionViewCellIncomingFile.h"
 
 @interface JSQMessage ()
 
@@ -157,7 +161,7 @@
             contentHash = [self.media hash];
             break;
         case JSQMessageDataTypeFile:
-            // TODO:
+            contentHash = [self.file hash];
             break;
         default:
             break;
@@ -233,7 +237,10 @@
                                                                     audio:self.audio];
             break;
         case JSQMessageDataTypeFile:
-            // TODO:
+            message = [[[self class] allocWithZone:zone] initWithSenderId:self.senderId
+                                                        senderDisplayName:self.senderDisplayName
+                                                                     date:self.date
+                                                                     file:self.file];
             break;
         default:
             break;
@@ -258,7 +265,7 @@
             identifier = outgoing ? [JSQMessagesCollectionViewCellOutgoingAudio cellReuseIdentifier] : [JSQMessagesCollectionViewCellIncomingAudio cellReuseIdentifier];
             break;
         case JSQMessageDataTypeFile:
-            // TODO:
+            identifier = outgoing ? [JSQMessagesCollectionViewCellOutgoingFile cellReuseIdentifier] : [JSQMessagesCollectionViewCellIncomingFile cellReuseIdentifier];
             break;
         default:
             break;
@@ -274,6 +281,17 @@
 {
     if (self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date messageType:JSQMessageDataTypeAudio]) {
         _audio = audio;
+    }
+    return self;
+}
+
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                            file:(id<JSQMessageFileData>)file
+{
+    if (self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date messageType:JSQMessageDataTypeFile]) {
+        _file = file;
     }
     return self;
 }

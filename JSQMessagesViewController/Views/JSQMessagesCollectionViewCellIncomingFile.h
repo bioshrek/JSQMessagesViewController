@@ -10,4 +10,8 @@
 
 @interface JSQMessagesCollectionViewCellIncomingFile : JSQMessagesCollectionViewCellIncoming
 
+@property (weak, nonatomic, readonly) UIImageView *fileIconView;
+@property (weak, nonatomic, readonly) UILabel *fileNameLabel;
+@property (weak, nonatomic, readonly) UILabel *fileSizeLabel;
+
 @end

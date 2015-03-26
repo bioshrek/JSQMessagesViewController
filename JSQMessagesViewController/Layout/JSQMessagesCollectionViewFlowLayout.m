@@ -32,6 +32,7 @@
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
 
 #import "JSQMessagesCollectionViewCellOutgoingAudio.h"
+#import "JSQMessagesCollectionViewCellOutgoingFile.h"
 
 #import "UIImage+JSQMessages.h"
 
@@ -473,12 +474,35 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
             CGFloat finalHeight = kOutgoingAudioAnimationViewTop + kOutgoingAudioAnimationViewHeight + kOutgoingAudioAnimationViewBottom;
             finalSize = CGSizeMake(finalWidth, finalHeight);
         } break;
+        case JSQMessageDataTypeFile: {
+            CGSize avatarSize = [self jsq_avatarSizeForIndexPath:indexPath];
+            
+            //  from the cell xibs, there is a 2 point space between avatar and bubble
+            CGFloat spacingBetweenAvatarAndBubble = 2.0f;
+            CGFloat maxBubbleWidth = self.itemWidth - avatarSize.width - spacingBetweenAvatarAndBubble - self.messageBubbleLeftRightMargin;
+            CGFloat maxNameLabelWidth = maxBubbleWidth - kOutgoingFileIconViewHeading - kOutgoingFileIconViewWidth - kOutgoingSpacingBetweenFileIconAndFileNameLabel - kOutgoingFileNameLabelTrailing;
+            
+            NSString *fileName = [[messageItem file] filename];
+            NSParameterAssert(fileName);
+            NSAttributedString *attributedFileName = [[NSAttributedString alloc] initWithString:fileName
+                                                                                     attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:kOutgoingFileNameLabelFontSize]}];
+            CGRect stringRect = [attributedFileName boundingRectWithSize:CGSizeMake(maxNameLabelWidth, CGFLOAT_MAX)
+                                                                           options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                                           context:nil];
+            
+            CGFloat finalWidth = kOutgoingFileIconViewHeading + kOutgoingFileIconViewWidth + kOutgoingSpacingBetweenFileIconAndFileNameLabel + CGRectGetWidth(stringRect) + kOutgoingFileNameLabelTrailing;
+            CGFloat finalHeight = kOutgoingFileNameLabelTop + CGRectGetHeight(stringRect) + kOutgoingVerticalSpacingBetweenFileNameLabelAndFileSizeLabel + kOutgoingFileSizeLabelHeight + kOutgoingFileSizeBottom;
+            
+            //  add extra 2 points of space, because `boundingRectWithSize:` is slightly off
+            //  not sure why. magix. (shrug) if you know, submit a PR
+            finalWidth += 2.0f;
+            finalHeight += 2.0f;
+            
+            finalSize = CGSizeMake(finalWidth, finalHeight);
+        } break;
         case JSQMessageDataTypeImage:
         case JSQMessageDataTypeVideo: {
             finalSize = [[messageItem media] mediaViewDisplaySize];
-        } break;
-        case JSQMessageDataTypeFile: {
-            // TODO:
         } break;
         default:
             break;

@@ -8,24 +8,34 @@
 
 #import "JSQMessagesCollectionViewCellIncomingFile.h"
 
+@interface JSQMessagesCollectionViewCellIncomingFile ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *fileIconView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fileIconViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fileIconViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fileIconViewHeadingContraint;  // 15.0f
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fileIconNameSpacing;  // 8.0f
+
+@property (weak, nonatomic) IBOutlet UILabel *fileNameLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fileNameLabelTrailingConstraint;  // 15.0f
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fileNameLabelTopConstraint;  // 15.0f
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fileNameSizeVerticalSpacing;  // 0.0f
+
+@property (weak, nonatomic) IBOutlet UILabel *fileSizeLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fileSizeHeight;  // 21.0f
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fileSizeBottomContraint;  // 15.0f
+
+@end
+
 @implementation JSQMessagesCollectionViewCellIncomingFile
 
-- (id)initWithFrame:(CGRect)frame
+- (void)prepareForReuse
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    [super prepareForReuse];
+    
+    self.fileNameLabel.text = nil;
+    self.fileSizeLabel.text = nil;
+    self.fileIconView.image = nil;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

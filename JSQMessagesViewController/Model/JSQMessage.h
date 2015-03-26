@@ -66,6 +66,8 @@
 
 @property (copy, nonatomic, readonly) id<JSQMessageAudioData> audio;
 
+@property (copy, nonatomic, readonly) id<JSQMessageFileData> file;
+
 #pragma mark - Initialization
 
 /**
@@ -138,5 +140,10 @@
                senderDisplayName:(NSString *)senderDisplayName
                             date:(NSDate *)date
                            audio:(id<JSQMessageAudioData>)audio;
+
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                            file:(id<JSQMessageFileData>)file;
 
 @end
