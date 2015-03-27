@@ -41,6 +41,22 @@
     return accessoryButton;
 }
 
++ (UIButton *)voiceRecordTriggerButton
+{
+    UIImage *normalImage = [UIImage imageNamed:@"voice"];
+    UIImage *highlightedImage = [UIImage imageNamed:@"voice_HL"];
+    
+    UIButton *accessoryButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, normalImage.size.width, 32.0f)];
+    [accessoryButton setImage:normalImage forState:UIControlStateNormal];
+    [accessoryButton setImage:highlightedImage forState:UIControlStateHighlighted];
+    
+    accessoryButton.contentMode = UIViewContentModeScaleAspectFit;
+    accessoryButton.backgroundColor = [UIColor clearColor];
+    accessoryButton.tintColor = [UIColor lightGrayColor];
+    
+    return accessoryButton;
+}
+
 + (UIButton *)defaultSendButtonItem
 {
     NSString *sendTitle = NSLocalizedStringFromTable(@"Send", @"JSQMessages", @"Text for the send button on the messages view toolbar");
@@ -69,6 +85,33 @@
                                   0.0f,
                                   CGRectGetWidth(CGRectIntegral(sendTitleRect)),
                                   maxHeight);
+    
+    return sendButton;
+}
+
++ (UIButton *)voiceRecordStarterButton
+{
+    NSString *sendTitle = @"按住说话";
+    
+    UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [sendButton setTitle:sendTitle forState:UIControlStateNormal];
+    [sendButton setTitleColor:[UIColor jsq_messageBubbleBlueColor] forState:UIControlStateNormal];
+    [sendButton setTitleColor:[[UIColor jsq_messageBubbleBlueColor] jsq_colorByDarkeningColorWithValue:0.1f] forState:UIControlStateHighlighted];
+    [sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    
+    sendButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
+    sendButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    sendButton.titleLabel.minimumScaleFactor = 0.85f;
+    sendButton.contentMode = UIViewContentModeCenter;
+    sendButton.backgroundColor = [UIColor clearColor];
+    sendButton.tintColor = [UIColor jsq_messageBubbleBlueColor];
+    
+    CGFloat maxHeight = 32.0f;
+    
+    CGRect sendTitleRect = [sendTitle boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, maxHeight)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                                attributes:@{ NSFontAttributeName : sendButton.titleLabel.font }
+                                                   context:nil];
     
     return sendButton;
 }

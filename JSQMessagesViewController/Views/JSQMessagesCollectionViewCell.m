@@ -127,7 +127,8 @@
     self.circularProgressView.progress = 0.3;
     
     // custom error view
-    [self.errorView addSubview:[CustomBadge customBadgeWithString:@"!"]];
+    CustomBadge *badge = [CustomBadge customBadgeWithString:@"!"];
+    [self.errorView addSubview:badge];
 }
 
 - (void)dealloc
