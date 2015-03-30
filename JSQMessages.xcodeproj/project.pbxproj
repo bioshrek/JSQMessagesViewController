@@ -7,6 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1404526C1AC9B47D00A52B46 /* SKToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1404526B1AC9B47D00A52B46 /* SKToolbar.m */; };
+		140452721AC9BF3B00A52B46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3219E0AE450014F889 /* Foundation.framework */; };
+		140452731AC9BF3B00A52B46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3419E0AE4A0014F889 /* CoreGraphics.framework */; };
+		140452741AC9BF3B00A52B46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3019E0AE3F0014F889 /* UIKit.framework */; };
+		1404527A1AC9BF3B00A52B46 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 140452781AC9BF3B00A52B46 /* InfoPlist.strings */; };
+		1404527C1AC9BF3B00A52B46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1404527B1AC9BF3B00A52B46 /* main.m */; };
+		140452801AC9BF3B00A52B46 /* SKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1404527F1AC9BF3B00A52B46 /* SKAppDelegate.m */; };
+		140452831AC9BF3B00A52B46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140452811AC9BF3B00A52B46 /* Main.storyboard */; };
+		140452861AC9BF3B00A52B46 /* SKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140452851AC9BF3B00A52B46 /* SKViewController.m */; };
+		140452881AC9BF3B00A52B46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140452871AC9BF3B00A52B46 /* Images.xcassets */; };
+		1404528E1AC9BF3B00A52B46 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3A19E0C0B10014F889 /* XCTest.framework */; };
+		1404528F1AC9BF3B00A52B46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3219E0AE450014F889 /* Foundation.framework */; };
+		140452901AC9BF3B00A52B46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88445B3019E0AE3F0014F889 /* UIKit.framework */; };
+		140452981AC9BF3C00A52B46 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 140452961AC9BF3C00A52B46 /* InfoPlist.strings */; };
+		1404529A1AC9BF3C00A52B46 /* SKToolbarDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 140452991AC9BF3C00A52B46 /* SKToolbarDemoTests.m */; };
+		140452A11AC9BF6400A52B46 /* SKToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1404526B1AC9B47D00A52B46 /* SKToolbar.m */; };
+		140452A21AC9C77F00A52B46 /* UIDevice+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 886FFD2D19E9A65D00EB8485 /* UIDevice+JSQMessages.m */; };
+		140452A41AC9D6B400A52B46 /* SKToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 140452A31AC9D6B400A52B46 /* SKToolbarContentView.xib */; };
+		140452A51AC9D70500A52B46 /* JSQMessagesToolbarContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A25F9E19D8E01A00924534 /* JSQMessagesToolbarContentView.m */; };
+		140452A61AC9D71700A52B46 /* JSQMessagesToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88A25F9F19D8E01A00924534 /* JSQMessagesToolbarContentView.xib */; };
+		140452A71AC9D96700A52B46 /* UIView+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A25F5E19D8E01A00924534 /* UIView+JSQMessages.m */; };
+		140452A81AC9D9EF00A52B46 /* JSQMessagesComposerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A25F9519D8E01A00924534 /* JSQMessagesComposerTextView.m */; };
+		140452AB1AC9DF3100A52B46 /* SKDemoToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 140452AA1AC9DF3100A52B46 /* SKDemoToolbar.m */; };
 		1407D93E1AC4403B00A0395E /* UIImageView+JSQMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1407D93D1AC4403B00A0395E /* UIImageView+JSQMessages.m */; };
 		1407D9441AC4464B00A0395E /* VoiceNodePlaying000@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1407D9401AC4464B00A0395E /* VoiceNodePlaying000@2x.png */; };
 		1407D9451AC4464B00A0395E /* VoiceNodePlaying001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1407D9411AC4464B00A0395E /* VoiceNodePlaying001@2x.png */; };
@@ -128,6 +151,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		140452911AC9BF3B00A52B46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88A25EFA19D8DEC400924534 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 140452701AC9BF3B00A52B46;
+			remoteInfo = SKToolbarDemo;
+		};
 		88A25F1C19D8DEC500924534 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 88A25EFA19D8DEC400924534 /* Project object */;
@@ -139,6 +169,26 @@
 
 /* Begin PBXFileReference section */
 		0844AD596023C7658D39E241 /* Pods-JSQMessagesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessagesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.release.xcconfig"; sourceTree = "<group>"; };
+		1404526A1AC9B47C00A52B46 /* SKToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKToolbar.h; sourceTree = "<group>"; };
+		1404526B1AC9B47D00A52B46 /* SKToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKToolbar.m; sourceTree = "<group>"; };
+		140452711AC9BF3B00A52B46 /* SKToolbarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKToolbarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		140452771AC9BF3B00A52B46 /* SKToolbarDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SKToolbarDemo-Info.plist"; sourceTree = "<group>"; };
+		140452791AC9BF3B00A52B46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1404527B1AC9BF3B00A52B46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1404527D1AC9BF3B00A52B46 /* SKToolbarDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKToolbarDemo-Prefix.pch"; sourceTree = "<group>"; };
+		1404527E1AC9BF3B00A52B46 /* SKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKAppDelegate.h; sourceTree = "<group>"; };
+		1404527F1AC9BF3B00A52B46 /* SKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKAppDelegate.m; sourceTree = "<group>"; };
+		140452821AC9BF3B00A52B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		140452841AC9BF3B00A52B46 /* SKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKViewController.h; sourceTree = "<group>"; };
+		140452851AC9BF3B00A52B46 /* SKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKViewController.m; sourceTree = "<group>"; };
+		140452871AC9BF3B00A52B46 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1404528D1AC9BF3B00A52B46 /* SKToolbarDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKToolbarDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		140452951AC9BF3C00A52B46 /* SKToolbarDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SKToolbarDemoTests-Info.plist"; sourceTree = "<group>"; };
+		140452971AC9BF3C00A52B46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		140452991AC9BF3C00A52B46 /* SKToolbarDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKToolbarDemoTests.m; sourceTree = "<group>"; };
+		140452A31AC9D6B400A52B46 /* SKToolbarContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKToolbarContentView.xib; sourceTree = "<group>"; };
+		140452A91AC9DF3100A52B46 /* SKDemoToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDemoToolbar.h; sourceTree = "<group>"; };
+		140452AA1AC9DF3100A52B46 /* SKDemoToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDemoToolbar.m; sourceTree = "<group>"; };
 		1407D93C1AC4403B00A0395E /* UIImageView+JSQMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+JSQMessages.h"; sourceTree = "<group>"; };
 		1407D93D1AC4403B00A0395E /* UIImageView+JSQMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+JSQMessages.m"; sourceTree = "<group>"; };
 		1407D9401AC4464B00A0395E /* VoiceNodePlaying000@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VoiceNodePlaying000@2x.png"; sourceTree = "<group>"; };
@@ -333,6 +383,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1404526E1AC9BF3B00A52B46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				140452731AC9BF3B00A52B46 /* CoreGraphics.framework in Frameworks */,
+				140452741AC9BF3B00A52B46 /* UIKit.framework in Frameworks */,
+				140452721AC9BF3B00A52B46 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1404528A1AC9BF3B00A52B46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1404528E1AC9BF3B00A52B46 /* XCTest.framework in Frameworks */,
+				140452901AC9BF3B00A52B46 /* UIKit.framework in Frameworks */,
+				1404528F1AC9BF3B00A52B46 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88A25EFF19D8DEC400924534 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -366,6 +436,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140452751AC9BF3B00A52B46 /* SKToolbarDemo */ = {
+			isa = PBXGroup;
+			children = (
+				1404527E1AC9BF3B00A52B46 /* SKAppDelegate.h */,
+				1404527F1AC9BF3B00A52B46 /* SKAppDelegate.m */,
+				140452811AC9BF3B00A52B46 /* Main.storyboard */,
+				140452841AC9BF3B00A52B46 /* SKViewController.h */,
+				140452851AC9BF3B00A52B46 /* SKViewController.m */,
+				140452871AC9BF3B00A52B46 /* Images.xcassets */,
+				140452761AC9BF3B00A52B46 /* Supporting Files */,
+				140452A31AC9D6B400A52B46 /* SKToolbarContentView.xib */,
+				140452A91AC9DF3100A52B46 /* SKDemoToolbar.h */,
+				140452AA1AC9DF3100A52B46 /* SKDemoToolbar.m */,
+			);
+			path = SKToolbarDemo;
+			sourceTree = "<group>";
+		};
+		140452761AC9BF3B00A52B46 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				140452771AC9BF3B00A52B46 /* SKToolbarDemo-Info.plist */,
+				140452781AC9BF3B00A52B46 /* InfoPlist.strings */,
+				1404527B1AC9BF3B00A52B46 /* main.m */,
+				1404527D1AC9BF3B00A52B46 /* SKToolbarDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		140452931AC9BF3B00A52B46 /* SKToolbarDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				140452991AC9BF3C00A52B46 /* SKToolbarDemoTests.m */,
+				140452941AC9BF3C00A52B46 /* Supporting Files */,
+			);
+			path = SKToolbarDemoTests;
+			sourceTree = "<group>";
+		};
+		140452941AC9BF3C00A52B46 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				140452951AC9BF3C00A52B46 /* SKToolbarDemoTests-Info.plist */,
+				140452961AC9BF3C00A52B46 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		1407D93F1AC4463A00A0395E /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,6 +557,8 @@
 			children = (
 				886C33FE19F45E30006B4997 /* JSQMessagesViewController.podspec */,
 				88A25F3E19D8E01A00924534 /* JSQMessagesViewController */,
+				140452751AC9BF3B00A52B46 /* SKToolbarDemo */,
+				140452931AC9BF3B00A52B46 /* SKToolbarDemoTests */,
 				636A8663AEEE5C37B65C515D /* Frameworks */,
 				88A25F2B19D8DF2500924534 /* JSQMessagesDemo */,
 				88A25F1E19D8DEC500924534 /* JSQMessagesTests */,
@@ -454,6 +572,8 @@
 			children = (
 				88A25F0219D8DEC400924534 /* JSQMessages.app */,
 				88A25F1B19D8DEC500924534 /* JSQMessagesTests.xctest */,
+				140452711AC9BF3B00A52B46 /* SKToolbarDemo.app */,
+				1404528D1AC9BF3B00A52B46 /* SKToolbarDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -671,6 +791,8 @@
 				14FCC0721AC1D7D500D47748 /* JSQMessagesCollectionViewCellIncomingFile.m */,
 				565766301AC50FBC00FCEBDC /* SKMessagesInputToolbar.h */,
 				565766311AC50FBC00FCEBDC /* SKMessagesInputToolbar.m */,
+				1404526A1AC9B47C00A52B46 /* SKToolbar.h */,
+				1404526B1AC9B47D00A52B46 /* SKToolbar.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -745,6 +867,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		140452701AC9BF3B00A52B46 /* SKToolbarDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1404529B1AC9BF3C00A52B46 /* Build configuration list for PBXNativeTarget "SKToolbarDemo" */;
+			buildPhases = (
+				1404526D1AC9BF3B00A52B46 /* Sources */,
+				1404526E1AC9BF3B00A52B46 /* Frameworks */,
+				1404526F1AC9BF3B00A52B46 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SKToolbarDemo;
+			productName = SKToolbarDemo;
+			productReference = 140452711AC9BF3B00A52B46 /* SKToolbarDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1404528C1AC9BF3B00A52B46 /* SKToolbarDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1404529E1AC9BF3C00A52B46 /* Build configuration list for PBXNativeTarget "SKToolbarDemoTests" */;
+			buildPhases = (
+				140452891AC9BF3B00A52B46 /* Sources */,
+				1404528A1AC9BF3B00A52B46 /* Frameworks */,
+				1404528B1AC9BF3B00A52B46 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				140452921AC9BF3B00A52B46 /* PBXTargetDependency */,
+			);
+			name = SKToolbarDemoTests;
+			productName = SKToolbarDemoTests;
+			productReference = 1404528D1AC9BF3B00A52B46 /* SKToolbarDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		88A25F0119D8DEC400924534 /* JSQMessages */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88A25F2519D8DEC500924534 /* Build configuration list for PBXNativeTarget "JSQMessages" */;
@@ -793,6 +950,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Hexed Bits";
 				TargetAttributes = {
+					1404528C1AC9BF3B00A52B46 = {
+						TestTargetID = 88A25F0119D8DEC400924534;
+					};
 					88A25F0119D8DEC400924534 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
@@ -830,11 +990,33 @@
 			targets = (
 				88A25F0119D8DEC400924534 /* JSQMessages */,
 				88A25F1A19D8DEC400924534 /* JSQMessagesTests */,
+				140452701AC9BF3B00A52B46 /* SKToolbarDemo */,
+				1404528C1AC9BF3B00A52B46 /* SKToolbarDemoTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1404526F1AC9BF3B00A52B46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				140452A61AC9D71700A52B46 /* JSQMessagesToolbarContentView.xib in Resources */,
+				140452A41AC9D6B400A52B46 /* SKToolbarContentView.xib in Resources */,
+				140452881AC9BF3B00A52B46 /* Images.xcassets in Resources */,
+				1404527A1AC9BF3B00A52B46 /* InfoPlist.strings in Resources */,
+				140452831AC9BF3B00A52B46 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1404528B1AC9BF3B00A52B46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				140452981AC9BF3C00A52B46 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88A25F0019D8DEC400924534 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -940,12 +1122,37 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1404526D1AC9BF3B00A52B46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				140452A81AC9D9EF00A52B46 /* JSQMessagesComposerTextView.m in Sources */,
+				140452A71AC9D96700A52B46 /* UIView+JSQMessages.m in Sources */,
+				140452A51AC9D70500A52B46 /* JSQMessagesToolbarContentView.m in Sources */,
+				140452A21AC9C77F00A52B46 /* UIDevice+JSQMessages.m in Sources */,
+				140452A11AC9BF6400A52B46 /* SKToolbar.m in Sources */,
+				140452801AC9BF3B00A52B46 /* SKAppDelegate.m in Sources */,
+				140452AB1AC9DF3100A52B46 /* SKDemoToolbar.m in Sources */,
+				140452861AC9BF3B00A52B46 /* SKViewController.m in Sources */,
+				1404527C1AC9BF3B00A52B46 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		140452891AC9BF3B00A52B46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1404529A1AC9BF3C00A52B46 /* SKToolbarDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88A25EFE19D8DEC400924534 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				88078A9D19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				88A25FCE19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
+				1404526C1AC9B47D00A52B46 /* SKToolbar.m in Sources */,
 				88A25FD119D8E01A00924534 /* JSQMessagesInputToolbar.m in Sources */,
 				88A25FCB19D8E01A00924534 /* JSQMessagesCollectionViewCell.m in Sources */,
 				88A25FBB19D8E01A00924534 /* JSQMessagesViewController.m in Sources */,
@@ -1034,6 +1241,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		140452921AC9BF3B00A52B46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 140452701AC9BF3B00A52B46 /* SKToolbarDemo */;
+			targetProxy = 140452911AC9BF3B00A52B46 /* PBXContainerItemProxy */;
+		};
 		88A25F1D19D8DEC500924534 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 88A25F0119D8DEC400924534 /* JSQMessages */;
@@ -1042,6 +1254,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		140452781AC9BF3B00A52B46 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				140452791AC9BF3B00A52B46 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		140452811AC9BF3B00A52B46 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				140452821AC9BF3B00A52B46 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		140452961AC9BF3C00A52B46 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				140452971AC9BF3C00A52B46 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		8841B88719F4988800EA16B6 /* JSQMessages.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1075,6 +1311,78 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1404529C1AC9BF3C00A52B46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKToolbarDemo/SKToolbarDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SKToolbarDemo/SKToolbarDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1404529D1AC9BF3C00A52B46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKToolbarDemo/SKToolbarDemo-Prefix.pch";
+				INFOPLIST_FILE = "SKToolbarDemo/SKToolbarDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1404529F1AC9BF3C00A52B46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKToolbarDemo/SKToolbarDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SKToolbarDemoTests/SKToolbarDemoTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		140452A01AC9BF3C00A52B46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKToolbarDemo/SKToolbarDemo-Prefix.pch";
+				INFOPLIST_FILE = "SKToolbarDemoTests/SKToolbarDemoTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		88A25F2319D8DEC500924534 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1187,7 +1495,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 223FBACE0F24ADEF8B7F3F24 /* Pods-JSQMessagesTests.debug.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1200,7 +1508,7 @@
 				INFOPLIST_FILE = JSQMessagesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
 		};
@@ -1208,7 +1516,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0844AD596023C7658D39E241 /* Pods-JSQMessagesTests.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1217,13 +1525,29 @@
 				INFOPLIST_FILE = JSQMessagesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JSQMessages.app/JSQMessages";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1404529B1AC9BF3C00A52B46 /* Build configuration list for PBXNativeTarget "SKToolbarDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1404529C1AC9BF3C00A52B46 /* Debug */,
+				1404529D1AC9BF3C00A52B46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1404529E1AC9BF3C00A52B46 /* Build configuration list for PBXNativeTarget "SKToolbarDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1404529F1AC9BF3C00A52B46 /* Debug */,
+				140452A01AC9BF3C00A52B46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		88A25EFD19D8DEC400924534 /* Build configuration list for PBXProject "JSQMessages" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
