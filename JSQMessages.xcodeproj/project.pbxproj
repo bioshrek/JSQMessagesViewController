@@ -26,6 +26,22 @@
 		14FCC0791AC1D84C00D47748 /* JSQMessagesCollectionViewCellIncomingFile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FCC0781AC1D84C00D47748 /* JSQMessagesCollectionViewCellIncomingFile.xib */; };
 		14FCC07B1AC1D85900D47748 /* JSQMessagesCollectionViewCellOutgoingFile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FCC07A1AC1D85900D47748 /* JSQMessagesCollectionViewCellOutgoingFile.xib */; };
 		36CF33BD29CF36EB06D0CCFD /* libPods-JSQMessagesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 782026E9E518622532ED474D /* libPods-JSQMessagesTests.a */; };
+		56445E6E1AC8F878001EB3AC /* SKKeyboardItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 56445E6D1AC8F878001EB3AC /* SKKeyboardItem.m */; };
+		56445E901AC93144001EB3AC /* smiling-face@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E8F1AC93144001EB3AC /* smiling-face@2x.png */; };
+		56445E921AC93159001EB3AC /* smiling-face.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E911AC93159001EB3AC /* smiling-face.png */; };
+		56445E941AC932AA001EB3AC /* laughing-face@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E931AC932AA001EB3AC /* laughing-face@2x.png */; };
+		56445E961AC932B6001EB3AC /* laughing-face.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E951AC932B6001EB3AC /* laughing-face.png */; };
+		56445E991AC94952001EB3AC /* XHVoiceRecordHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 56445E981AC94952001EB3AC /* XHVoiceRecordHUD.m */; };
+		56445EA41AC94C12001EB3AC /* RecordCancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E9A1AC94C12001EB3AC /* RecordCancel@2x.png */; };
+		56445EA51AC94C12001EB3AC /* RecordingBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E9B1AC94C12001EB3AC /* RecordingBkg@2x.png */; };
+		56445EA61AC94C12001EB3AC /* RecordingSignal001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E9C1AC94C12001EB3AC /* RecordingSignal001@2x.png */; };
+		56445EA71AC94C12001EB3AC /* RecordingSignal002@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E9D1AC94C12001EB3AC /* RecordingSignal002@2x.png */; };
+		56445EA81AC94C12001EB3AC /* RecordingSignal003@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E9E1AC94C12001EB3AC /* RecordingSignal003@2x.png */; };
+		56445EA91AC94C12001EB3AC /* RecordingSignal004@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445E9F1AC94C12001EB3AC /* RecordingSignal004@2x.png */; };
+		56445EAA1AC94C12001EB3AC /* RecordingSignal005@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445EA01AC94C12001EB3AC /* RecordingSignal005@2x.png */; };
+		56445EAB1AC94C12001EB3AC /* RecordingSignal006@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445EA11AC94C12001EB3AC /* RecordingSignal006@2x.png */; };
+		56445EAC1AC94C12001EB3AC /* RecordingSignal007@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445EA21AC94C12001EB3AC /* RecordingSignal007@2x.png */; };
+		56445EAD1AC94C12001EB3AC /* RecordingSignal008@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56445EA31AC94C12001EB3AC /* RecordingSignal008@2x.png */; };
 		5657662A1AC50EC000FCEBDC /* voice_HL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 565766281AC50EC000FCEBDC /* voice_HL@2x.png */; };
 		5657662B1AC50EC000FCEBDC /* voice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 565766291AC50EC000FCEBDC /* voice@2x.png */; };
 		5657662E1AC50EDA00FCEBDC /* keyborad_HL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5657662C1AC50EDA00FCEBDC /* keyborad_HL@2x.png */; };
@@ -170,6 +186,24 @@
 		14FCC07A1AC1D85900D47748 /* JSQMessagesCollectionViewCellOutgoingFile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellOutgoingFile.xib; sourceTree = "<group>"; };
 		223FBACE0F24ADEF8B7F3F24 /* Pods-JSQMessagesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSQMessagesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSQMessagesTests/Pods-JSQMessagesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		27B7FD1B722B36B26CB3460B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		56445E6C1AC8F878001EB3AC /* SKKeyboardItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKKeyboardItem.h; sourceTree = "<group>"; };
+		56445E6D1AC8F878001EB3AC /* SKKeyboardItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKKeyboardItem.m; sourceTree = "<group>"; };
+		56445E8F1AC93144001EB3AC /* smiling-face@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiling-face@2x.png"; sourceTree = "<group>"; };
+		56445E911AC93159001EB3AC /* smiling-face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiling-face.png"; sourceTree = "<group>"; };
+		56445E931AC932AA001EB3AC /* laughing-face@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "laughing-face@2x.png"; sourceTree = "<group>"; };
+		56445E951AC932B6001EB3AC /* laughing-face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "laughing-face.png"; sourceTree = "<group>"; };
+		56445E971AC94952001EB3AC /* XHVoiceRecordHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHVoiceRecordHUD.h; sourceTree = "<group>"; };
+		56445E981AC94952001EB3AC /* XHVoiceRecordHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHVoiceRecordHUD.m; sourceTree = "<group>"; };
+		56445E9A1AC94C12001EB3AC /* RecordCancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordCancel@2x.png"; sourceTree = "<group>"; };
+		56445E9B1AC94C12001EB3AC /* RecordingBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingBkg@2x.png"; sourceTree = "<group>"; };
+		56445E9C1AC94C12001EB3AC /* RecordingSignal001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal001@2x.png"; sourceTree = "<group>"; };
+		56445E9D1AC94C12001EB3AC /* RecordingSignal002@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal002@2x.png"; sourceTree = "<group>"; };
+		56445E9E1AC94C12001EB3AC /* RecordingSignal003@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal003@2x.png"; sourceTree = "<group>"; };
+		56445E9F1AC94C12001EB3AC /* RecordingSignal004@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal004@2x.png"; sourceTree = "<group>"; };
+		56445EA01AC94C12001EB3AC /* RecordingSignal005@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal005@2x.png"; sourceTree = "<group>"; };
+		56445EA11AC94C12001EB3AC /* RecordingSignal006@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal006@2x.png"; sourceTree = "<group>"; };
+		56445EA21AC94C12001EB3AC /* RecordingSignal007@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal007@2x.png"; sourceTree = "<group>"; };
+		56445EA31AC94C12001EB3AC /* RecordingSignal008@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecordingSignal008@2x.png"; sourceTree = "<group>"; };
 		565766281AC50EC000FCEBDC /* voice_HL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voice_HL@2x.png"; sourceTree = "<group>"; };
 		565766291AC50EC000FCEBDC /* voice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voice@2x.png"; sourceTree = "<group>"; };
 		5657662C1AC50EDA00FCEBDC /* keyborad_HL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyborad_HL@2x.png"; sourceTree = "<group>"; };
@@ -369,6 +403,20 @@
 		1407D93F1AC4463A00A0395E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				56445E9A1AC94C12001EB3AC /* RecordCancel@2x.png */,
+				56445E9B1AC94C12001EB3AC /* RecordingBkg@2x.png */,
+				56445E9C1AC94C12001EB3AC /* RecordingSignal001@2x.png */,
+				56445E9D1AC94C12001EB3AC /* RecordingSignal002@2x.png */,
+				56445E9E1AC94C12001EB3AC /* RecordingSignal003@2x.png */,
+				56445E9F1AC94C12001EB3AC /* RecordingSignal004@2x.png */,
+				56445EA01AC94C12001EB3AC /* RecordingSignal005@2x.png */,
+				56445EA11AC94C12001EB3AC /* RecordingSignal006@2x.png */,
+				56445EA21AC94C12001EB3AC /* RecordingSignal007@2x.png */,
+				56445EA31AC94C12001EB3AC /* RecordingSignal008@2x.png */,
+				56445E951AC932B6001EB3AC /* laughing-face.png */,
+				56445E931AC932AA001EB3AC /* laughing-face@2x.png */,
+				56445E911AC93159001EB3AC /* smiling-face.png */,
+				56445E8F1AC93144001EB3AC /* smiling-face@2x.png */,
 				5657662C1AC50EDA00FCEBDC /* keyborad_HL@2x.png */,
 				5657662D1AC50EDA00FCEBDC /* keyborad@2x.png */,
 				565766281AC50EC000FCEBDC /* voice_HL@2x.png */,
@@ -628,6 +676,8 @@
 		88A25F8919D8E01A00924534 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				56445E971AC94952001EB3AC /* XHVoiceRecordHUD.h */,
+				56445E981AC94952001EB3AC /* XHVoiceRecordHUD.m */,
 				883C11761A09FB100092A16D /* JSQMessagesCellTextView.h */,
 				883C11771A09FB100092A16D /* JSQMessagesCellTextView.m */,
 				88A25F8A19D8E01A00924534 /* JSQMessagesCollectionView.h */,
@@ -671,6 +721,8 @@
 				14FCC0721AC1D7D500D47748 /* JSQMessagesCollectionViewCellIncomingFile.m */,
 				565766301AC50FBC00FCEBDC /* SKMessagesInputToolbar.h */,
 				565766311AC50FBC00FCEBDC /* SKMessagesInputToolbar.m */,
+				56445E6C1AC8F878001EB3AC /* SKKeyboardItem.h */,
+				56445E6D1AC8F878001EB3AC /* SKKeyboardItem.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -840,27 +892,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				88E4D7131A0DBD6B000CC061 /* JSQMessages.strings in Resources */,
+				56445EA81AC94C12001EB3AC /* RecordingSignal003@2x.png in Resources */,
 				886C33FF19F45E30006B4997 /* JSQMessagesViewController.podspec in Resources */,
+				56445EAB1AC94C12001EB3AC /* RecordingSignal006@2x.png in Resources */,
+				56445EAA1AC94C12001EB3AC /* RecordingSignal005@2x.png in Resources */,
 				14FCC0751AC1D81600D47748 /* JSQMessagesCollectionViewCellIncomingAudio.xib in Resources */,
+				56445EA71AC94C12001EB3AC /* RecordingSignal002@2x.png in Resources */,
 				1407D9461AC4464B00A0395E /* VoiceNodePlaying002@2x.png in Resources */,
 				8861666D19F492B70025B958 /* JSQMessagesAssets.bundle in Resources */,
 				88A25FCF19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
+				56445E921AC93159001EB3AC /* smiling-face.png in Resources */,
 				1407D9491AC4565600A0395E /* play-mark.png in Resources */,
 				14FCC0791AC1D84C00D47748 /* JSQMessagesCollectionViewCellIncomingFile.xib in Resources */,
 				88A25FCD19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 				5657662B1AC50EC000FCEBDC /* voice@2x.png in Resources */,
 				5657662E1AC50EDA00FCEBDC /* keyborad_HL@2x.png in Resources */,
+				56445E961AC932B6001EB3AC /* laughing-face.png in Resources */,
+				56445EA91AC94C12001EB3AC /* RecordingSignal004@2x.png in Resources */,
 				1407D9441AC4464B00A0395E /* VoiceNodePlaying000@2x.png in Resources */,
 				88A25FD619D8E01A00924534 /* JSQMessagesToolbarContentView.xib in Resources */,
+				56445E901AC93144001EB3AC /* smiling-face@2x.png in Resources */,
 				88A25F3A19D8DF2500924534 /* Images.xcassets in Resources */,
 				88A25FBC19D8E01A00924534 /* JSQMessagesViewController.xib in Resources */,
+				56445EAD1AC94C12001EB3AC /* RecordingSignal008@2x.png in Resources */,
+				56445EA61AC94C12001EB3AC /* RecordingSignal001@2x.png in Resources */,
 				5657662A1AC50EC000FCEBDC /* voice_HL@2x.png in Resources */,
+				56445EA51AC94C12001EB3AC /* RecordingBkg@2x.png in Resources */,
+				56445E941AC932AA001EB3AC /* laughing-face@2x.png in Resources */,
+				56445EA41AC94C12001EB3AC /* RecordCancel@2x.png in Resources */,
 				14FCC07B1AC1D85900D47748 /* JSQMessagesCollectionViewCellOutgoingFile.xib in Resources */,
 				88A25FD819D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				88A25F3919D8DF2500924534 /* Main.storyboard in Resources */,
 				14FCC0771AC1D83B00D47748 /* JSQMessagesCollectionViewCellOutgoingAudio.xib in Resources */,
 				1407D9451AC4464B00A0395E /* VoiceNodePlaying001@2x.png in Resources */,
 				5657662F1AC50EDA00FCEBDC /* keyborad@2x.png in Resources */,
+				56445EAC1AC94C12001EB3AC /* RecordingSignal007@2x.png in Resources */,
 				1407D9471AC4464B00A0395E /* VoiceNodePlaying003@2x.png in Resources */,
 				88A25FD419D8E01A00924534 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 			);
@@ -947,6 +1013,7 @@
 				88078A9D19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				88A25FCE19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				88A25FD119D8E01A00924534 /* JSQMessagesInputToolbar.m in Sources */,
+				56445E991AC94952001EB3AC /* XHVoiceRecordHUD.m in Sources */,
 				88A25FCB19D8E01A00924534 /* JSQMessagesCollectionViewCell.m in Sources */,
 				88A25FBB19D8E01A00924534 /* JSQMessagesViewController.m in Sources */,
 				8885734D19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m in Sources */,
@@ -993,6 +1060,7 @@
 				88A25FBD19D8E01A00924534 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				88A25FB519D8E01A00924534 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				88A25FD019D8E01A00924534 /* JSQMessagesComposerTextView.m in Sources */,
+				56445E6E1AC8F878001EB3AC /* SKKeyboardItem.m in Sources */,
 				88A25FC319D8E01A00924534 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
 				141CE2F71AC3047500E6FDEC /* JSQAudioItem.m in Sources */,
 				147F35651AC4B61200F0C4A6 /* BadgeStyle.m in Sources */,

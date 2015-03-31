@@ -31,6 +31,17 @@
                                                       constant:0.0f]];
 }
 
+- (void)jsq_setLayoutAttribute:(NSLayoutAttribute)attribute1 otherView:(UIView *)otherView otherAttribute:(NSLayoutAttribute)attribute2 constant:(CGFloat)constant
+{
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                     attribute:attribute1
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:otherView
+                                                     attribute:attribute2
+                                                    multiplier:1.0f
+                                                      constant:constant]];
+}
+
 - (void)jsq_pinAllEdgesOfSubview:(UIView *)subview
 {
     [self jsq_pinSubview:subview toEdge:NSLayoutAttributeBottom];

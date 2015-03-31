@@ -38,6 +38,15 @@
 - (void)messagesInputToolbar:(SKMessagesInputToolbar *)toolbar
        didPressLeftBarButton:(UIButton *)sender;
 
+- (UIView *)emoticonKeyboardView;
+
+- (UIView *)mediaKeyboardView;
+
+- (void)startRecordingAudioWithErrorHandler:(void (^)())errorHandler;
+- (void)endRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
+- (void)cancelRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
+
+
 @end
 
 @interface SKMessagesInputToolbar : UIToolbar
