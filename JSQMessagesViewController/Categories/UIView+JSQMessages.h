@@ -35,6 +35,6 @@
  */
 - (void)jsq_pinAllEdgesOfSubview:(UIView *)subview;
 
-- (void)jsq_setLayoutAttribute:(NSLayoutAttribute)attribute1 otherView:(UIView *)otherView otherAttribute:(NSLayoutAttribute)attribute2 constant:(CGFloat)constant;
+- (void)jsq_setLayoutAttribute:(NSLayoutAttribute)attribute1 otherView:(id)otherView otherAttribute:(NSLayoutAttribute)attribute2 constant:(CGFloat)constant;
 
 @end

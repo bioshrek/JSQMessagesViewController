@@ -66,6 +66,16 @@
                ReferencedContainer = "container:JSQMessages.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1404528C1AC9BF3B00A52B46"
+               BuildableName = "SKToolbarDemoTests.xctest"
+               BlueprintName = "SKToolbarDemoTests"
+               ReferencedContainer = "container:JSQMessages.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

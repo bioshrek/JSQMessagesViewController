@@ -26,6 +26,14 @@
 
 #import "JSQMessagesCollectionViewCellIncomingAudio.h"
 
+#import "JSQMessagesInputToolbarEx.h"
+
+@interface DemoMessagesViewController () <JSQMessagesInputToolbarExDelegate>
+
+@property (weak, nonatomic) IBOutlet JSQMessagesInputToolbarEx *toolbar;
+
+@end
+
 @implementation DemoMessagesViewController
 
 #pragma mark - View lifecycle
@@ -75,6 +83,10 @@
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
+    
+    [self.toolbar configWithTextView:self.toolbar.contentView.textView adjustToolbarHeightWhenTextViewContentSizeChange:YES contextView:self.view scrollView:self.collectionView topLayoutGuide:self.topLayoutGuide bottomLayoutGuide:self.bottomLayoutGuide panGestureRecognizer:self.collectionView.panGestureRecognizer delegate:nil];
+    self.toolbar.contentView.textView.placeHolder = NSLocalizedStringFromTable(@"New Message", @"JSQMessages", @"Placeholder text for the message input text view");
+    self.toolbar.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -98,11 +110,35 @@
      *  Note: this feature is mostly stable, but still experimental
      */
     self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
+    
+    [self.toolbar beginListeningForKeyboard];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [self.toolbar endListeningForKeyboard];
+}
 
+- (void)dealloc
+{
+    [_toolbar endListeningForKeyboard];
+}
 
 #pragma mark - Actions
+
+- (void)finishSendingMessage
+{
+    [super finishSendingMessage];
+    
+        UITextView *textView = self.toolbar.contentView.textView;
+        textView.attributedText = nil;
+        [textView.undoManager removeAllActions];
+    
+        [self.toolbar toggleSendButtonEnabled];
+        [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
+}
 
 - (void)receiveMessagePressed:(UIBarButtonItem *)sender
 {
@@ -323,7 +359,7 @@
                                          destructiveButtonTitle:nil
                                               otherButtonTitles:@"Send photo", @"Send location", @"Send video", @"Send text emoji mixture", @"Input text emoji mixture", @"Send voice", @"Send file", nil];
     
-    [sheet showFromToolbar:self.inputToolbar];
+    [sheet showFromToolbar:self.toolbar];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -389,8 +425,8 @@
             [mutableAttrText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attach]];
             [self ensureFont:[UIFont systemFontOfSize:16.0f] forAttributedText:mutableAttrText];
             
-            [self.inputToolbar.contentView.textView.textStorage appendAttributedString:mutableAttrText];
-            [self.inputToolbar toggleSendButtonEnabled];  // change text view programmatically
+            [self.toolbar.contentView.textView.textStorage appendAttributedString:mutableAttrText];
+            [self.toolbar toggleSendButtonEnabled];  // change text view programmatically
         } break;
             
         case 5: {
@@ -710,6 +746,45 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
 {
     NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
+}
+
+#pragma mark - input toolbar delegate
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbarEx *)toolbar didPressLeftBarButton:(UIButton *)sender
+{
+    if (toolbar.sendButtonOnRight) {
+        [self didPressAccessoryButton:sender];
+    }
+    else {
+        [self didPressSendButton:sender
+       withMessageAttributedText:[self jsq_currentlyComposedMessageAttributedText]
+                        senderId:self.senderId
+               senderDisplayName:self.senderDisplayName
+                            date:[NSDate date]];
+    }
+}
+
+- (void)messagesInputToolbar:(JSQMessagesInputToolbarEx *)toolbar didPressRightBarButton:(UIButton *)sender
+{
+    if (toolbar.sendButtonOnRight) {
+        [self didPressSendButton:sender
+       withMessageAttributedText:[self jsq_currentlyComposedMessageAttributedText]
+                        senderId:self.senderId
+               senderDisplayName:self.senderDisplayName
+                            date:[NSDate date]];
+    }
+    else {
+        [self didPressAccessoryButton:sender];
+    }
+}
+
+- (NSAttributedString *)jsq_currentlyComposedMessageAttributedText
+{
+    //  add a space to accept any auto-correct suggestions
+    NSMutableAttributedString *editor = self.toolbar.contentView.textView.textStorage;
+    [editor appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    [editor deleteCharactersInRange:NSMakeRange([editor length] - 1, 1)];
+    return editor;
 }
 
 @end

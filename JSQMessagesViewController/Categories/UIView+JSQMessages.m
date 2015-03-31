@@ -31,7 +31,7 @@
                                                       constant:0.0f]];
 }
 
-- (void)jsq_setLayoutAttribute:(NSLayoutAttribute)attribute1 otherView:(UIView *)otherView otherAttribute:(NSLayoutAttribute)attribute2 constant:(CGFloat)constant
+- (void)jsq_setLayoutAttribute:(NSLayoutAttribute)attribute1 otherView:(id)otherView otherAttribute:(NSLayoutAttribute)attribute2 constant:(CGFloat)constant
 {
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self
                                                      attribute:attribute1

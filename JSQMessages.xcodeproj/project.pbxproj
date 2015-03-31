@@ -47,6 +47,13 @@
 		5657662E1AC50EDA00FCEBDC /* keyborad_HL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5657662C1AC50EDA00FCEBDC /* keyborad_HL@2x.png */; };
 		5657662F1AC50EDA00FCEBDC /* keyborad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5657662D1AC50EDA00FCEBDC /* keyborad@2x.png */; };
 		565766321AC50FBC00FCEBDC /* SKMessagesInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 565766311AC50FBC00FCEBDC /* SKMessagesInputToolbar.m */; };
+		5680782E1ACA385500817976 /* SKToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5680782D1ACA385500817976 /* SKToolbar.m */; };
+		56930DF81ACA7BBC00C04250 /* SKToolbarContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 56930DF71ACA7BBC00C04250 /* SKToolbarContentView.m */; };
+		56D6E0031ACA3B980079DC44 /* JSQMessagesInputToolbarEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D6E0021ACA3B980079DC44 /* JSQMessagesInputToolbarEx.m */; };
+		56D6E0061ACA57470079DC44 /* DemoToolbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D6E0051ACA57470079DC44 /* DemoToolbarViewController.m */; };
+		56D6E0081ACA5EE10079DC44 /* SKToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D6E0071ACA5EE10079DC44 /* SKToolbarContentView.xib */; };
+		56EF3ADB1ACA7737004F1BB7 /* multiMedia_HL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56EF3AD91ACA7737004F1BB7 /* multiMedia_HL@2x.png */; };
+		56EF3ADC1ACA7737004F1BB7 /* multiMedia@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56EF3ADA1ACA7737004F1BB7 /* multiMedia@2x.png */; };
 		77CC17A895E6E12BC9CB549A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E6750B77E8A7042BA0754B /* libPods.a */; };
 		88078A9D19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */; };
 		88324C3419F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88324C3319F6301C00BC732D /* JSQMessagesMediaViewBubbleImageMaskerTests.m */; };
@@ -210,6 +217,17 @@
 		5657662D1AC50EDA00FCEBDC /* keyborad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyborad@2x.png"; sourceTree = "<group>"; };
 		565766301AC50FBC00FCEBDC /* SKMessagesInputToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKMessagesInputToolbar.h; sourceTree = "<group>"; };
 		565766311AC50FBC00FCEBDC /* SKMessagesInputToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKMessagesInputToolbar.m; sourceTree = "<group>"; };
+		5680782C1ACA385500817976 /* SKToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKToolbar.h; sourceTree = "<group>"; };
+		5680782D1ACA385500817976 /* SKToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKToolbar.m; sourceTree = "<group>"; };
+		56930DF61ACA7BBC00C04250 /* SKToolbarContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKToolbarContentView.h; sourceTree = "<group>"; };
+		56930DF71ACA7BBC00C04250 /* SKToolbarContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKToolbarContentView.m; sourceTree = "<group>"; };
+		56D6E0011ACA3B980079DC44 /* JSQMessagesInputToolbarEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesInputToolbarEx.h; sourceTree = "<group>"; };
+		56D6E0021ACA3B980079DC44 /* JSQMessagesInputToolbarEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesInputToolbarEx.m; sourceTree = "<group>"; };
+		56D6E0041ACA57470079DC44 /* DemoToolbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoToolbarViewController.h; sourceTree = "<group>"; };
+		56D6E0051ACA57470079DC44 /* DemoToolbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoToolbarViewController.m; sourceTree = "<group>"; };
+		56D6E0071ACA5EE10079DC44 /* SKToolbarContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKToolbarContentView.xib; sourceTree = "<group>"; };
+		56EF3AD91ACA7737004F1BB7 /* multiMedia_HL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "multiMedia_HL@2x.png"; sourceTree = "<group>"; };
+		56EF3ADA1ACA7737004F1BB7 /* multiMedia@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "multiMedia@2x.png"; sourceTree = "<group>"; };
 		782026E9E518622532ED474D /* libPods-JSQMessagesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JSQMessagesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88078A9B19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesMediaPlaceholderView.h; sourceTree = "<group>"; };
 		88078A9C19D8FEB5005B4595 /* JSQMessagesMediaPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesMediaPlaceholderView.m; sourceTree = "<group>"; };
@@ -403,6 +421,8 @@
 		1407D93F1AC4463A00A0395E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				56EF3AD91ACA7737004F1BB7 /* multiMedia_HL@2x.png */,
+				56EF3ADA1ACA7737004F1BB7 /* multiMedia@2x.png */,
 				56445E9A1AC94C12001EB3AC /* RecordCancel@2x.png */,
 				56445E9B1AC94C12001EB3AC /* RecordingBkg@2x.png */,
 				56445E9C1AC94C12001EB3AC /* RecordingSignal001@2x.png */,
@@ -547,6 +567,8 @@
 				8885734C19DE55D000E89D20 /* NSUserDefaults+DemoSettings.m */,
 				88A25FDD19D8E0C400924534 /* TableViewController.h */,
 				88A25FDE19D8E0C400924534 /* TableViewController.m */,
+				56D6E0041ACA57470079DC44 /* DemoToolbarViewController.h */,
+				56D6E0051ACA57470079DC44 /* DemoToolbarViewController.m */,
 			);
 			path = JSQMessagesDemo;
 			sourceTree = "<group>";
@@ -676,6 +698,14 @@
 		88A25F8919D8E01A00924534 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				565766301AC50FBC00FCEBDC /* SKMessagesInputToolbar.h */,
+				565766311AC50FBC00FCEBDC /* SKMessagesInputToolbar.m */,
+				56930DF61ACA7BBC00C04250 /* SKToolbarContentView.h */,
+				56930DF71ACA7BBC00C04250 /* SKToolbarContentView.m */,
+				56D6E0011ACA3B980079DC44 /* JSQMessagesInputToolbarEx.h */,
+				56D6E0021ACA3B980079DC44 /* JSQMessagesInputToolbarEx.m */,
+				5680782C1ACA385500817976 /* SKToolbar.h */,
+				5680782D1ACA385500817976 /* SKToolbar.m */,
 				56445E971AC94952001EB3AC /* XHVoiceRecordHUD.h */,
 				56445E981AC94952001EB3AC /* XHVoiceRecordHUD.m */,
 				883C11761A09FB100092A16D /* JSQMessagesCellTextView.h */,
@@ -719,10 +749,9 @@
 				14FCC0781AC1D84C00D47748 /* JSQMessagesCollectionViewCellIncomingFile.xib */,
 				14FCC0711AC1D7D500D47748 /* JSQMessagesCollectionViewCellIncomingFile.h */,
 				14FCC0721AC1D7D500D47748 /* JSQMessagesCollectionViewCellIncomingFile.m */,
-				565766301AC50FBC00FCEBDC /* SKMessagesInputToolbar.h */,
-				565766311AC50FBC00FCEBDC /* SKMessagesInputToolbar.m */,
 				56445E6C1AC8F878001EB3AC /* SKKeyboardItem.h */,
 				56445E6D1AC8F878001EB3AC /* SKKeyboardItem.m */,
+				56D6E0071ACA5EE10079DC44 /* SKToolbarContentView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -903,8 +932,11 @@
 				88A25FCF19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				56445E921AC93159001EB3AC /* smiling-face.png in Resources */,
 				1407D9491AC4565600A0395E /* play-mark.png in Resources */,
+				56D6E0081ACA5EE10079DC44 /* SKToolbarContentView.xib in Resources */,
+				56EF3ADC1ACA7737004F1BB7 /* multiMedia@2x.png in Resources */,
 				14FCC0791AC1D84C00D47748 /* JSQMessagesCollectionViewCellIncomingFile.xib in Resources */,
 				88A25FCD19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
+				56EF3ADB1ACA7737004F1BB7 /* multiMedia_HL@2x.png in Resources */,
 				5657662B1AC50EC000FCEBDC /* voice@2x.png in Resources */,
 				5657662E1AC50EDA00FCEBDC /* keyborad_HL@2x.png in Resources */,
 				56445E961AC932B6001EB3AC /* laughing-face.png in Resources */,
@@ -1027,6 +1059,7 @@
 				88A25FD519D8E01A00924534 /* JSQMessagesToolbarContentView.m in Sources */,
 				14FCC0731AC1D7D500D47748 /* JSQMessagesCollectionViewCellIncomingFile.m in Sources */,
 				88A25FC119D8E01A00924534 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
+				56D6E0061ACA57470079DC44 /* DemoToolbarViewController.m in Sources */,
 				8885734A19DE540400E89D20 /* DemoSettingsViewController.m in Sources */,
 				88A25FC719D8E01A00924534 /* JSQMessagesBubbleImage.m in Sources */,
 				88A25FC519D8E01A00924534 /* JSQMessage.m in Sources */,
@@ -1034,6 +1067,7 @@
 				88A25FD319D8E01A00924534 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				88A25FC819D8E01A00924534 /* JSQPhotoMediaItem.m in Sources */,
 				88C4583019F5F7A0008FD427 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
+				5680782E1ACA385500817976 /* SKToolbar.m in Sources */,
 				88A25FB819D8E01A00924534 /* UIImage+JSQMessages.m in Sources */,
 				88A25FBF19D8E01A00924534 /* JSQMessagesTimestampFormatter.m in Sources */,
 				14FCC0701AC1D7C000D47748 /* JSQMessagesCollectionViewCellOutgoingFile.m in Sources */,
@@ -1061,8 +1095,10 @@
 				88A25FB519D8E01A00924534 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				88A25FD019D8E01A00924534 /* JSQMessagesComposerTextView.m in Sources */,
 				56445E6E1AC8F878001EB3AC /* SKKeyboardItem.m in Sources */,
+				56D6E0031ACA3B980079DC44 /* JSQMessagesInputToolbarEx.m in Sources */,
 				88A25FC319D8E01A00924534 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
 				141CE2F71AC3047500E6FDEC /* JSQAudioItem.m in Sources */,
+				56930DF81ACA7BBC00C04250 /* SKToolbarContentView.m in Sources */,
 				147F35651AC4B61200F0C4A6 /* BadgeStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -38,12 +38,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 2) {
+    if (section == 3 || 0 == section) {
         return 1;
     }
     
@@ -58,8 +58,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    
     if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:
+                cell.textLabel.text = @"Toolbar view controller";
+                break;
+        }
+    } else if (indexPath.section == 1) {
         switch (indexPath.row) {
             case 0:
                 cell.textLabel.text = @"Push via storyboard";
@@ -69,7 +74,7 @@
                 break;
         }
     }
-    else if (indexPath.section == 1) {
+    else if (indexPath.section == 2) {
         switch (indexPath.row) {
             case 0:
                 cell.textLabel.text = @"Modal via storyboard";
@@ -79,7 +84,7 @@
                 break;
         }
     }
-    else if (indexPath.section == 2) {
+    else if (indexPath.section == 3) {
         switch (indexPath.row) {
             case 0:
                 cell.textLabel.text = @"Settings";
@@ -114,6 +119,12 @@
     if (indexPath.section == 0) {
         switch (indexPath.row) {
             case 0:
+                [self performSegueWithIdentifier:@"segueToolbarVC" sender:self];
+                break;
+        }
+    } else if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
                 [self performSegueWithIdentifier:@"seguePushDemoVC" sender:self];
                 break;
             case 1:
@@ -124,7 +135,7 @@
                 break;
         }
     }
-    else if (indexPath.section == 1) {
+    else if (indexPath.section == 2) {
         switch (indexPath.row) {
             case 0:
                 [self performSegueWithIdentifier:@"segueModalDemoVC" sender:self];
@@ -139,7 +150,7 @@
                 break;
         }
     }
-    else if (indexPath.section == 2) {
+    else if (indexPath.section == 3) {
         switch (indexPath.row) {
             case 0:
                 [self performSegueWithIdentifier:@"SegueToSettings" sender:self];

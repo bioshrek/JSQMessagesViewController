@@ -8,55 +8,32 @@
 
 #import <UIKit/UIKit.h>
 
-@class SKMessagesInputToolbar;
+#import "SKToolbar.h"
 
-#import "JSQMessagesToolbarContentView.h"
+#import "SKToolbarContentView.h"
 
-/**
- *  The `JSQMessagesInputToolbarDelegate` protocol defines methods for interacting with
- *  a `JSQMessagesInputToolbar` object.
- */
-@protocol SKMessagesInputToolbarDelegate <UIToolbarDelegate>
+//@protocol SKMessagesInputToolbarDelegate <NSObject>
+//
+//- (UIView *)emoticonKeyboardView;
+//
+//- (UIView *)mediaKeyboardView;
+//
+//- (void)startRecordingAudioWithErrorHandler:(void (^)())errorHandler;
+//- (void)endRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
+//- (void)cancelRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
+//
+//- (void)sendButtonDidPressed;
+//
+//@end
 
-@required
+@interface SKMessagesInputToolbar : SKToolbar
 
-/**
- *  Tells the delegate that the toolbar's `rightBarButtonItem` has been pressed.
- *
- *  @param toolbar The object representing the toolbar sending this information.
- *  @param sender  The button that received the touch event.
- */
-- (void)messagesInputToolbar:(SKMessagesInputToolbar *)toolbar
-      didPressRightBarButton:(UIButton *)sender;
-
-/**
- *  Tells the delegate that the toolbar's `leftBarButtonItem` has been pressed.
- *
- *  @param toolbar The object representing the toolbar sending this information.
- *  @param sender  The button that received the touch event.
- */
-- (void)messagesInputToolbar:(SKMessagesInputToolbar *)toolbar
-       didPressLeftBarButton:(UIButton *)sender;
-
-- (UIView *)emoticonKeyboardView;
-
-- (UIView *)mediaKeyboardView;
-
-- (void)startRecordingAudioWithErrorHandler:(void (^)())errorHandler;
-- (void)endRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
-- (void)cancelRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
-
-
-@end
-
-@interface SKMessagesInputToolbar : UIToolbar
-
-@property (weak, nonatomic) id<SKMessagesInputToolbarDelegate> delegate;
+@property (weak, nonatomic) id<SKToolbarCotentViewDelegate> delegate;
 
 /**
  *  Returns the content view of the toolbar. This view contains all subviews of the toolbar.
  */
-@property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
+@property (weak, nonatomic, readonly) SKToolbarContentView *contentView;
 
 /**
  *  Enables or disables the send button based on whether or not its `textView` has text.
