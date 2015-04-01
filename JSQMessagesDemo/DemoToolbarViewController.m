@@ -11,13 +11,19 @@
 #import "UIView+JSQMessages.h"
 #import "SKMessagesInputToolbar.h"
 
-@interface DemoToolbarViewController () <UITableViewDataSource, SKToolbarCotentViewDelegate>
+@interface DemoToolbarViewController () <UITableViewDataSource, SKMessagesInputToolbarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet SKMessagesInputToolbar *toolbar;
 
 @property (weak, nonatomic) IBOutlet UIView *mediaKeyboardView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mediaKeyboardViewHeightConstraint;
+
+@property (strong, nonatomic) UIView *emoticonKeyboardView;
+
+@property (weak, nonatomic) NSTimer *voicePowerPeakTimer;
+@property (copy, nonatomic) void (^peakPowerBlock)();
+
 @end
 
 @implementation DemoToolbarViewController
@@ -28,8 +34,12 @@
     
     self.tableView.dataSource = self;
     
-    [self.toolbar configWithTextView:self.toolbar.contentView.textView adjustToolbarHeightWhenTextViewContentSizeChange:YES contextView:self.view scrollView:self.tableView topLayoutGuide:self.topLayoutGuide bottomLayoutGuide:self.bottomLayoutGuide panGestureRecognizer:self.tableView.panGestureRecognizer delegate:nil];
+    [self.toolbar configWithTextView:self.toolbar.contentView.textView adjustToolbarHeightWhenTextViewContentSizeChange:YES contextView:self.view scrollView:self.tableView topLayoutGuide:self.topLayoutGuide bottomLayoutGuide:self.bottomLayoutGuide panGestureRecognizer:self.tableView.panGestureRecognizer];
     self.toolbar.delegate = self;
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+    view.backgroundColor = [UIColor blueColor];
+    self.emoticonKeyboardView = view;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -81,16 +91,9 @@
 
 #pragma mark - Toolbar Delegate
 
-- (void)sendButtonDidPressed
+- (void)sendButtonDidPressed:(UITextView *)textView
 {
     NSLog(@"send button pressed.");
-}
-
-- (UIView *)emoticonKeyboardView
-{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
-    view.backgroundColor = [UIColor blueColor];
-    return view;
 }
 
 - (void)configMediaKeyboardView
@@ -103,38 +106,72 @@
     self.mediaKeyboardView.hidden = YES;
 }
 
-- (void)showMediaKeyboardView
+- (void)showMediaKeyboardViewWithCompeltion:(void (^)(CGFloat))completionHandler
 {
-    [self.toolbar jsq_setToolbarBottomLayoutGuideConstant:self.mediaKeyboardViewHeightConstraint.constant];
-    self.mediaKeyboardView.hidden = NO;
-    
+    if (self.mediaKeyboardView.hidden) {
+        self.mediaKeyboardView.hidden = NO;
+        if (completionHandler) completionHandler(self.mediaKeyboardViewHeightConstraint.constant);
+    }
 }
 
 - (void)hideMediaKeyboardView
 {
-    self.mediaKeyboardView.hidden = YES;
-    [self.toolbar jsq_setToolbarBottomLayoutGuideConstant:0];
+    if (!self.mediaKeyboardView.hidden) {
+        self.mediaKeyboardView.hidden = YES;
+    }
 }
 
-- (void)startRecordingAudioWithErrorHandler:(void (^)())errorHandler
+- (void)resumeRecordingAudioWithVoiceVolumn:(void (^)(CGFloat))voiceVolumBlock errorHandler:(void (^)())errorHandler
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (errorHandler) errorHandler();
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        if (errorHandler) errorHandler();
+//    });
+    
+    self.peakPowerBlock = voiceVolumBlock;
+    
+    if (!self.voicePowerPeakTimer) {
+        NSTimer *timer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(updatePowerPeak) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+        self.voicePowerPeakTimer = timer;
+    }
+    [self.voicePowerPeakTimer fire];
+    
+    NSLog(@"resume recording voice");
+}
+
+- (void)updatePowerPeak
+{
+    if (self.peakPowerBlock) {
+        self.peakPowerBlock(arc4random_uniform(100) / 100.0);
+    }
+}
+
+- (void)pauseRecordingAudio
+{
+    [self.voicePowerPeakTimer invalidate];
+    
+    NSLog(@"pause recording voice");
 }
 
 - (void)endRecordingAudioWithCompletionHandler:(void (^)())completionHandler
 {
+    [self.voicePowerPeakTimer invalidate];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (completionHandler) completionHandler();
     });
+    NSLog(@"end recording voice");
 }
 
 - (void)cancelRecordingAudioWithCompletionHandler:(void (^)())completionHandler
 {
+    [self.voicePowerPeakTimer invalidate];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (completionHandler) completionHandler();
     });
+    
+    NSLog(@"cancel recording voice");
 }
 
 @end

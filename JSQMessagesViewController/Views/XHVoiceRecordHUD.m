@@ -47,10 +47,10 @@
         CGPoint center = CGPointMake(CGRectGetWidth(view.frame) / 2.0, CGRectGetHeight(view.frame) / 2.0);
         self.center = center;
         [view addSubview:self];
-        [self configRecoding:YES];
-        self.remindLabel.backgroundColor = [UIColor clearColor];
-        self.remindLabel.text = kXHVoiceRecordDoingString;
     }
+    [self configRecoding:YES];
+    self.remindLabel.backgroundColor = [UIColor clearColor];
+    self.remindLabel.text = kXHVoiceRecordDoingString;
 }
 
 - (void)didRecording {
@@ -74,9 +74,9 @@
 
 - (void)dismissCompleted:(void(^)(BOOL fnished))completion {
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.alpha = 0.0;
+//        self.alpha = 0.0;
     } completion:^(BOOL finished) {
-        [super removeFromSuperview];
+        [self removeFromSuperview];
         if (completion) completion(finished);
     }];
 }
@@ -171,15 +171,9 @@
     return self;
 }
 
-+ (instancetype)sharedInstance
++ (instancetype)instance
 {
-    static XHVoiceRecordHUD *_instance;
-    static dispatch_once_t onceToken = 0;
-    dispatch_once(&onceToken, ^{
-        _instance = [[XHVoiceRecordHUD alloc] initWithFrame:CGRectMake(0, 0, 140, 140)];
-    });
-    
-    return _instance;
+    return [[XHVoiceRecordHUD alloc] initWithFrame:CGRectMake(0, 0, 140, 140)];
 }
 
 /*

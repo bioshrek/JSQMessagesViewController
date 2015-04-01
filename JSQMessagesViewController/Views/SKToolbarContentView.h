@@ -8,27 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- *  The `JSQMessagesInputToolbarDelegate` protocol defines methods for interacting with
- *  a `JSQMessagesInputToolbar` object.
- */
-@protocol SKToolbarCotentViewDelegate <UIToolbarDelegate>
-
-@required
-
-- (UIView *)emoticonKeyboardView;
-
-- (void)showMediaKeyboardView;
-- (void)hideMediaKeyboardView;
-
-- (void)startRecordingAudioWithErrorHandler:(void (^)())errorHandler;
-- (void)endRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
-- (void)cancelRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
-
-- (void)sendButtonDidPressed;
-
-@end
-
 @interface SKToolbarContentView : UIView
 
 @property (weak, nonatomic, readonly) UIButton *voiceRecordTriggerButton;
@@ -40,8 +19,6 @@
 
 @property (weak, nonatomic, readonly) UIButton *mediaTriggerButton;
 @property (weak, nonatomic, readonly) UIButton *sendButton;
-
-@property (weak, nonatomic) id<SKToolbarCotentViewDelegate> delegate;
 
 + (instancetype)loadFromNib;
 

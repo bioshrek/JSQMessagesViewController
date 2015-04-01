@@ -84,7 +84,7 @@
                                                                              target:self
                                                                              action:@selector(receiveMessagePressed:)];
     
-    [self.toolbar configWithTextView:self.toolbar.contentView.textView adjustToolbarHeightWhenTextViewContentSizeChange:YES contextView:self.view scrollView:self.collectionView topLayoutGuide:self.topLayoutGuide bottomLayoutGuide:self.bottomLayoutGuide panGestureRecognizer:self.collectionView.panGestureRecognizer delegate:nil];
+    [self.toolbar configWithTextView:self.toolbar.contentView.textView adjustToolbarHeightWhenTextViewContentSizeChange:YES contextView:self.view scrollView:self.collectionView topLayoutGuide:self.topLayoutGuide bottomLayoutGuide:self.bottomLayoutGuide panGestureRecognizer:self.collectionView.panGestureRecognizer];
     self.toolbar.contentView.textView.placeHolder = NSLocalizedStringFromTable(@"New Message", @"JSQMessages", @"Placeholder text for the message input text view");
     self.toolbar.delegate = self;
 }

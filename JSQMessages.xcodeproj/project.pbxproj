@@ -700,6 +700,7 @@
 			children = (
 				565766301AC50FBC00FCEBDC /* SKMessagesInputToolbar.h */,
 				565766311AC50FBC00FCEBDC /* SKMessagesInputToolbar.m */,
+				56D6E0071ACA5EE10079DC44 /* SKToolbarContentView.xib */,
 				56930DF61ACA7BBC00C04250 /* SKToolbarContentView.h */,
 				56930DF71ACA7BBC00C04250 /* SKToolbarContentView.m */,
 				56D6E0011ACA3B980079DC44 /* JSQMessagesInputToolbarEx.h */,
@@ -751,7 +752,6 @@
 				14FCC0721AC1D7D500D47748 /* JSQMessagesCollectionViewCellIncomingFile.m */,
 				56445E6C1AC8F878001EB3AC /* SKKeyboardItem.h */,
 				56445E6D1AC8F878001EB3AC /* SKKeyboardItem.m */,
-				56D6E0071ACA5EE10079DC44 /* SKToolbarContentView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -11,7 +11,7 @@
 @interface SKKeyboardItem()
 
 @property (copy, nonatomic) void (^onBlock)();
-@property (copy, nonatomic) void (^offBlock)(SKKeyboardItem *sender);
+@property (copy, nonatomic) void (^offBlock)(SKKeyboardItem *sender, void (^completionBlock)());
 @property (weak, nonatomic) id<SKKeyboardManager> keyboardManager;
 
 @end
@@ -20,7 +20,7 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                            onBlock:(void (^)())onBlock
-                          offBlock:(void (^)(SKKeyboardItem *sender))offBlock
+                          offBlock:(void (^)(SKKeyboardItem *sender, void (^completionBlock)()))offBlock
                    keyboardManager:(id<SKKeyboardManager>)keyboardManager
 {
     NSParameterAssert(identifier);
@@ -41,16 +41,18 @@
     _on = !currentState;
     
     if (currentState) {  // on -> off
-        if (self.offBlock) self.offBlock(self);
+        if (self.offBlock) self.offBlock(self, nil);
     } else {  // off -> on
-        [self.keyboardManager turnOffOtherKeyboardItemsWithSender:self];
-        if (self.onBlock) self.onBlock();
+        [self.keyboardManager turnOffOtherKeyboardItemsWithSender:self completion:^{
+            if (self.onBlock) self.onBlock();
+        }];
     }
 }
 
-- (void)turnOffByOtherKeyboard:(SKKeyboardItem *)otherKeyboardItem
+- (void)turnOffByOtherKeyboard:(SKKeyboardItem *)otherKeyboardItem completion:(void (^)())completionBlock
 {
-    if (self.offBlock) self.offBlock(otherKeyboardItem);
+    _on = NO;
+    if (self.offBlock) self.offBlock(otherKeyboardItem, completionBlock);
 }
 
 - (BOOL)isEqual:(id)object

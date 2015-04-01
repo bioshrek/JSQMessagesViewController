@@ -28,6 +28,6 @@
 
 - (void)dismissCompleted:(void(^)(BOOL fnished))completion;
 
-+ (instancetype)sharedInstance;
++ (instancetype)instance;
 
 @end

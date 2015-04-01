@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F1066" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -32,7 +31,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXN-jh-e1v" userLabel="Voice Record Starter Button">
-                    <rect key="frame" x="88" y="7" width="172" height="32"/>
+                    <rect key="frame" x="88" y="6" width="172" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="XNZ-Eu-lj2"/>
                     </constraints>
@@ -84,7 +83,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ptE-UG-b5B" firstAttribute="bottom" secondItem="HXN-jh-e1v" secondAttribute="bottom" constant="-1" id="0JV-w4-Mb9"/>
+                <constraint firstItem="ptE-UG-b5B" firstAttribute="bottom" secondItem="HXN-jh-e1v" secondAttribute="bottom" id="0JV-w4-Mb9"/>
                 <constraint firstAttribute="bottom" secondItem="EvF-tc-14g" secondAttribute="bottom" constant="6" id="0xk-Cd-gnw"/>
                 <constraint firstItem="YCw-xy-5Dc" firstAttribute="leading" secondItem="kPA-ZL-vJ9" secondAttribute="trailing" constant="8" id="5Sh-8u-2kA"/>
                 <constraint firstItem="ptE-UG-b5B" firstAttribute="trailing" secondItem="HXN-jh-e1v" secondAttribute="trailing" id="AXz-Rz-Tal"/>
@@ -93,18 +92,12 @@
                 <constraint firstItem="ptE-UG-b5B" firstAttribute="leading" secondItem="YCw-xy-5Dc" secondAttribute="trailing" constant="8" id="a5C-DR-Bk1"/>
                 <constraint firstItem="ptE-UG-b5B" firstAttribute="leading" secondItem="HXN-jh-e1v" secondAttribute="leading" id="aRT-Ug-6gk"/>
                 <constraint firstItem="EvF-tc-14g" firstAttribute="leading" secondItem="ptE-UG-b5B" secondAttribute="trailing" constant="8" id="lbp-E9-Nzd"/>
-                <constraint firstItem="ptE-UG-b5B" firstAttribute="leading" secondItem="EvF-tc-14g" secondAttribute="trailing" constant="-33" id="mPk-Oy-TH1"/>
                 <constraint firstAttribute="bottom" secondItem="ptE-UG-b5B" secondAttribute="bottom" constant="6" id="mly-eK-40W"/>
                 <constraint firstAttribute="bottom" secondItem="kPA-ZL-vJ9" secondAttribute="bottom" constant="6" id="oM5-zZ-mZS"/>
                 <constraint firstItem="kPA-ZL-vJ9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="yfG-Nc-1xB"/>
                 <constraint firstAttribute="bottom" secondItem="YCw-xy-5Dc" secondAttribute="bottom" constant="6" id="yqK-Re-IcM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="mPk-Oy-TH1"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="emoticonTriggerButton" destination="YCw-xy-5Dc" id="NGd-16-UCX"/>
                 <outlet property="mediaTriggerButton" destination="Cde-Z7-cQD" id="m3u-jO-rhI"/>

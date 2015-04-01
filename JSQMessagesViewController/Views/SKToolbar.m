@@ -45,7 +45,6 @@ adjustToolbarHeightWhenTextViewContentSizeChange:(BOOL)should
             topLayoutGuide:(id<UILayoutSupport>)topLayoutGuide
          bottomLayoutGuide:(id<UILayoutSupport>)bottomLayoutGuide
       panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer
-                  delegate:(id<SKToolbarKeyboardDelegate>)delegate
 
 {
     NSParameterAssert(textView != nil);
@@ -63,7 +62,6 @@ adjustToolbarHeightWhenTextViewContentSizeChange:(BOOL)should
     _topLayoutGuide = topLayoutGuide;
     _bottomLayoutGuide = bottomLayoutGuide;
     _panGestureRecognizer = panGestureRecognizer;
-    _keyboardDelegate = delegate;
     _sk_isObserving = NO;
 }
 
@@ -192,28 +190,32 @@ adjustToolbarHeightWhenTextViewContentSizeChange:(BOOL)should
     self.keyboardView = self.textView.inputAccessoryView.superview;
     [self jsq_setKeyboardViewHidden:NO];
     
-    [self jsq_handleKeyboardNotification:notification completion:^(BOOL finished) {
+    [self jsq_handleKeyboardNotification:notification animation:^{
+        [self.keyboardDelegate keyboardDidShow];
+    } completion:^(BOOL finished) {
         [self.panGestureRecognizer addTarget:self action:@selector(jsq_handlePanGestureRecognizer:)];
     }];
 }
 
 - (void)jsq_didReceiveKeyboardWillChangeFrameNotification:(NSNotification *)notification
 {
-    [self jsq_handleKeyboardNotification:notification completion:nil];
+    [self jsq_handleKeyboardNotification:notification animation:nil completion:nil];
 }
 
 - (void)jsq_didReceiveKeyboardDidChangeFrameNotification:(NSNotification *)notification
 {
     [self jsq_setKeyboardViewHidden:NO];
     
-    [self jsq_handleKeyboardNotification:notification completion:nil];
+    [self jsq_handleKeyboardNotification:notification animation:nil completion:nil];
 }
 
 - (void)jsq_didReceiveKeyboardDidHideNotification:(NSNotification *)notification
 {
     self.keyboardView = nil;
     
-    [self jsq_handleKeyboardNotification:notification completion:^(BOOL finished) {
+    [self jsq_handleKeyboardNotification:notification animation:^{
+        [self.keyboardDelegate keyboardDidHide];
+    } completion:^(BOOL finished) {
         [self.panGestureRecognizer removeTarget:self action:NULL];
     }];
 }
@@ -225,7 +227,9 @@ adjustToolbarHeightWhenTextViewContentSizeChange:(BOOL)should
     }
 }
 
-- (void)jsq_handleKeyboardNotification:(NSNotification *)notification completion:(JSQAnimationCompletionBlock)completion
+- (void)jsq_handleKeyboardNotification:(NSNotification *)notification
+                             animation:(void (^)())animationBlock
+                            completion:(JSQAnimationCompletionBlock)completion
 {
     NSDictionary *userInfo = [notification userInfo];
     
@@ -246,6 +250,7 @@ adjustToolbarHeightWhenTextViewContentSizeChange:(BOOL)should
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
+                         if (animationBlock) animationBlock();
                          [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
                      }
                      completion:^(BOOL finished) {
@@ -271,7 +276,9 @@ adjustToolbarHeightWhenTextViewContentSizeChange:(BOOL)should
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SKToolbarKeyboardNotificationKeyboardDidChangeFrame
                                                         object:self
-                                                      userInfo:@{ SKToolbarKeyboardUserInfoKeyKeyboardDidChangeFrame : [NSValue valueWithCGRect:frame] }];
+                                                      userInfo:@{
+                                                                 SKToolbarKeyboardUserInfoKeyKeyboardDidChangeFrame : [NSValue valueWithCGRect:frame]
+                                                                 }];
 }
 
 #pragma mark - Key-value observing

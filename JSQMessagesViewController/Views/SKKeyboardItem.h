@@ -12,7 +12,8 @@
 
 @protocol SKKeyboardManager <NSObject>
 
-- (void)turnOffOtherKeyboardItemsWithSender:(SKKeyboardItem *)keyboardItem;
+- (void)turnOffOtherKeyboardItemsWithSender:(SKKeyboardItem *)keyboardItem
+                                 completion:(void (^)())completionBlock;
 
 @end
 
@@ -24,11 +25,11 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                            onBlock:(void (^)())onBlock
-                          offBlock:(void (^)(SKKeyboardItem *sender))offBlock
+                          offBlock:(void (^)(SKKeyboardItem *sender, void (^completionBlock)()))offBlock
                    keyboardManager:(id<SKKeyboardManager>)keyboardManager;
 
 - (void)triggered;
 
-- (void)turnOffByOtherKeyboard:(SKKeyboardItem *)otherKeyboardItem;
+- (void)turnOffByOtherKeyboard:(SKKeyboardItem *)otherKeyboardItem completion:(void (^)())completionBlock;
 
 @end

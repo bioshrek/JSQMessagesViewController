@@ -71,9 +71,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_configureMessagesViewController;
 
-- (NSAttributedString *)jsq_currentlyComposedMessageAttributedText;
+//- (NSAttributedString *)jsq_currentlyComposedMessageAttributedText;
 
-- (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification;
+//- (void)jsq_handleDidChangeStatusBarFrameNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveMenuWillShowNotification:(NSNotification *)notification;
 - (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification;
 
@@ -82,10 +82,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_handleInteractivePopGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer;
 
-- (BOOL)jsq_inputToolbarHasReachedMaximumHeight;
-- (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
-- (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy;
-- (void)jsq_scrollComposerTextViewToBottomAnimated:(BOOL)animated;
+//- (BOOL)jsq_inputToolbarHasReachedMaximumHeight;
+//- (void)jsq_adjustInputToolbarForComposerTextViewContentSizeChange:(CGFloat)dy;
+//- (void)jsq_adjustInputToolbarHeightConstraintByDelta:(CGFloat)dy;
+//- (void)jsq_scrollComposerTextViewToBottomAnimated:(BOOL)animated;
 
 //- (void)jsq_updateCollectionViewInsets;
 //- (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom;

@@ -12,23 +12,28 @@
 
 #import "SKToolbarContentView.h"
 
-//@protocol SKMessagesInputToolbarDelegate <NSObject>
-//
-//- (UIView *)emoticonKeyboardView;
-//
-//- (UIView *)mediaKeyboardView;
-//
-//- (void)startRecordingAudioWithErrorHandler:(void (^)())errorHandler;
-//- (void)endRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
-//- (void)cancelRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
-//
-//- (void)sendButtonDidPressed;
-//
-//@end
+@protocol SKMessagesInputToolbarDelegate <UIToolbarDelegate>
+
+@required
+
+- (UIView *)emoticonKeyboardView;
+
+- (void)showMediaKeyboardViewWithCompeltion:(void (^)(CGFloat keyboardHeight))completionHandler;
+- (void)hideMediaKeyboardView;
+
+- (void)pauseRecordingAudio;
+- (void)resumeRecordingAudioWithVoiceVolumn:(void (^)(CGFloat peakPower))voiceVolumBlock
+                               errorHandler:(void (^)())errorHandler;
+- (void)endRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
+- (void)cancelRecordingAudioWithCompletionHandler:(void (^)())completionHandler;
+
+- (void)sendButtonDidPressed:(UITextView *)textView;
+
+@end
 
 @interface SKMessagesInputToolbar : SKToolbar
 
-@property (weak, nonatomic) id<SKToolbarCotentViewDelegate> delegate;
+@property (weak, nonatomic) id<SKMessagesInputToolbarDelegate> delegate;
 
 /**
  *  Returns the content view of the toolbar. This view contains all subviews of the toolbar.

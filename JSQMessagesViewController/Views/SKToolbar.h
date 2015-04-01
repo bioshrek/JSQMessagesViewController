@@ -33,6 +33,10 @@ FOUNDATION_EXPORT NSString * const SKToolbarKeyboardUserInfoKeyKeyboardDidChange
  */
 - (void)keyboardDidChangeFrame:(CGRect)keyboardFrame;
 
+- (void)keyboardDidShow;
+
+- (void)keyboardDidHide;
+
 @end
 
 @interface SKToolbar : UIToolbar
@@ -90,8 +94,7 @@ adjustToolbarHeightWhenTextViewContentSizeChange:(BOOL)should
                 scrollView:(UIScrollView *)scrollView
             topLayoutGuide:(id<UILayoutSupport>)topLayoutGuide
          bottomLayoutGuide:(id<UILayoutSupport>)bottomLayoutGuide
-      panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer
-                  delegate:(id<SKToolbarKeyboardDelegate>)delegate;
+      panGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer;
 
 /**
  *  Tells the keyboard controller that it should begin listening for system keyboard notifications.
